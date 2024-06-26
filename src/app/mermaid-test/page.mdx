@@ -1,0 +1,176 @@
+# Sequnce diagram 1
+
+[Sequnce diagram doc](https://mermaid.js.org/syntax/sequenceDiagram.html#sequence-diagrams)
+
+- "+" 또는 activate로 시작하고, "-" 또는 deactivate로 끝난다. (중첩 가능)
+- --> 점선, ->> 실선 화살표, -->> 점선 화살표 그 외 메시지 기호는 [요기 참고](https://mermaid.js.org/syntax/sequenceDiagram.html#messages)
+- par, opt, loop, alt, break 등 지원함
+
+```mermaid
+sequenceDiagram
+    Client ->>+Front Server: Request
+    Front Server ->>Back Server : Request
+    activate Back Server
+    Back Server ->> Front Server : Response (JSON)
+    deactivate Back Server
+    par Context API를 이용한 데이터 전달
+        Front Server ->>+Context API : 데이터 저장
+        Context API -->-Front Server : 데이터 전달
+    and react-dom/server의 renderToString 실행
+        Front Server ->> Front Server : React Component를 HTML로 변환
+    end
+    Front Server ->>-Client: Response (HTML)
+```
+
+# Flow chart 2
+
+[flow chart reference](https://mermaid.js.org/syntax/flowchart.html)
+
+<img src='./flow_chart.png' width='700px' />
+
+빠르게 의미를 전달하고자 하는 이유로 사용한다면 subgraph나 스타일링을 사용하지 않는게 좋을듯 함
+
+```mermaid
+flowchart TD
+    START([스포츠클럽 등록 신청])
+    A01{{스포츠클럽 관계자}}
+    A01_IF{스포츠클럽 관계자이다.}
+    A02[
+    등록 스포츠클럽 신청
+    ]
+    MOVE_TO_MAIN([메인 페이지로 이동])
+
+    START --> A01 --> A01_IF
+    A01_IF --> |"YES"| A02
+    A01_IF --> |"NO"| MOVE_TO_MAIN
+    B01[
+    등록 스포츠클럽 접수
+    displayId : 0106C
+    ]
+    B01_1[
+    등록 스포츠클럽 접수
+    displayId : 0106C
+    ]
+    A02 --> |신규 신청| B01
+    A02 --> |변경 신청| B01
+    A02 --> |취소 신청| B01
+    B01 --> B02{{체육회 관계자}} --> B02_IF{체육회 관계자이다.}
+    B02_IF --> |"YES"| B03[등록 스포츠클럽 접수]
+    B03 --> |최초 접수 B01| B01_1
+    C01[
+    등록 스포츠클럽 승인
+    displayId : 0106C
+    ]
+    C01_1[
+    등록 스포츠클럽 승인
+    displayId : 0106C
+    ]
+    B01_1 --> B03_4[
+    접수 반려
+    code : B04
+    ] --> START
+    B01_1 --> B03_2[처리내역 저장] --> B01_1
+    B01_1 --> B03_3[처리내역 삭제] --> B01_1
+    B01_1 --> B03_5[
+    접수 승인
+    code : B02
+    ] --> C01_IF
+
+    C01_IF{행정 관계자이다.}
+    C01_IF --> |"YES"| C01
+    C01_IF --> |"NO"| MOVE_TO_MAIN_2([메인 페이지로 이동])
+    C01 --> |최초 접수 C01| C01_1
+    C01_1 --> C01_3[
+    승인 반려
+    code : C04
+    ] --> B01
+    C01_1 --> C01_5[처리내역 저장] --> C01_1
+    C01_1 --> C01_4[처리내역 삭제] --> C01_1
+    C01_1 --> C01_2[
+    승인 완료
+    code : C02
+    ] --> END([스포츠클럽 등록 완료])
+
+```
+
+# Sequnce diagram 3
+
+[Sequnce diagram doc](https://mermaid.js.org/syntax/sequenceDiagram.html#sequence-diagrams)
+
+- "+" 또는 activate로 시작하고, "-" 또는 deactivate로 끝난다. (중첩 가능)
+- --> 점선, ->> 실선 화살표, -->> 점선 화살표 그 외 메시지 기호는 [요기 참고](https://mermaid.js.org/syntax/sequenceDiagram.html#messages)
+- par, opt, loop, alt, break 등 지원함
+
+```mermaid
+sequenceDiagram
+    Client ->>+Front Server: Request
+    Front Server ->>Back Server : Request
+    activate Back Server
+    Back Server ->> Front Server : Response (JSON)
+    deactivate Back Server
+    par Context API를 이용한 데이터 전달
+        Front Server ->>+Context API : 데이터 저장
+        Context API -->-Front Server : 데이터 전달
+    and react-dom/server의 renderToString 실행
+        Front Server ->> Front Server : React Component를 HTML로 변환
+    end
+    Front Server ->>-Client: Response (HTML)
+```
+
+# Sequnce diagram 4
+
+[Sequnce diagram doc](https://mermaid.js.org/syntax/sequenceDiagram.html#sequence-diagrams)
+
+- "+" 또는 activate로 시작하고, "-" 또는 deactivate로 끝난다. (중첩 가능)
+- --> 점선, ->> 실선 화살표, -->> 점선 화살표 그 외 메시지 기호는 [요기 참고](https://mermaid.js.org/syntax/sequenceDiagram.html#messages)
+- par, opt, loop, alt, break 등 지원함
+
+```mermaid
+sequenceDiagram
+    Client ->>+Front Server: Request
+    Front Server ->>Back Server : Request
+    activate Back Server
+    Back Server ->> Front Server : Response (JSON)
+    deactivate Back Server
+    par Context API를 이용한 데이터 전달
+        Front Server ->>+Context API : 데이터 저장
+        Context API -->-Front Server : 데이터 전달
+    and react-dom/server의 renderToString 실행
+        Front Server ->> Front Server : React Component를 HTML로 변환
+    end
+    Front Server ->>-Client: Response (HTML)
+```
+
+# git graph 5
+
+[Gitgraph Diagrams docs](https://mermaid.js.org/syntax/gitgraph.html)
+
+```mermaid
+gitGraph
+   commit
+   commit id: "Normal" tag: "v1.0.0"
+   commit
+   commit id: "Reverse" type: REVERSE tag: "RC_1"
+   commit
+   commit id: "Highlight" type: HIGHLIGHT tag: "8.8.4"
+   commit
+   branch dev
+   commit
+   commit
+   commit
+   checkout main
+   commit
+   branch feature/comment
+   commit id: "START" tag: "v1.0.1"
+```
+
+# last
+
+위 mermaid가잘 출력되는지 체크
+
+```js
+;(function Foo() {
+  console.log('Foo')
+  return 'Foo'
+})()
+```

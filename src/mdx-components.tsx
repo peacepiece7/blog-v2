@@ -1,5 +1,7 @@
 import type { MDXComponents } from 'mdx/types'
 import { Heading } from '@/components/heading'
+import { CodeBlock } from '@/components/codeBlock'
+import { Preview } from '@/components/preview'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   /**
@@ -8,9 +10,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
    */
   return {
     h1: Heading,
-    pre: (props) => {
-      return <pre {...props} />
-    }, // pre > code.language-<name>
+    code: CodeBlock,
+    pre: Preview,
     ...components,
   }
 }
