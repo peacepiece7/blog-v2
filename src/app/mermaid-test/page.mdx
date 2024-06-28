@@ -26,8 +26,6 @@ sequenceDiagram
 
 [flow chart reference](https://mermaid.js.org/syntax/flowchart.html)
 
-<img src='./flow_chart.png' width='700px' />
-
 빠르게 의미를 전달하고자 하는 이유로 사용한다면 subgraph나 스타일링을 사용하지 않는게 좋을듯 함
 
 ```mermaid
@@ -90,58 +88,9 @@ flowchart TD
     승인 완료
     code : C02
     ] --> END([스포츠클럽 등록 완료])
-
 ```
 
-# Sequnce diagram 3
-
-[Sequnce diagram doc](https://mermaid.js.org/syntax/sequenceDiagram.html#sequence-diagrams)
-
-- "+" 또는 activate로 시작하고, "-" 또는 deactivate로 끝난다. (중첩 가능)
-- --> 점선, ->> 실선 화살표, -->> 점선 화살표 그 외 메시지 기호는 [요기 참고](https://mermaid.js.org/syntax/sequenceDiagram.html#messages)
-- par, opt, loop, alt, break 등 지원함
-
-```mermaid
-sequenceDiagram
-    Client ->>+Front Server: Request
-    Front Server ->>Back Server : Request
-    activate Back Server
-    Back Server ->> Front Server : Response (JSON)
-    deactivate Back Server
-    par Context API를 이용한 데이터 전달
-        Front Server ->>+Context API : 데이터 저장
-        Context API -->-Front Server : 데이터 전달
-    and react-dom/server의 renderToString 실행
-        Front Server ->> Front Server : React Component를 HTML로 변환
-    end
-    Front Server ->>-Client: Response (HTML)
-```
-
-# Sequnce diagram 4
-
-[Sequnce diagram doc](https://mermaid.js.org/syntax/sequenceDiagram.html#sequence-diagrams)
-
-- "+" 또는 activate로 시작하고, "-" 또는 deactivate로 끝난다. (중첩 가능)
-- --> 점선, ->> 실선 화살표, -->> 점선 화살표 그 외 메시지 기호는 [요기 참고](https://mermaid.js.org/syntax/sequenceDiagram.html#messages)
-- par, opt, loop, alt, break 등 지원함
-
-```mermaid
-sequenceDiagram
-    Client ->>+Front Server: Request
-    Front Server ->>Back Server : Request
-    activate Back Server
-    Back Server ->> Front Server : Response (JSON)
-    deactivate Back Server
-    par Context API를 이용한 데이터 전달
-        Front Server ->>+Context API : 데이터 저장
-        Context API -->-Front Server : 데이터 전달
-    and react-dom/server의 renderToString 실행
-        Front Server ->> Front Server : React Component를 HTML로 변환
-    end
-    Front Server ->>-Client: Response (HTML)
-```
-
-# git graph 5
+# git graph 3
 
 [Gitgraph Diagrams docs](https://mermaid.js.org/syntax/gitgraph.html)
 

@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes, useRef } from 'react'
 import hljs from 'highlight.js'
+import { hiMelody } from '@/utils/fonts'
 
 const LANGUAGES_MAP: Record<string, string> = {
   'language-js': 'javascript',
