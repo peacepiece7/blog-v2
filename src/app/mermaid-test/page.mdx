@@ -7,6 +7,53 @@
 - par, opt, loop, alt, break 등 지원함
 
 ```mermaid
+pie title Pets adopted by volunteers
+    title Pets adopted by volunteers2
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 14
+```
+
+- par, opt, loop, alt, break 등 지원함
+
+```mermaid
+pie title Pets adopted by volunteers
+    title Pets adopted by volunteers2
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15
+```
+
+```mermaid
+pie title Pets adopted by volunteers
+    title Pets adopted by volunteers
+    "Dogs" : 386
+    "Cats" : 85
+    "Rats" : 15
+```
+
+```mermaid
+gitGraph
+   commit
+   commit id: "Normal" tag: "v1.0.0"
+   commit
+   commit id: "Reverse" type: REVERSE tag: "RC_1"
+   commit
+   commit id: "Highlight" type: HIGHLIGHT tag: "8.8.4"
+   commit
+   branch dev
+   commit
+   commit
+   commit
+   checkout main
+   commit
+   branch feature/comment
+   commit id: "START" tag: "v1.0.1"
+```
+
+bar
+
+```mermaid
 sequenceDiagram
     Client ->>+Front Server: Request
     Front Server ->>Back Server : Request
@@ -35,6 +82,8 @@ flowchart TD
  A01_IF --> | yes | A02{{dashboard}}
  A01_IF --> | no | A03{{login}}
 ```
+
+foo
 
 ```mermaid
 flowchart TD
@@ -98,7 +147,7 @@ flowchart TD
     ] --> END([스포츠클럽 등록 완료])
 ```
 
-# git graph 3
+# git graph 4
 
 [Gitgraph Diagrams docs](https://mermaid.js.org/syntax/gitgraph.html)
 

@@ -1,4 +1,5 @@
 'use client'
+
 import { hiMelody } from '@/utils/fonts'
 import mermaid from 'mermaid'
 import {
@@ -12,15 +13,11 @@ import {
 export const Mermaid = (
   props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
 ) => {
-  if (typeof window === 'undefined')
-    return <code children={props.children} style={{ visibility: 'hidden' }} />
-
   const codeRef = useRef<HTMLPreElement>(null)
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
     if (!codeRef.current) return
-    setIsMounted(true)
     codeRef.current.className = `mermaid ${hiMelody.className}`
     mermaid.initialize({
       startOnLoad: false,
@@ -28,7 +25,13 @@ export const Mermaid = (
       altFontFamily: hiMelody.style.fontFamily,
       fontSize: 20,
     })
+    setIsMounted(true)
     mermaid.run()
+
+    return () => {
+      // mermaid.cleanup()
+      setIsMounted(false)
+    }
   }, [])
 
   return (
