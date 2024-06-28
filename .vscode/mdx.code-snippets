@@ -1,0 +1,86 @@
+{
+  "Mermaid Sequence Diagram": {
+    "prefix": "mermaid-sequence",
+    "body": [
+      "```mermaid",
+      "sequenceDiagram",
+      "    participant Alice",
+      "    participant Bob",
+      "    Alice->>Bob: Hello Bob, how are you?",
+      "    Bob-->>Alice: I am good thanks!",
+      "```"
+    ],
+    "description": "Mermaid Sequence Diagram template"
+  },
+  "Mermaid flowchart": {
+    "prefix": "mermaid-flowchart",
+    "body": [
+      "```mermaid",
+      "flowchart TD",
+      "START([start])",
+      "START --> A01{{page}} --> A01_IF{if logged in}",
+      "A01_IF --> | yes | A02{{dashboard}}",
+      "A01_IF --> | no | A03{{login}}",
+      "```"
+    ],
+    "description": "Mermaid flowchart template"
+  },
+  "Mermaid gitgraph": {
+    "prefix": "mermaid-gitgraph",
+    "body": [
+      "```mermaid",
+      "gitGraph",
+      "   commit",
+      "   commit id: \"Normal\" tag: \"v1.0.0\"",
+      "   commit",
+      "   commit id: \"Reverse\" type: REVERSE tag: \"RC_1\"",
+      "   commit",
+      "   commit id: \"Highlight\" type: HIGHLIGHT tag: \"8.8.4\"",
+      "   commit",
+      "   branch dev",
+      "   commit",
+      "   commit",
+      "   commit",
+      "   checkout main",
+      "   commit",
+      "   branch feature/comment",
+      "   commit id: \"START\" tag: \"v1.0.1\"",
+      "```"
+    ],
+    "description": "Mermaid gitgraph template"
+  },
+  "Mermaid sequnce diagram": {
+    "prefix": "mermaid-sequnce",
+    "body": [
+      "```mermaid",
+      "sequenceDiagram",
+      "    Client ->>+Front Server: Request",
+      "    Front Server ->>Back Server : Request",
+      "    activate Back Server",
+      "    Back Server ->> Front Server : Response (JSON)",
+      "    deactivate Back Server",
+      "    par Context API를 이용한 데이터 전달",
+      "        Front Server ->>+Context API : 데이터 저장",
+      "        Context API -->-Front Server : 데이터 전달",
+      "    and react-dom/server의 renderToString 실행",
+      "        Front Server ->> Front Server : React Component를 HTML로 변환",
+      "    end",
+      "    Front Server ->>-Client: Response (HTML)",
+      "```"
+    ],
+    "description": "Mermaid sequnce diagram template"
+  },
+  "Mermaid pie chart": {
+    "prefix": "mermaid-pie",
+    "body": [
+      "```mermaid",
+      "pie title Pets adopted by volunteers",
+      "    title Pets adopted by volunteers",
+      "    \"Dogs\" : 386",
+      "    \"Cats\" : 85",
+      "    \"Rats\" : 15",
+      "```"
+    ],
+    "description": "Mermaid pie chart template"
+  }
+}

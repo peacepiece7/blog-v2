@@ -30,6 +30,14 @@ sequenceDiagram
 
 ```mermaid
 flowchart TD
+ START([start])
+ START --> A01{{page}} --> A01_IF{if logged in}
+ A01_IF --> | yes | A02{{dashboard}}
+ A01_IF --> | no | A03{{login}}
+```
+
+```mermaid
+flowchart TD
     START([스포츠클럽 등록 신청])
     A01{{스포츠클럽 관계자}}
     A01_IF{스포츠클럽 관계자이다.}
