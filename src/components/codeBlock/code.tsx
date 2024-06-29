@@ -32,6 +32,7 @@ export const Code = (
         backgroundColor: 'hsl(210,8%,80%)',
         padding: '1rem',
         borderRadius: '0.5rem',
+        fontSize: '1.6rem',
       }}
     >
       <code {...restProps} dangerouslySetInnerHTML={{ __html: value }}></code>

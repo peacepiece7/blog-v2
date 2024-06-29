@@ -30,12 +30,14 @@ const RAW_RUNTIME_STATE =
           ["@mdx-js/loader", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:3.0.1"],\
           ["@mdx-js/react", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:3.0.1"],\
           ["@next/mdx", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:14.2.4"],\
+          ["@tailwindcss/typography", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:0.5.13"],\
           ["@types/mdx", "npm:2.0.13"],\
           ["@types/node", "npm:20.14.9"],\
           ["@types/react", "npm:18.3.3"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:14.2.4"],\
+          ["framer-motion", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:11.2.12"],\
           ["highlight.js", "npm:11.9.0"],\
           ["mermaid", "npm:10.9.1"],\
           ["next", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:14.2.4"],\
@@ -524,6 +526,32 @@ const RAW_RUNTIME_STATE =
           ["@swc/helpers", "npm:0.5.5"],\
           ["@swc/counter", "npm:0.1.3"],\
           ["tslib", "npm:2.6.3"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tailwindcss/typography", [\
+      ["npm:0.5.13", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@tailwindcss-typography-npm-0.5.13-d1d59a3273-10c0.zip/node_modules/@tailwindcss/typography/",\
+        "packageDependencies": [\
+          ["@tailwindcss/typography", "npm:0.5.13"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:0.5.13", {\
+        "packageLocation": "./.yarn/__virtual__/@tailwindcss-typography-virtual-51085e2d52/4/AppData/Local/Yarn/Berry/cache/@tailwindcss-typography-npm-0.5.13-d1d59a3273-10c0.zip/node_modules/@tailwindcss/typography/",\
+        "packageDependencies": [\
+          ["@tailwindcss/typography", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:0.5.13"],\
+          ["@types/tailwindcss", null],\
+          ["lodash.castarray", "npm:4.4.0"],\
+          ["lodash.isplainobject", "npm:4.0.6"],\
+          ["lodash.merge", "npm:4.6.2"],\
+          ["postcss-selector-parser", "npm:6.0.10"],\
+          ["tailwindcss", "npm:3.4.4"]\
+        ],\
+        "packagePeers": [\
+          "@types/tailwindcss",\
+          "tailwindcss"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1179,12 +1207,14 @@ const RAW_RUNTIME_STATE =
           ["@mdx-js/loader", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:3.0.1"],\
           ["@mdx-js/react", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:3.0.1"],\
           ["@next/mdx", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:14.2.4"],\
+          ["@tailwindcss/typography", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:0.5.13"],\
           ["@types/mdx", "npm:2.0.13"],\
           ["@types/node", "npm:20.14.9"],\
           ["@types/react", "npm:18.3.3"],\
           ["@types/react-dom", "npm:18.3.0"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-next", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:14.2.4"],\
+          ["framer-motion", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:11.2.12"],\
           ["highlight.js", "npm:11.9.0"],\
           ["mermaid", "npm:10.9.1"],\
           ["next", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:14.2.4"],\
@@ -3064,6 +3094,37 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["framer-motion", [\
+      ["npm:11.2.12", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/framer-motion-npm-11.2.12-2bfb6af0e5-10c0.zip/node_modules/framer-motion/",\
+        "packageDependencies": [\
+          ["framer-motion", "npm:11.2.12"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:11.2.12", {\
+        "packageLocation": "./.yarn/__virtual__/framer-motion-virtual-cbcca5c124/4/AppData/Local/Yarn/Berry/cache/framer-motion-npm-11.2.12-2bfb6af0e5-10c0.zip/node_modules/framer-motion/",\
+        "packageDependencies": [\
+          ["framer-motion", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:11.2.12"],\
+          ["@emotion/is-prop-valid", null],\
+          ["@types/emotion__is-prop-valid", null],\
+          ["@types/react", "npm:18.3.3"],\
+          ["@types/react-dom", "npm:18.3.0"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:18.3.1"],\
+          ["tslib", "npm:2.6.3"]\
+        ],\
+        "packagePeers": [\
+          "@emotion/is-prop-valid",\
+          "@types/emotion__is-prop-valid",\
+          "@types/react-dom",\
+          "@types/react",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["fs-minipass", [\
       ["npm:2.1.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/fs-minipass-npm-2.1.0-501ef87306-10c0.zip/node_modules/fs-minipass/",\
@@ -4193,6 +4254,24 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/lodash-es-npm-4.17.21-b45832dfce-10c0.zip/node_modules/lodash-es/",\
         "packageDependencies": [\
           ["lodash-es", "npm:4.17.21"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lodash.castarray", [\
+      ["npm:4.4.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/lodash.castarray-npm-4.4.0-f3706198e9-10c0.zip/node_modules/lodash.castarray/",\
+        "packageDependencies": [\
+          ["lodash.castarray", "npm:4.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lodash.isplainobject", [\
+      ["npm:4.0.6", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/lodash.isplainobject-npm-4.0.6-d73937742f-10c0.zip/node_modules/lodash.isplainobject/",\
+        "packageDependencies": [\
+          ["lodash.isplainobject", "npm:4.0.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5822,6 +5901,15 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["postcss-selector-parser", [\
+      ["npm:6.0.10", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/postcss-selector-parser-npm-6.0.10-a4d7aaa270-10c0.zip/node_modules/postcss-selector-parser/",\
+        "packageDependencies": [\
+          ["postcss-selector-parser", "npm:6.0.10"],\
+          ["cssesc", "npm:3.0.0"],\
+          ["util-deprecate", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
       ["npm:6.1.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/postcss-selector-parser-npm-6.1.0-f392fdf6ae-10c0.zip/node_modules/postcss-selector-parser/",\
         "packageDependencies": [\

@@ -19,6 +19,17 @@ yarn create next-app
 PnP 모드시 zip archives에서 타입을 가져와주는 yarn toolchain [ZipFS](https://marketplace.visualstudio.com/items?itemName=arcanis.vscode-zipfs)  
 (node_modules가 없기 때문에 타입 에러 발생 함 yarn pnp시 필수)
 
+[yarn editor sdk](https://yarnpkg.com/getting-started/editor-sdks) 설정
+
+> Install the ZipFS extension, which is maintained by the Yarn team.
+> Run the following command, which will generate a .vscode/settings.json file:
+> yarn dlx @yarnpkg/sdks vscode
+> For safety reason VSCode requires you to explicitly activate the custom TS settings:
+>
+> 1. Press ctrl+shift+p in a TypeScript file
+> 2. Choose "Select TypeScript Version"
+> 3. Pick "Use Workspace Version"
+
 ## gitignore
 
 팀원이 모두 PnP를 사용하지 않거나 차후 변경 예정이라면 .pnp.cjs와 .pnp.loader.mjs 파일을 gitignore에 추가해야 함

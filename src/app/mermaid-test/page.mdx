@@ -6,13 +6,7 @@
 - --> 점선, ->> 실선 화살표, -->> 점선 화살표 그 외 메시지 기호는 [요기 참고](https://mermaid.js.org/syntax/sequenceDiagram.html#messages)
 - par, opt, loop, alt, break 등 지원함
 
-```mermaid
-pie title Pets adopted by volunteers
-    title Pets adopted by volunteers2
-    "Dogs" : 386
-    "Cats" : 85
-    "Rats" : 14
-```
+"Dogs" : 386 "Cats" : 85 "Rats" : 14 ```
 
 - par, opt, loop, alt, break 등 지원함
 
@@ -24,15 +18,8 @@ pie title Pets adopted by volunteers
     "Rats" : 15
 ```
 
-```mermaid
-pie title Pets adopted by volunteers
-    title Pets adopted by volunteers
-    "Dogs" : 386
-    "Cats" : 85
-    "Rats" : 15
-```
-
-```mermaid
+```mermaid 머메이드 요약 타이틀
+%% 깃 그래프
 gitGraph
    commit
    commit id: "Normal" tag: "v1.0.0"
@@ -54,6 +41,7 @@ gitGraph
 bar
 
 ```mermaid
+%% 시퀀스 다이어그램
 sequenceDiagram
     Client ->>+Front Server: Request
     Front Server ->>Back Server : Request
@@ -76,6 +64,7 @@ sequenceDiagram
 빠르게 의미를 전달하고자 하는 이유로 사용한다면 subgraph나 스타일링을 사용하지 않는게 좋을듯 함
 
 ```mermaid
+%% 플로우 차트 1
 flowchart TD
  START([start])
  START --> A01{{page}} --> A01_IF{if logged in}
@@ -86,6 +75,7 @@ flowchart TD
 foo
 
 ```mermaid
+%% 플롱 차트 2
 flowchart TD
     START([스포츠클럽 등록 신청])
     A01{{스포츠클럽 관계자}}
