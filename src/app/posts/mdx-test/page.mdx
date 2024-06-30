@@ -1,0 +1,33 @@
+# Hello world
+
+Welcome to my blog!
+
+foo bar `fredo` waldo
+
+안녕하셍 반갑스니다. 영어로 쓰니까 글자가 좀 많이 작네요
+
+```js
+export const Code = (
+  props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
+) => {
+  const { children, ...restProps } = props
+
+  if (!props.className)
+    return (
+      <code
+        className='text-sm text-rose-500 font-bold bg-slate-200 p-1 rounded-md'
+        {...props}
+      />
+    )
+
+  const value = hljs.highlight(props.children as string, {
+    language: LANGUAGES_MAP[props.className as string] || 'plaintext',
+  }).value
+
+  return (
+    <div className='bg-slate-300 p-2 rounded-lg text-sm overflow-y-auto'>
+      <code {...restProps} dangerouslySetInnerHTML={{ __html: value }}></code>
+    </div>
+  )
+}
+```

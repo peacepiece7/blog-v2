@@ -4,27 +4,27 @@
 
 html {
   font-size: 62.5%;
+  scroll-behavior: smooth;
 }
 
 body {
-  font-size: 2rem;
-  font-weight: 500;
   padding: 20px;
 }
 
-details > summary {
-  list-style-type: '> ';
+/*
+  mermaid 스타일
+*/
+/* details[open] > summary {
+  list-style-type: '[close] ';
 }
+
+details:not([open]) > summary {
+  list-style-type: '[open] ';
+} */
 
 details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
 }
-
-/* 
-이런거 구현하려면 js로 하자
-details:not([open]) summary ~ * {
-  animation: sweep 0.5s ease-in-out;
-} */
 
 @keyframes sweep {
   0% {

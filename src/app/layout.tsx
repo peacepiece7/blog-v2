@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { hiMelody, inter } from '@/utils/fonts'
-import './globals.css'
+import './styles/globals.css'
+import './styles/reset.css'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${hiMelody?.className} ${inter?.className}`}>
+      <body className={`${hiMelody?.className} ${inter?.className} text-base`}>
         {children}
       </body>
     </html>

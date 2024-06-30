@@ -22,20 +22,30 @@ export const Code = (
 ) => {
   const { children, ...restProps } = props
 
-  let value = hljs.highlight(props.children as string, {
+  if (
+    !props.className &&
+    typeof props.children === 'string' &&
+    !props.children.includes('\n')
+  ) {
+    return (
+      <code
+        className=' text-rose-500 font-bold bg-slate-200 p-1 rounded-md text-xs not-italic font-mono'
+        {...props}
+      />
+    )
+  }
+
+  const value = hljs.highlight(props.children as string, {
     language: LANGUAGES_MAP[props.className as string] || 'plaintext',
   }).value
 
   return (
-    <div
-      style={{
-        backgroundColor: 'hsl(210,8%,80%)',
-        padding: '1rem',
-        borderRadius: '0.5rem',
-        fontSize: '1.6rem',
-      }}
-    >
-      <code {...restProps} dangerouslySetInnerHTML={{ __html: value }}></code>
+    <div className='bg-slate-300 p-2 rounded-lg overflow-y-auto text-xs'>
+      <code
+        {...restProps}
+        dangerouslySetInnerHTML={{ __html: value }}
+        className='not-italic font-mono'
+      ></code>
     </div>
   )
 }
