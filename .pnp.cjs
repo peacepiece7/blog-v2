@@ -46,6 +46,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:18.3.1"],\
           ["react-icons", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:5.2.1"],\
+          ["remark-frontmatter", "npm:5.0.0"],\
           ["tailwindcss", "npm:3.4.4"],\
           ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=379a07"]\
         ],\
@@ -1253,6 +1254,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:18.3.1"],\
           ["react-icons", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:5.2.1"],\
+          ["remark-frontmatter", "npm:5.0.0"],\
           ["tailwindcss", "npm:3.4.4"],\
           ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=379a07"]\
         ],\
@@ -2539,6 +2541,13 @@ const RAW_RUNTIME_STATE =
           ["escape-string-regexp", "npm:4.0.0"]\
         ],\
         "linkType": "HARD"\
+      }],\
+      ["npm:5.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/escape-string-regexp-npm-5.0.0-a663e825ce-10c0.zip/node_modules/escape-string-regexp/",\
+        "packageDependencies": [\
+          ["escape-string-regexp", "npm:5.0.0"]\
+        ],\
+        "linkType": "HARD"\
       }]\
     ]],\
     ["eslint", [\
@@ -3084,6 +3093,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["fault", [\
+      ["npm:2.0.1", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/fault-npm-2.0.1-c462630f58-10c0.zip/node_modules/fault/",\
+        "packageDependencies": [\
+          ["fault", "npm:2.0.1"],\
+          ["format", "npm:0.2.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["file-entry-cache", [\
       ["npm:6.0.1", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/file-entry-cache-npm-6.0.1-31965cf0af-10c0.zip/node_modules/file-entry-cache/",\
@@ -3153,6 +3172,15 @@ const RAW_RUNTIME_STATE =
           ["foreground-child", "npm:3.2.1"],\
           ["cross-spawn", "npm:7.0.3"],\
           ["signal-exit", "npm:4.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["format", [\
+      ["npm:0.2.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/format-npm-0.2.2-679f3acc64-10c0.zip/node_modules/format/",\
+        "packageDependencies": [\
+          ["format", "npm:0.2.2"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4455,6 +4483,21 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["mdast-util-frontmatter", [\
+      ["npm:2.0.1", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/mdast-util-frontmatter-npm-2.0.1-7fb656bf3d-10c0.zip/node_modules/mdast-util-frontmatter/",\
+        "packageDependencies": [\
+          ["mdast-util-frontmatter", "npm:2.0.1"],\
+          ["@types/mdast", "npm:4.0.4"],\
+          ["devlop", "npm:1.1.0"],\
+          ["escape-string-regexp", "npm:5.0.0"],\
+          ["mdast-util-from-markdown", "npm:2.0.1"],\
+          ["mdast-util-to-markdown", "npm:2.1.0"],\
+          ["micromark-extension-frontmatter", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["mdast-util-mdx", [\
       ["npm:3.0.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/mdast-util-mdx-npm-3.0.0-02a6734e33-10c0.zip/node_modules/mdast-util-mdx/",\
@@ -4715,6 +4758,19 @@ const RAW_RUNTIME_STATE =
           ["micromark-util-normalize-identifier", "npm:2.0.0"],\
           ["micromark-util-resolve-all", "npm:2.0.0"],\
           ["micromark-util-subtokenize", "npm:2.0.1"],\
+          ["micromark-util-symbol", "npm:2.0.0"],\
+          ["micromark-util-types", "npm:2.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["micromark-extension-frontmatter", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/micromark-extension-frontmatter-npm-2.0.0-a54996ce3a-10c0.zip/node_modules/micromark-extension-frontmatter/",\
+        "packageDependencies": [\
+          ["micromark-extension-frontmatter", "npm:2.0.0"],\
+          ["fault", "npm:2.0.1"],\
+          ["micromark-util-character", "npm:2.1.0"],\
           ["micromark-util-symbol", "npm:2.0.0"],\
           ["micromark-util-types", "npm:2.0.0"]\
         ],\
@@ -6204,6 +6260,19 @@ const RAW_RUNTIME_STATE =
           ["define-properties", "npm:1.2.1"],\
           ["es-errors", "npm:1.3.0"],\
           ["set-function-name", "npm:2.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["remark-frontmatter", [\
+      ["npm:5.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/remark-frontmatter-npm-5.0.0-c52fe198da-10c0.zip/node_modules/remark-frontmatter/",\
+        "packageDependencies": [\
+          ["remark-frontmatter", "npm:5.0.0"],\
+          ["@types/mdast", "npm:4.0.4"],\
+          ["mdast-util-frontmatter", "npm:2.0.1"],\
+          ["micromark-extension-frontmatter", "npm:2.0.0"],\
+          ["unified", "npm:11.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\
