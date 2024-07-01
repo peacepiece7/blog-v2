@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react'
 import 'highlight.js/styles/github.css'
-import { Mermaid } from './mermiadBlock'
+import { Mermaid } from './mermaidBlock'
 import { Code } from './code'
 
 export const CodeBlock = (
