@@ -23,13 +23,13 @@ export const Detail = ({ summaryTitle, children }: DetailProps) => {
         onClick={onToggle}
       >
         <div
-          className={`flex items-center transition-all
-          `}
+          className={`group flex items-center transition-colors border-[2px] border-transparent rounded-md hover:border-[2px] hover:border-gray-200 hover:bg-gray-100 w-fit`}
         >
+          <p>{summaryTitle}</p>
           <FaAngleRight
-            className={`mr-2 transition-all ${isOpen ? 'rotate-90 mb-1' : ''}`}
+            className={`w-6 h-6 ml-1 transition-all group-hover:translate-x-1
+              ${isOpen ? 'rotate-90 mb-1' : 'mb-1'}`}
           />
-          {summaryTitle}
         </div>
       </summary>
       {children}

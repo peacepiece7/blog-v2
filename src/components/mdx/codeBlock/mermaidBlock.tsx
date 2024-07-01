@@ -15,7 +15,7 @@ export const Mermaid = (
 ) => {
   const codeRef = useRef<HTMLPreElement>(null)
   const [summaryTitle, _setSummaryTitle] = useState(
-    () => setSummartTitle(props.children as string) || '상세 보기'
+    () => setSummeryTitle(props.children as string) || '상세 보기'
   )
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export const Mermaid = (
   )
 }
 
-function setSummartTitle(text: string) {
+function setSummeryTitle(text: string) {
   const firstCommentStartIndex = text.indexOf('%%')
   if (firstCommentStartIndex !== -1) {
     const firstCommentEndIndex = text
