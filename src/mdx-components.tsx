@@ -7,7 +7,7 @@ import { List } from './components/mdx/list'
 import { Paragraph } from './components/mdx/paragraph'
 import { Blockquote } from './components/mdx/blockquote'
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+export function useMDXComponents(components?: MDXComponents): MDXComponents {
   /**
    * @node code-block
    * pre > code.language-<name>
