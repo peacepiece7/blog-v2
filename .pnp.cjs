@@ -31,6 +31,7 @@ const RAW_RUNTIME_STATE =
           ["@mdx-js/react", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:3.0.1"],\
           ["@next/mdx", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:14.2.4"],\
           ["@tailwindcss/typography", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:0.5.13"],\
+          ["@types/mdast", "npm:4.0.4"],\
           ["@types/mdx", "npm:2.0.13"],\
           ["@types/node", "npm:20.14.9"],\
           ["@types/react", "npm:18.3.3"],\
@@ -46,9 +47,13 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:18.3.1"],\
           ["react-icons", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:5.2.1"],\
+          ["rehype-stringify", "npm:10.0.0"],\
           ["remark-frontmatter", "npm:5.0.0"],\
+          ["remark-parse", "npm:11.0.0"],\
+          ["remark-rehype", "npm:11.1.0"],\
           ["tailwindcss", "npm:3.4.4"],\
-          ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=379a07"]\
+          ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=379a07"],\
+          ["unified", "npm:11.0.5"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -1239,6 +1244,7 @@ const RAW_RUNTIME_STATE =
           ["@mdx-js/react", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:3.0.1"],\
           ["@next/mdx", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:14.2.4"],\
           ["@tailwindcss/typography", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:0.5.13"],\
+          ["@types/mdast", "npm:4.0.4"],\
           ["@types/mdx", "npm:2.0.13"],\
           ["@types/node", "npm:20.14.9"],\
           ["@types/react", "npm:18.3.3"],\
@@ -1254,9 +1260,13 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:18.3.1"],\
           ["react-icons", "virtual:de26b75da75a7f303b13f7c2f64efda58f74fe58a1b7ad587604a069adb678c33fa1eb3463bb97c49455d8b1c79df042ec06b938c87a15e8888c658a9b9dfb75#npm:5.2.1"],\
+          ["rehype-stringify", "npm:10.0.0"],\
           ["remark-frontmatter", "npm:5.0.0"],\
+          ["remark-parse", "npm:11.0.0"],\
+          ["remark-rehype", "npm:11.1.0"],\
           ["tailwindcss", "npm:3.4.4"],\
-          ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=379a07"]\
+          ["typescript", "patch:typescript@npm%3A5.5.2#optional!builtin<compat/typescript>::version=5.5.2&hash=379a07"],\
+          ["unified", "npm:11.0.5"]\
         ],\
         "linkType": "SOFT"\
       }]\
@@ -2344,6 +2354,15 @@ const RAW_RUNTIME_STATE =
           ["enhanced-resolve", "npm:5.17.0"],\
           ["graceful-fs", "npm:4.2.11"],\
           ["tapable", "npm:2.2.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["entities", [\
+      ["npm:4.5.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/entities-npm-4.5.0-7cdb83b832-10c0.zip/node_modules/entities/",\
+        "packageDependencies": [\
+          ["entities", "npm:4.5.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -3517,6 +3536,55 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["hast-util-from-parse5", [\
+      ["npm:8.0.1", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hast-util-from-parse5-npm-8.0.1-5ed6a912d8-10c0.zip/node_modules/hast-util-from-parse5/",\
+        "packageDependencies": [\
+          ["hast-util-from-parse5", "npm:8.0.1"],\
+          ["@types/hast", "npm:3.0.4"],\
+          ["@types/unist", "npm:3.0.2"],\
+          ["devlop", "npm:1.1.0"],\
+          ["hastscript", "npm:8.0.0"],\
+          ["property-information", "npm:6.5.0"],\
+          ["vfile", "npm:6.0.1"],\
+          ["vfile-location", "npm:5.0.2"],\
+          ["web-namespaces", "npm:2.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["hast-util-parse-selector", [\
+      ["npm:4.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hast-util-parse-selector-npm-4.0.0-adea10ab8c-10c0.zip/node_modules/hast-util-parse-selector/",\
+        "packageDependencies": [\
+          ["hast-util-parse-selector", "npm:4.0.0"],\
+          ["@types/hast", "npm:3.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["hast-util-raw", [\
+      ["npm:9.0.4", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hast-util-raw-npm-9.0.4-91b7a26c16-10c0.zip/node_modules/hast-util-raw/",\
+        "packageDependencies": [\
+          ["hast-util-raw", "npm:9.0.4"],\
+          ["@types/hast", "npm:3.0.4"],\
+          ["@types/unist", "npm:3.0.2"],\
+          ["@ungap/structured-clone", "npm:1.2.0"],\
+          ["hast-util-from-parse5", "npm:8.0.1"],\
+          ["hast-util-to-parse5", "npm:8.0.0"],\
+          ["html-void-elements", "npm:3.0.0"],\
+          ["mdast-util-to-hast", "npm:13.2.0"],\
+          ["parse5", "npm:7.1.2"],\
+          ["unist-util-position", "npm:5.0.0"],\
+          ["unist-util-visit", "npm:5.0.0"],\
+          ["vfile", "npm:6.0.1"],\
+          ["web-namespaces", "npm:2.0.1"],\
+          ["zwitch", "npm:2.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["hast-util-to-estree", [\
       ["npm:3.1.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hast-util-to-estree-npm-3.1.0-0bbaae89ac-10c0.zip/node_modules/hast-util-to-estree/",\
@@ -3537,6 +3605,27 @@ const RAW_RUNTIME_STATE =
           ["space-separated-tokens", "npm:2.0.2"],\
           ["style-to-object", "npm:0.4.4"],\
           ["unist-util-position", "npm:5.0.0"],\
+          ["zwitch", "npm:2.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["hast-util-to-html", [\
+      ["npm:9.0.1", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hast-util-to-html-npm-9.0.1-e29a5a2a70-10c0.zip/node_modules/hast-util-to-html/",\
+        "packageDependencies": [\
+          ["hast-util-to-html", "npm:9.0.1"],\
+          ["@types/hast", "npm:3.0.4"],\
+          ["@types/unist", "npm:3.0.2"],\
+          ["ccount", "npm:2.0.1"],\
+          ["comma-separated-tokens", "npm:2.0.3"],\
+          ["hast-util-raw", "npm:9.0.4"],\
+          ["hast-util-whitespace", "npm:3.0.0"],\
+          ["html-void-elements", "npm:3.0.0"],\
+          ["mdast-util-to-hast", "npm:13.2.0"],\
+          ["property-information", "npm:6.5.0"],\
+          ["space-separated-tokens", "npm:2.0.2"],\
+          ["stringify-entities", "npm:4.0.4"],\
           ["zwitch", "npm:2.0.4"]\
         ],\
         "linkType": "HARD"\
@@ -3566,6 +3655,22 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["hast-util-to-parse5", [\
+      ["npm:8.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hast-util-to-parse5-npm-8.0.0-5b46bc2294-10c0.zip/node_modules/hast-util-to-parse5/",\
+        "packageDependencies": [\
+          ["hast-util-to-parse5", "npm:8.0.0"],\
+          ["@types/hast", "npm:3.0.4"],\
+          ["comma-separated-tokens", "npm:2.0.3"],\
+          ["devlop", "npm:1.1.0"],\
+          ["property-information", "npm:6.5.0"],\
+          ["space-separated-tokens", "npm:2.0.2"],\
+          ["web-namespaces", "npm:2.0.1"],\
+          ["zwitch", "npm:2.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["hast-util-whitespace", [\
       ["npm:3.0.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hast-util-whitespace-npm-3.0.0-215dd4954b-10c0.zip/node_modules/hast-util-whitespace/",\
@@ -3576,11 +3681,34 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["hastscript", [\
+      ["npm:8.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/hastscript-npm-8.0.0-acde2e34a0-10c0.zip/node_modules/hastscript/",\
+        "packageDependencies": [\
+          ["hastscript", "npm:8.0.0"],\
+          ["@types/hast", "npm:3.0.4"],\
+          ["comma-separated-tokens", "npm:2.0.3"],\
+          ["hast-util-parse-selector", "npm:4.0.0"],\
+          ["property-information", "npm:6.5.0"],\
+          ["space-separated-tokens", "npm:2.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["highlight.js", [\
       ["npm:11.9.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/highlight.js-npm-11.9.0-ec99f7b12f-10c0.zip/node_modules/highlight.js/",\
         "packageDependencies": [\
           ["highlight.js", "npm:11.9.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["html-void-elements", [\
+      ["npm:3.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/html-void-elements-npm-3.0.0-e1a7d1151b-10c0.zip/node_modules/html-void-elements/",\
+        "packageDependencies": [\
+          ["html-void-elements", "npm:3.0.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -5812,6 +5940,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["parse5", [\
+      ["npm:7.1.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/parse5-npm-7.1.2-aa9a92c270-10c0.zip/node_modules/parse5/",\
+        "packageDependencies": [\
+          ["parse5", "npm:7.1.2"],\
+          ["entities", "npm:4.5.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["path-exists", [\
       ["npm:4.0.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/path-exists-npm-4.0.0-e9e4f63eb0-10c0.zip/node_modules/path-exists/",\
@@ -6260,6 +6398,18 @@ const RAW_RUNTIME_STATE =
           ["define-properties", "npm:1.2.1"],\
           ["es-errors", "npm:1.3.0"],\
           ["set-function-name", "npm:2.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["rehype-stringify", [\
+      ["npm:10.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/rehype-stringify-npm-10.0.0-caaa3e672e-10c0.zip/node_modules/rehype-stringify/",\
+        "packageDependencies": [\
+          ["rehype-stringify", "npm:10.0.0"],\
+          ["@types/hast", "npm:3.0.4"],\
+          ["hast-util-to-html", "npm:9.0.1"],\
+          ["unified", "npm:11.0.5"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7362,6 +7512,17 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["vfile-location", [\
+      ["npm:5.0.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/vfile-location-npm-5.0.2-8b28eeaf35-10c0.zip/node_modules/vfile-location/",\
+        "packageDependencies": [\
+          ["vfile-location", "npm:5.0.2"],\
+          ["@types/unist", "npm:3.0.2"],\
+          ["vfile", "npm:6.0.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["vfile-message", [\
       ["npm:4.0.2", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/vfile-message-npm-4.0.2-6a07dfdc39-10c0.zip/node_modules/vfile-message/",\
@@ -7369,6 +7530,15 @@ const RAW_RUNTIME_STATE =
           ["vfile-message", "npm:4.0.2"],\
           ["@types/unist", "npm:3.0.2"],\
           ["unist-util-stringify-position", "npm:4.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["web-namespaces", [\
+      ["npm:2.0.1", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/web-namespaces-npm-2.0.1-f7b8233848-10c0.zip/node_modules/web-namespaces/",\
+        "packageDependencies": [\
+          ["web-namespaces", "npm:2.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
