@@ -8,7 +8,6 @@ import { X_CUSTOM_URL } from '@/constants/server'
 export async function middleware(req: NextRequest) {
   const match = req.url.match(urlPathRegExp)
   const path = match ? match[1] : '/'
-  console.log('path : ', path)
 
   req.headers.set(X_CUSTOM_URL, path)
 
