@@ -16,14 +16,23 @@ export const metadata: Metadata = {
   creator: 'Your Name',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
   const headerList = headers()
-
   const isPostPage = headerList.get(X_CUSTOM_URL)?.includes('posts')
+
+  headerList.forEach((value, key) => {
+    console.log(key, value)
+  })
+
+  // fetch('http://localhost:3000/api/navigation')
+  // const tocRes = await fetch('/api/table-of-contents')
+
+  // get navigation data
+  // get table of contents data
 
   return (
     <html lang='en'>
@@ -33,7 +42,8 @@ export default function RootLayout({
             <Link href='/'>Blog v2</Link>
           </div>
           <div className='col-start-1 col-end-2 row-start-2 row-end-4 w-fit min-w-fit px-10 overflow-y-scroll'>
-            <LeftSideBar tabIdx={0} />
+            {/* left side bar skeleton UI */}
+            <LeftSideBar />
           </div>
           {isPostPage ? (
             <PostPageLayout>{children}</PostPageLayout>
