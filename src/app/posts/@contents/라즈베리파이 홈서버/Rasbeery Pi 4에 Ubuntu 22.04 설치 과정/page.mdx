@@ -1,0 +1,163 @@
+# Rasbeery Pi 4에 Ubuntu 22.04 설치 과정
+
+웹 서버로 사용할 목적으로 Rasberry Pi 4를 구입하고 Ubuntu 22.04를 설치하였다.  
+이 포스트는 Rasberry Pi 4에 Ubuntu 22.04를 설치한 과정과 그 과정에서 발생한 이슈를 정리할 목적으로 작성되었다.
+
+[미니 홈서버 구축하기](https://nitr0.tistory.com/category/Server) 시리즈가 도움이 많이 되었다.
+
+## Ubuntu 설치
+
+[raspberry pi imager](https://www.raspberrypi.com/software/)에서 Ubuntu 22.04를 설치한다.  
+Raspberry Pi Imager를 ㅅㅇ행하고 다음과 같이 설정한다.
+
+1. Raspbeery Pi device -> Raspberry Pi 4
+2. OS -> Other general-purpose OS -> Ubuntu -> Ubuntu 22.04 LTS 64-bit (Server)
+3. 저장소 -> SD Card 선택
+
+ssh로 연결하기 위해서는 추가로 다음과 같이 설정한다.
+
+![resberry_pi](/images/raspberry_pi.png)
+
+SSID : wifi 이름  
+비밀번호 : wifi 비밀번호
+
+렌을 직접 연결해도 된다.
+
+여기서 커스터마이징하지 않더라도 sd card에 network-config 파일을 직접 수정해주어도 된다.
+
+```yml
+version: 2
+ethernets:
+  eth0:
+    dhcp4: true
+wifis:
+  renderer: networkd
+  wlan0:
+    dhcp4: true
+    optional: true
+    access-points:
+      'wifi name(SSID)':
+        password: 'wifi password'
+```
+
+네트워크가 잘 연결 되었는지 확인해보자
+
+```bash
+$ ip a
+$ ping -c 4 al.com
+```
+
+## ssh로 접속하기
+
+ssh로 접속하려면 raspbeery pi를 부팅하고 http://192.168.0.1/ 에서 raspberry pi의 ip를 확인해야하는데  
+iptime 기준 http://192.168.0.1/ 에 접속하여 확인한다.
+
+이더넷이 연결되었다면 raspberry pi의 ip를 확인할 수 있다.
+
+![resberry_pi2](/images/raspberry_pi2.png)
+
+window에서 진행했으므로 putty를 사용하여 접속한다.
+
+![resberry_pi3](/images/raspberry_pi3.png)
+
+# 이슈 정리
+
+## 1. 모니터를 연결하자
+
+이미지를 설치할 떄 wifi id를 잘못 적어서 wifi 연결이 안되는 문제가 있었고,
+
+Window에서 어떤 문제로 인해 sd card가 FAT으로 포멧이 안되어 raspberry pi에서 boot가 안되는 문제가 있었다.  
+모니터를 처음부터 연결했다면 에러 메시지를 확인하고 해결할 수 있었을텐데  
+호기롭게 모니터 없이 하려다가 시간을 많이 날려먹었다.
+
+## 2. act led 점등으로 확인하자
+
+빨강/파랑 led가 점등 되면 일단 부트가 된 것이다.  
+부트가 되었는데 wifi에 연결된 ip가 없다면, 아마도 로그인 문제일 것이다.  
+이런경우 화면을 연결해서 에러 메지지를 확인하자.
+
+## 3. 네트워크 관리자 설정
+
+Provider에 따라 다르겠지만, iptime의 경우 198.68.01로 접속한다.  
+초기 id/pw는 admin/admin로 만약 까먹었다면 뾰족한 물건으로 reset 버튼을 5초 정도 눌러주면 초기화 된다.  
+이후 로그인 -> 고급설정 -> 네트워크 관리자에서 raspberry pi의 ip를 확인할 수 있다.
+
+## 4. (raspberry pi)네트워크를 못찾을 경우
+
+Rasberry pi imager에서 ubuntu 22.04를 설치할 때 wifi 설정을 해주었으나 네트워크를 찾기 못하는 문제가 발생했다.
+
+우선 현재 네트워크 상태을 확인한다.
+
+```bash
+$ ip link
+
+1: lo: ..
+2: eth0: ..
+3: wlan0: ..
+```
+
+보통 eth 또는 wlan이 있다면 네트워크가 연결되어 있는 것이다.  
+네트워크 연결이 잘 되어있다면 다음 명령어가 동작할 것이다.
+
+```bash
+shdo apt-get update
+```
+
+연결된 네트워크가 없거나 에러가 날 경우 netplan을 수정해주어야 한다.  
+netplan에 들어가면 초기 네트워크 설정때 입력하 정보가 들어가 있는 yaml 파일을 확인할 수 있다.
+
+```bash
+$ cd ~/etc/netplan
+$ ls -al
+
+50-cloud-init.yaml
+```
+
+이 파일을 수정하여 네트워크 설정을 변경할 수 있다.  
+이더넷 또는 와이파이 설정을 상황에 맞게 수정한다.
+
+```bash
+$ sudo vi 50-cloud-init.yaml
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    eth0:
+      dhcp4: true
+  wifis:
+    wlan0:
+      access-points:
+        "wifi name(SSID)":
+          password: "wifi password"
+```
+
+수정이 되었다면 다음 명령어로 설정을 적용한다.
+
+```bash
+$ sudo netplan apply
+```
+
+## 5. (raspberry pi)50-cloud-init.yaml is too open netplat configuration should not be accessible by others
+
+yaml파일을 수정하다가 권한을 잘못 설정하면 이런 에러가 발생한다.  
+이럴 경우 권한을 수정해주어야 한다.
+
+```bash
+# 파일 권한 체크
+ls -l /etc/netplan/50-cloud-init.yaml
+
+# 파일 권한 수정
+sudo chmod 600 /etc/netplan/50-cloud-init.yaml
+
+# 소유자 변경
+sudo chown root:root /etc/netplan/50-cloud-init.yaml
+
+# 파일 권한 재확인
+ls -l /etc/netplan/50-cloud-init.yaml
+```
+
+# 참고 링크
+
+https://nitr0.tistory.com/325
+
+https://m.blog.naver.com/makitmine_/222070055923

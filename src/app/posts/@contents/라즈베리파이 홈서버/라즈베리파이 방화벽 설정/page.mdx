@@ -1,0 +1,38 @@
+# 방화벽 설정
+
+ufw는 iptable을 쉬운 버전 정도이다.
+
+## 설치 및 설정
+
+```bash
+$ sudo apt-get install ufw
+
+# 상태 확인
+$ sudo ufw status verbose
+
+# ssh 허용
+$ sudo ufw allow 22
+
+# 규칙 삭제
+$ sudo ufw delete allow 22
+
+# ufw 활성화
+$ sudo ufw enable
+
+# ufw 비활성화
+$ sudo ufw disable
+
+# 허용 포트 및 프로토콜 확인
+cat /etc/services
+
+# 특정 ip 허용
+sudo ufw allow from 192.168.1.2
+sudo ufw allow from 192.168.1.2 to any port 22
+sudo ufw allow from 192.168.1.2 to any port 22 proto tcp
+
+
+```
+
+# 참고
+
+https://nitr0.tistory.com/326?category=836159
