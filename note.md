@@ -30,6 +30,18 @@ PnP 모드시 zip archives에서 타입을 가져와주는 yarn toolchain [ZipFS
 > 2. Choose "Select TypeScript Version"
 > 3. Pick "Use Workspace Version"
 
+`yarn dlx @yarnpkg/sdks vscode` 실행시 .yarn/sdks/typescript/lib 파일이 생성되고
+
+.vscode/settings.json에 다음 설정이 추가된다.
+
+```json
+{
+  "eslint.nodePath": ".yarn/sdks",
+  "typescript.tsdk": ".yarn/sdks/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
+```
+
 ## gitignore
 
 팀원이 모두 PnP를 사용하지 않거나 차후 변경 예정이라면 .pnp.cjs와 .pnp.loader.mjs 파일을 gitignore에 추가해야 함
