@@ -1,11 +1,11 @@
-import type { MDXComponents } from 'mdx/types'
 import { CodeBlock } from '@/components/mdx/codeBlock'
 import { Preview } from '@/components/mdx/preview'
-import { Heading } from './components/mdx/heading'
-import Anchor from './components/mdx/link'
-import { List } from './components/mdx/list'
-import { Paragraph } from './components/mdx/paragraph'
-import { Blockquote } from './components/mdx/blockquote'
+import { Heading } from '@/components/mdx/heading'
+import Anchor from '@/components/mdx/link'
+import { List } from '@/components/mdx/list'
+import { Paragraph } from '@/components/mdx/paragraph'
+import { Blockquote } from '@/components/mdx/blockquote'
+import { MDXComponents } from 'mdx/types'
 
 export function useMDXComponents(components?: MDXComponents): MDXComponents {
   /**

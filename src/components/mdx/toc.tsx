@@ -1,26 +1,15 @@
-import { unified } from 'unified'
-import markdown from 'remark-parse'
-import { readFile } from 'fs'
 import React from 'react'
 import type { RootContentMap } from 'mdast'
+import { getASTTreeSafely, getFileNamesSafely } from '@/utils/fs'
 
-export async function createTableOfContents(path: string) {
-  const heainds = await new Promise<RootContentMap['heading'][]>((res) => {
-    readFile(`${path}/page.mdx`, (error, buffer) => {
-      if (error) {
-        console.error(error)
-        res([])
-      } else {
-        const mdAst = unified().use(markdown).parse(buffer.toString())
-        const headingNodes = mdAst.children.filter(
-          (node) => node.type === 'heading'
-        )
-        res(headingNodes)
-      }
-    })
-  })
+export async function createTableOfContents(path: string, index: number = 0) {
+  const fileNames = getFileNamesSafely(path, '.mdx')
 
-  return createTOC(heainds)
+  const headingNodes = getASTTreeSafely<'heading'>(
+    `${path}/${fileNames[index].name}`,
+    'heading'
+  )
+  return createTOC(headingNodes)
 }
 
 function createTOC(headings: RootContentMap['heading'][]): React.ReactElement {
@@ -34,10 +23,17 @@ function createTOC(headings: RootContentMap['heading'][]): React.ReactElement {
     const text = heading.children
       .flatMap((node) => ('value' in node ? node.value : ''))
       .join('')
+    const formattedText = text.replace(/\s+/g, '_')
     const li = React.createElement(
       'li',
       { key: `li-${index}`, className: 'list-disc ml-6' },
-      text
+      React.createElement(
+        'a',
+        {
+          href: `#${formattedText}`,
+        },
+        text
+      )
     )
 
     while (stack.length > 0 && stack[stack.length - 1].depth >= depth) {
@@ -67,5 +63,6 @@ function createTOC(headings: RootContentMap['heading'][]): React.ReactElement {
   }
 
   const { element, children } = stack.pop()!
+
   return React.cloneElement(element, {}, children)
 }

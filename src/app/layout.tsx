@@ -24,10 +24,6 @@ export default async function RootLayout({
   const headerList = headers()
   const isPostPage = headerList.get(X_CUSTOM_URL)?.includes('posts')
 
-  headerList.forEach((value, key) => {
-    console.log(key, value)
-  })
-
   // fetch('http://localhost:3000/api/navigation')
   // const tocRes = await fetch('/api/table-of-contents')
 
@@ -41,7 +37,7 @@ export default async function RootLayout({
           <div className='col-start-1 col-end-5 row-start-1 row-end-2'>
             <Link href='/'>Blog v2</Link>
           </div>
-          <div className='col-start-1 col-end-2 row-start-2 row-end-4 w-fit min-w-fit px-10 overflow-y-scroll'>
+          <div className='col-start-1 col-end-2 row-start-2 row-end-4 w-fit min-w-fit max-w-[50rem] px-10 overflow-y-scroll'>
             {/* left side bar skeleton UI */}
             <LeftSideBar />
           </div>
