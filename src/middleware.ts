@@ -10,12 +10,6 @@ export async function middleware(req: NextRequest) {
   const path = match ? match[1] : '/'
 
   req.headers.set(X_CUSTOM_URL, path)
-  if (path !== decodeURIComponent(path)) {
-    // redirect('/posts/example/codepen')
-
-    return NextResponse.redirect(new URL('/posts/한글테스트', req.url))
-    // return NextResponse.redirect('/posts/example/codepen')
-  }
 
   return NextResponse.next({
     request: {

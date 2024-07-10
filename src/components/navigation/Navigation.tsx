@@ -1,56 +1,19 @@
-export default function Navigation() {
-  // if tab === 2 => Table of Contents
-  // else => Navigation
+'use client'
+import { usePathname } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+export default function Navigation(props: {
+  children: React.ReactNode
+  isActive: boolean
+}) {
+  const pathname = usePathname()
+  const [isActive, setIsActive] = useState(props.isActive)
+
+  useEffect(() => {
+    setIsActive(!pathname.includes('posts'))
+  }, [pathname])
+
   return (
-    <nav>
-      <h1>navigation contents</h1>
-      <ul className='overflow-y-auto'>
-        <li>Home</li>
-        <li>About</li>
-        <li>Services</li>
-        <li>Contact</li>
-        <ul>
-          <li>Phone</li>
-          <li>Email</li>
-          <li>Address</li>
-        </ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Services</li>
-        <li>Contact</li>
-        <ul>
-          <li>Phone</li>
-          <li>Email</li>
-          <li>Address</li>
-        </ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Services</li>
-        <li>Contact</li>
-        <ul>
-          <li>Phone</li>
-          <li>Email</li>
-          <li>Address</li>
-        </ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Services</li>
-        <li>Contact</li>
-        <ul>
-          <li>Phone</li>
-          <li>Email</li>
-          <li>Address</li>
-        </ul>
-        <li>Home</li>
-        <li>About</li>
-        <li>Services</li>
-        <li>Contact</li>
-        <ul>
-          <li>Phone</li>
-          <li>Email</li>
-          <li>Address</li>
-        </ul>
-      </ul>
-    </nav>
+    <div className={`${isActive ? 'visible' : 'hidden'}`}>{props.children}</div>
   )
 }

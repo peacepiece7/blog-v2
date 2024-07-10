@@ -1,19 +1,21 @@
-export function TableOfContents() {
+'use client'
+import { usePathname } from 'next/navigation'
+import React from 'react'
+import { useEffect, useState } from 'react'
+
+export default function TableOfContents(props: {
+  children: React.ReactNode
+  isActive: boolean
+  rendingUrl: string
+}) {
+  const pathname = usePathname()
+  const [isActive, setIsActive] = useState(props.isActive)
+
+  useEffect(() => {
+    setIsActive(pathname.includes('posts'))
+  }, [])
+
   return (
-    <ul>
-      <li>test</li>
-      <li>test</li>
-      <li>test</li>
-      <li>test2</li>
-      <ul>
-        <li>test2-1</li>
-        <li>test2-2</li>
-      </ul>
-      <li>test3</li>
-      <li>test4</li>
-      <ul>
-        <li>test4-1</li>
-      </ul>
-    </ul>
+    <div className={`${isActive ? 'visible' : 'hidden'}`}>{props.children}</div>
   )
 }

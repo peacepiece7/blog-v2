@@ -387,6 +387,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.50.1":
+  version: 5.50.1
+  resolution: "@tanstack/query-core@npm:5.50.1"
+  checksum: 10c0/4690750e70638fbfbcb686262f129c45e06314126bc651701f9cd57a77bd05cb9dad30b68cad960c35c790982750c294c9c340d25cb8a9a0916576d2e27569c0
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.50.1":
+  version: 5.50.1
+  resolution: "@tanstack/react-query@npm:5.50.1"
+  dependencies:
+    "@tanstack/query-core": "npm:5.50.1"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 10c0/ccf33245bc4f83c20b93a629e64edd9976a4d397ee51ee442326955a387345ff2b2a3813955faef6d08fde732eebb40557944df8335d50838094b703e79f35f9
+  languageName: node
+  linkType: hard
+
 "@types/acorn@npm:^4.0.0":
   version: 4.0.6
   resolution: "@types/acorn@npm:4.0.6"
@@ -950,6 +968,7 @@ __metadata:
     "@mdx-js/react": "npm:^3.0.1"
     "@next/mdx": "npm:^14.2.4"
     "@tailwindcss/typography": "npm:^0.5.13"
+    "@tanstack/react-query": "npm:^5.50.1"
     "@types/mdast": "npm:^4.0.4"
     "@types/mdx": "npm:^2.0.13"
     "@types/node": "npm:^20"
