@@ -82,3 +82,48 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 ```
 
 mdx 문법 하이라이트 [MDX extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx)
+
+# pm2
+
+pm2 설치
+
+`npm i --global pm2`
+
+pm2 명령 설정 후 실행
+
+```js
+module.exports = {
+  apps: [
+    {
+      name: 'blog',
+      script: 'yarn',
+      args: 'run start',
+      watch: true, // 파일 변경 감지 및 자동 재시작
+      env: {
+        NODE_ENV: 'development',
+      },
+      env_production: {
+        NODE_ENV: 'production',
+      },
+    },
+  ],
+}
+```
+
+```bash
+pm2 start ecosystem.config.js --env production
+```
+
+관리 명령어
+
+```bash
+pm2 status
+
+pm2 restart blog
+
+pm2 stop blog
+
+pm2 stop all
+
+pm2 logs blog
+```
