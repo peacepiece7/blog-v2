@@ -127,3 +127,11 @@ pm2 stop all
 
 pm2 logs blog
 ```
+
+## husky
+
+yarn add -D husky lint-staged
+npx husky init
+
+> 8 버전 이하는 husky install 명령어 사용
+> 9 버전 이상은 "install command is deprecated" 이런 문구가 뜬다.
