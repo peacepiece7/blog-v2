@@ -34,7 +34,7 @@ export const Paragraph: React.FC<React.HTMLProps<HTMLParagraphElement>> = (
   }
 
   if (isCodepenLinkSyntax(props.children)) {
-    return <Codepen children={props.children} />
+    return <Codepen>{props.children}</Codepen>
   }
   return <p {...props} className='mt-4' />
 }

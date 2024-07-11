@@ -6,11 +6,15 @@ interface PostPageProps {
     index: string
   }
 }
-export default async function PostPage({ params }: PostPageProps) {
+export default async function PostPage({
+  params,
+}: {
+  params: { pageId: string }
+}) {
   const MDXPage = await new Promise<React.ComponentType>((resolve) => {
-    const postPath = getPostPath('example', 'remote', '[index]')
+    const postPath = getPostPath('javascript', '[pageId]')
     const fileNames = getFileNamesSafely(postPath, 'mdx')
-    import(`./${fileNames[parseInt(params?.index) - 1 || 0]?.name}`).then(
+    import(`./${fileNames[parseInt(params?.pageId) - 1 || 0]?.name}`).then(
       (module) => resolve(module.default)
     )
   })

@@ -1,0 +1,63 @@
+# Nginx 설치
+
+apt 업데이트 후 설치
+
+```bash
+sudo apt update
+sudo apt install nginx
+```
+
+방화벽 포트가 열려있는지 체크
+
+```bash
+sudo ufw list
+```
+
+## 확인 사항
+
+### 방화벽 설정
+
+80/443번 포트를 열어준다.
+
+```bash
+sudo ufw allow 'Nginx HTTP'
+```
+
+### Nginx 상태 및 설정 확인
+
+active 상태인지 체크
+
+```bash
+sudo systemctl status nginx
+```
+
+dns 기본 설정이 확인하기 쭉 읽어보면 대충 어디에 뭐가있는지 알려줌
+
+빠진 부분은 없는지 체크
+
+```bash
+cat /etc/nginx/sites-available/default
+```
+
+### 그 외 에러 발생 시
+
+올바른 IP 주소로 요청했는지 체크하자
+
+```bash
+ip addr show
+```
+
+80번 포트가 잘 열려있는지 체크
+
+```bash
+sudo netstat -lntp | grep :80
+```
+
+nginx 접근, 에러로그 확인
+
+```bash
+sudo tail -n 100 /var/log/nginx/access.log
+sudo tail -n 100 /var/log/nginx/errorlog
+```
+
+만약 접근 로그가 없을 경우 클라우드(aws)라면 **인바운드 규칙을 확인**하고 홈 서버라면 **포트 포워딩 설정**을 확인한다.

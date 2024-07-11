@@ -53,7 +53,7 @@ function buildTree(paths: string[], baseDir: string): TreeNode[] {
     const relativePath = path.relative(baseDir, filePath)
     const parts = relativePath
       .split(path.sep)
-      .filter((part) => part !== '[index]')
+      .filter((part) => part !== '[pageId]')
     const fileName = parts.pop() as string
     let current = tree
 

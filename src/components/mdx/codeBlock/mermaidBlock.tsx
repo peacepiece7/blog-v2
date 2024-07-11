@@ -38,7 +38,7 @@ export const Mermaid = (
 
   return (
     <Detail summaryTitle={summaryTitle}>
-      <code ref={codeRef} children={props.children} />
+      <code ref={codeRef}>{props.children}</code>
     </Detail>
   )
 }
