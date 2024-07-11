@@ -8,7 +8,9 @@
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   // * Code spell checker setting
-  "cSpell.ignoreWords": ["customworkd1"],
+  "cSpell.ignoreWords": [
+    "customworkd1"
+  ],
   "cSpell.ignorePaths": [
     "package-lock.json",
     "node_modules",

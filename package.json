@@ -6,6 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "start:pm2": "yarn dlx pm2 start yarn --name blog-v2-yarn -- start",
     "lint": "next lint",
     "check:version": "npx npm-check-updates"
   },
