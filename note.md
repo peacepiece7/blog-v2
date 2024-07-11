@@ -127,3 +127,8 @@ pm2 stop all
 
 pm2 logs blog
 ```
+
+## husky
+
+yarn add -D husky lint-staged
+npx husky
