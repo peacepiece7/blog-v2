@@ -3,8 +3,9 @@ FROM node:18-alpine
 WORKDIR /web/repo/blog-v2
 
 COPY package.json yarn.lock ./
-
 COPY .yarn ./.yarn
+COPY ./ ./
+
 
 RUN yarn install --immutable
 
