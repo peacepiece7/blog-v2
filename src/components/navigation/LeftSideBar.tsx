@@ -99,7 +99,6 @@ function createTOCElements(
         text
       )
     )
-
     while (stack.length > 0 && stack[stack.length - 1].depth >= depth) {
       const { element, children } = stack.pop()!
       if (children.length > 0) {
