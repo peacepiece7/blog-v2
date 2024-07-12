@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "start:pm2": "yarn dlx pm2 start yarn --name blog-v2-yarn -- start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "commitizen": "git-cz",
+    "eslint": "eslint --ext .ts,.tsx,.js,.jsx"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
@@ -35,6 +37,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.19",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "husky": "^9.0.11",
@@ -42,7 +46,12 @@
     "postcss": "^8",
     "react-icons": "^5.2.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "5.4.0"
+    "typescript": "^5.4.0"
   },
-  "packageManager": "yarn@4.3.1"
+  "packageManager": "yarn@4.3.1",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn eslint"
+    ]
+  }
 }
