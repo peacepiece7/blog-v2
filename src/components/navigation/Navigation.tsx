@@ -1,6 +1,6 @@
 'use client'
 import { usePathname } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function Navigation(props: {
   children: React.ReactNode
@@ -8,12 +8,15 @@ export default function Navigation(props: {
 }) {
   const pathname = usePathname()
   const [isActive, setIsActive] = useState(props.isActive)
+  const ulRef = useRef<HTMLUListElement>(null)
 
   useEffect(() => {
     setIsActive(!pathname.includes('posts'))
   }, [pathname])
 
   return (
-    <div className={`${isActive ? 'visible' : 'hidden'}`}>{props.children}</div>
+    <ul ref={ulRef} className={`${isActive ? 'visible' : 'hidden'}`}>
+      {props.children}
+    </ul>
   )
 }

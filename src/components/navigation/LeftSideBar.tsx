@@ -6,6 +6,9 @@ import { fetcher } from '@/utils/fetcher'
 import { TreeNode } from '@/app/api/navigation/route'
 import { X_CUSTOM_URL } from '@/constants/server'
 import { headers } from 'next/headers'
+import { FaRegFolderOpen } from 'react-icons/fa'
+import { IoFolderOpenOutline } from 'react-icons/io5'
+import { TiDocument } from 'react-icons/ti'
 
 export async function LeftSideBar() {
   const headerList = headers()
@@ -22,7 +25,7 @@ export async function LeftSideBar() {
   return (
     <nav className='col-start-1 col-end-2 row-start-2 row-end-4 w-fit min-w-fit max-w-[50rem] px-10 overflow-y-scroll'>
       <Navigation isActive={!isPostPage}>
-        {createNavElements(navRes.navTree)}
+        {createNavElements(navRes.navTree, [], 0)}
       </Navigation>
       <TableOfContents isActive={isPostPage} rendingUrl={url}>
         {createTOCElements(tocRes.tocTree)}
@@ -32,24 +35,33 @@ export async function LeftSideBar() {
 }
 
 // navigation
-const createNavElements = (tree: TreeNode[]): React.JSX.Element[] => {
+const createNavElements = (
+  tree: TreeNode[],
+  list: number[],
+  deepth: number
+): React.JSX.Element[] => {
   return tree.map((node, idx) => {
+    const dataPath = [...list, idx]
     if (node.leafNode && node.link) {
       const nodelinks = node.link.split('/')
       nodelinks.pop()
       nodelinks.push((idx + 1).toString())
-      // Convert node.link from [/posts/js/concept.mdx, /posts/js/syntax.mdx] to [/posts/js/1, /posts/js/2]
       node.link = nodelinks.join('/')
     }
-
     return (
-      <li key={node.text} className='list-disc ml-6'>
+      <li
+        key={node.text}
+        data-path={dataPath.join('-')}
+        data-deepth={deepth}
+        data-leaf={node.leafNode ? 1 : 0}
+        className='list-disc ml-6'
+      >
         {node.leafNode && node.link ? (
           <a href={node.link}>{node.text}</a>
         ) : (
           <>
             <span>{node.text}</span>
-            <ul>{createNavElements(node.children)}</ul>
+            <ul>{createNavElements(node.children, dataPath, deepth + 1)}</ul>
           </>
         )}
       </li>
@@ -74,7 +86,11 @@ function createTOCElements(
     const formattedText = text.replace(/\s+/g, '_')
     const li = React.createElement(
       'li',
-      { key: `li-${index}`, className: 'list-disc ml-6' },
+      {
+        key: `li-${index}`,
+        className: 'list-disc ml-6',
+        'data-deepth': depth,
+      },
       React.createElement(
         'a',
         {
