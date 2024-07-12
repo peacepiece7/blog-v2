@@ -132,3 +132,19 @@ pm2 logs blog
 
 yarn add -D husky lint-staged
 npx husky
+
+.lintstagedrc.json 또는 package.json아래 스크립트를 추가해주면 된다.
+
+### nextjs 14 & yarn pnp에서 app, pages 경로를 찾지 못하는 문제
+
+yarn pnp & nextjs 14에서 pre-commit에 `npx lint-staged`로 `next lint`를 사용하니까 app, pages directory를 찾지 못했다는 에러가 발생하여
+
+`next lint` 대신 `eslint --ext ...`으로 대체하였다.
+
+## preapre
+
+`yarn install`시 `husky install` 명령어가 자동으로 실행되면 좋겠는데
+
+package.json에서 `yarn prepare, yarn postinstall`은 동작하지 않은 것으로 보인다.
+
+git clone시 항상 `yarn install & yarn prepare`를 해주거나 sh로 해결해야 할 것 같다.

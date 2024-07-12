@@ -48,10 +48,5 @@
     "tailwindcss": "^3.4.1",
     "typescript": "5.4.0"
   },
-  "packageManager": "yarn@4.3.1",
-  "husky": {
-    "hooks": {
-      "pre-commit": "npx lint-staged"
-    }
-  }
+  "packageManager": "yarn@4.3.1"
 }
