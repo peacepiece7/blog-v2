@@ -45,7 +45,7 @@ export const Code = (
         {...restProps}
         dangerouslySetInnerHTML={{ __html: value }}
         className='not-italic font-mono'
-      ></code>
+      />
     </div>
   )
 }

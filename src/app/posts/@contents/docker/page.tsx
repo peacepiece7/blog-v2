@@ -5,8 +5,6 @@ export default async function PostPage({
 }: {
   params: { pageId: string }
 }) {
-
-  const foo = 100
   const MDXPage = await new Promise<any>((resolve) => {
     const postPath = getPostPath('example', 'architecture', '[pageId]')
     const fileNames = getFileNamesSafely(postPath, 'mdx')

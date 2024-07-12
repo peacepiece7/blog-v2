@@ -8,12 +8,12 @@ export default function TableOfContents(props: {
   isActive: boolean
   rendingUrl: string
 }) {
-  const pathname = usePathname()
+  // const pathname = usePathname()
   const [isActive, setIsActive] = useState(props.isActive)
 
-  useEffect(() => {
-    setIsActive(pathname.includes('posts'))
-  }, [])
+  // useEffect(() => {
+  // setIsActive(pathname.includes('posts'))
+  // }, [])
 
   return (
     <div className={`${isActive ? 'visible' : 'hidden'}`}>{props.children}</div>
