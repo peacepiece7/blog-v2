@@ -1,0 +1,43 @@
+# 공변성
+
+좁은 타입을 넓은 타입에 대입 할 수 있다.
+
+ts에서는 리턴 값에 대해서 공변성을 가진다.
+
+`type One = (i : number) => number | string`일 경우
+리턴 타입이 `number`, `string` ,`number | string`은 되지만
+
+`number | string | boolean`, `boolean`은 안된다.
+
+# 반공변성
+
+넓은 다음에 좁은 타입을 대입 할 수 있다.
+
+`type Two = (i : string | number) => number`일 경우
+
+매개변수 i는 `string | number`, `string | number | boolean`는 되지만
+
+`string`, `number`는 안된다.
+
+# 이변성
+
+공변성과 반공변성을 모두 가질 수 있다.
+
+```ts
+interface Object {
+  method1(p: number | string | boolean): number
+  method2: (p: string | number | boolean) => number
+}
+```
+
+이런 경우 method2는 반공변성을 가지지만 method1은 이변성을 가지기 때문에, 매개변수 p가 `number`, `string` 등 다양한 타입을 가질 수 있다.
+
+대부분의 경우 method2 방식으로 선언하는 것을 추천한다.
+
+https://www.youtube.com/shorts/WPeoQit2N_Y
+
+https://www.youtube.com/shorts/AoSpKyd2ZsQ
+
+https://www.youtube.com/shorts/DQAtLLBQa0w
+
+[공변성, 반공변성, 이변성](https://inpa.tistory.com/entry/TS-%F0%9F%93%98-%ED%83%80%EC%9E%85%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-%EA%B3%B5%EB%B3%80%EC%84%B1-%EB%B0%98%EA%B3%B5%EB%B3%80%EC%84%B1-%F0%9F%92%A1-%ED%95%B5%EC%8B%AC-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
