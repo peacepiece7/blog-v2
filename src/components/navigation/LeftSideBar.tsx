@@ -1,8 +1,7 @@
 import Navigation from './Navigation'
-import TableOfContents from './TableOfContents'
 import { Heading, RootContentMap } from 'mdast'
 import React from 'react'
-import { fetcher } from '@/utils/fetcher'
+import { fetcher } from '@/utils/server'
 import { TreeNode } from '@/app/api/navigation/route'
 import { X_CUSTOM_URL } from '@/constants/server'
 import { headers } from 'next/headers'
@@ -26,14 +25,11 @@ export async function LeftSideBar() {
   const navRes = await fetcher<{ navTree: TreeNode[] }>(`/api/navigation`, {})
 
   return (
-    <nav className='col-start-1 col-end-2 row-start-2 row-end-4 w-fit min-w-fit max-w-[50rem] px-10 overflow-y-scroll pt-4'>
-      <Navigation isActive={!isPostPage}>
-        {createNavElements(navRes.navTree, [], 0)}
-      </Navigation>
-      <TableOfContents isActive={isPostPage} rendingUrl={url}>
-        {createTOCElements(tocRes.tocTree)}
-      </TableOfContents>
-    </nav>
+    <Navigation
+      isActive={!isPostPage}
+      navChildren={createNavElements(navRes.navTree, [], 0)}
+      tocChildren={createTOCElements(tocRes.tocTree)}
+    />
   )
 }
 

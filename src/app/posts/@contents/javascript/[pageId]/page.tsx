@@ -1,4 +1,4 @@
-import { getFileNamesSafely, getPostPath } from '@/utils/fs'
+import { getFileNamesSafely, getPostPath } from '@/utils/server'
 
 interface PostPageProps {
   children?: React.ReactNode

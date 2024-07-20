@@ -1,7 +1,4 @@
-export default function NavFallbackPage() {
-  return (
-    <div>
-      <p>@navigation default page</p>
-    </div>
-  )
+import { LeftSideBar } from '@/components/navigation/LeftSideBar'
+export default function NavigationDefaultPage() {
+  return <LeftSideBar />
 }

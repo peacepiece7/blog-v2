@@ -1,11 +1,10 @@
-import { getFileNamesSafely, getPostPath } from '@/utils/fs'
+import { getFileNamesSafely, getPostPath } from '@/utils/server'
 
 export default async function PostPage({
-  params
+  params,
 }: {
   params: { pageId: string }
 }) {
-
   const foo = 100
   const MDXPage = await new Promise<any>((resolve) => {
     const postPath = getPostPath('example', 'architecture', '[pageId]')
@@ -14,7 +13,6 @@ export default async function PostPage({
       (module) => resolve(module.default)
     )
   })
-
 
   return (
     <>

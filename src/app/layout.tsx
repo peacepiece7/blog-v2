@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { hiMelody, inter } from '@/utils/fonts'
+import { hiMelody, inter } from '@/utils/server'
 import './styles/globals.css'
 import './styles/reset.css'
 
