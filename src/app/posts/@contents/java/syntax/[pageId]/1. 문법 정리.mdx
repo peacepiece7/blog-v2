@@ -1,0 +1,164 @@
+# 원시 타입 (Primitive type)
+
+## char
+
+char는 2byte이다.
+
+```java
+public static void main() {
+    char a = 'A';
+
+    // char는 c와 동일하게 문자 하나만 저장하고 아스키코드로 저장된다.
+    char lowercaseA = (char)(a + 32);
+}
+```
+
+## String
+
+java.lang에 선언된 외부 패키지이다.
+
+```java
+public static void main() {
+    String str = "Hello World";
+
+    char[] charArray = str.toCharArray();
+}
+```
+
+## number
+
+int는 4byte(2^32), long은 8byte(2^64)
+
+float 4byte, double 8byte 동일하다
+
+int를 제외하면 선언 뒤에 L, f, d가 들어간다. (일부 생략 가능)
+
+```java
+public static void main() {
+    // int
+    int a = 10;
+
+    String str = Integer.toString(a); // 19
+    STring binary = Integer.toBinaryString(a); // 1010
+    String hex = Integer.toHexString(a); // a
+    String octal = Integer.toOctalString(a); // 12
+
+    // long
+    long l = 2100000001L;
+
+    // float
+    float f = 3.14f;
+
+    // double
+    double d = 3.14d;
+    double d2 = 3.022e23;
+}
+```
+
+## Array
+
+```java
+
+public static void main() {
+    int[] arr = new int[10];
+    int[] arr1 = {10, 20, 30};
+
+    int[][] matrix = new int[3][3];
+    int[][] matrix1 = {
+        {1, 2, 3},
+        {4, 5, 6},
+        {7, 8, 9}
+    };
+
+}
+```
+
+## Operator
+
+```
+단항 연산자 (전위 ++a, 후위 a++;)
+이항 연산자
+- 산술 연산자 (+, -, *, /, %)
+- 관계 연산자 (<, >, <=, >=, ==, !=)
+- 논리 연산자 (&&, ||, !)
+복합 대입 연산자 (+=, -=, *=, /=, %=)
+삼항 연산자 (condition ? true : false)
+명령문
+- 조건문 (if, if else)
+- 선택문 (switch case)
+- 반복문 for, foreach, while, do-while
+- 제어문 break, continue;
+```
+
+## Overloading
+
+overloading은 정적 바인딩이되므로 실행 속도와는 연관이 없다.
+
+```java
+public static int combine(int a, int b) { return a + b; }
+public static String combine(String a, String b) { return a + b; }
+```
+
+## getter/setter
+
+```java
+public PersonDTO(String name) {
+    String name;
+
+    PersonDTO(String name) { this.name = name; }
+
+    public void setName(String name) { this.name = name; }
+    public String getName() { return this.name; }
+}
+```
+
+`this.name`을 직접적으로 수정하기 못하게 막으려면 `private` 변수로 선언한다.
+
+```java
+private String name;
+```
+
+`final`을 추가하면 this.name 인스턴스가 생선된 이후에는 수정이 불가능하다.
+
+```java
+final private String name;
+```
+
+## Method
+
+primitive type은 call by value, 객체는 call by reference이다.
+
+```java
+// call by reference
+public static void main() {
+    PersonDTO john = new PersonDTO("John");
+
+    System.out.println(john.getName());
+    ModifyPerson(john);
+    System.out.println(john.getName());
+}
+    public static void ModifyPerson(PersonDTO2 personDTO2) {
+        personDTO2.name = personDTO2.getName() + "is modified";
+    }
+```
+
+## DTO, VO, DAO
+
+### DTO(DATA Transfer Object)
+
+데이터를 담는 객체로 위 예제의 PersonDTO가 이에 해당된다.  
+계층 간 데이터 교환을 목적으로 하는 객체이다.  
+**DB나 비즈니스 로직이 포함되지 않는다.**
+
+### VO(Value Object)
+
+불변 객체로 값 제를 가지는 개체이다.  
+객체의 상탤흘 표현하는데 사용된다.  
+여기저기서 VO 객체를 사용하더라도 VO 객체의 값은 변하지 않게 설계되어야 한다.  
+hashCode, equals, toString 메소드를 오버라이딩하여 사용한다.
+
+### DAO(Data Access Object),
+
+데이터베이스에 접근하는 객체이다.
+DB에 변경사항이 생기면 DAO 객체만 수정하면 된다.  
+비즈니스 로직이 포함되지 않는다.

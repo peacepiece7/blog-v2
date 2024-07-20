@@ -1,0 +1,153 @@
+# OOP
+
+## UML
+
+UML는 Unified Modeling Language라는 뜻으로 소프트웨어 시스템을 시각적으로 모델링하기 위한 표준 언어다.
+
+자주 접하는 sequence diagram, class diagram, use case diagrame 등이 이에 해당된다.
+
+이걸 보고 소프트웨어를 설계한다.
+
+UML을 작성하는데 다음 도구를 사용할 수 있다.
+
+- Enterprise Architect
+- Lucidchart
+- Microsoft Visio
+- StarUML
+- PlantUML
+
+## 상속
+
+protected, super, extends 등 대부분 js의 class와 비슷하다.
+
+intellij를 쓰니까 shift + f10 이나 alt + insert 등 키워드로 생성자, getter/setter, FaEquals, hashCode 등을 쉽게 만들 수 있다.
+
+진짜 개꿀..
+
+```java
+public class Employee {
+    private String name;
+    private int age;
+    private String phone;
+    private String dept;
+    private boolean marriage;
+
+    public Employee(String phone, String name, int age, String dept, boolean marriage) {
+        this.phone = phone;
+        this.name = name;
+        this.age = age;
+        this.dept = dept;
+        this.marriage = marriage;
+    }
+}
+```
+
+```java
+public class RempVO extends Employee {
+
+    public RempVO(String phone, String name, int age, String dept, boolean marriage) {
+        super(phone, name, age, dept, marriage);
+    }
+}
+```
+
+## Overried
+
+상속받은 메소드를 재정의한다.
+
+polymorphism을 구현할 때 사용할 수 있다.
+
+alt + insert 개꿀..
+
+```java
+public class RempVO extends Employee {
+
+    public RempVO(String phone, String name, int age, String dept, boolean marriage) {
+        super(phone, name, age, dept, marriage);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+}
+```
+
+## Up/Down Casting
+
+Upcasting은 암시적으로 형변환 된다.
+
+```java
+Animal animal = new Dog();
+animal.bark()
+```
+
+Downcasting은 명시적으로 형변환 해야한다.
+
+```java
+Animal animal = new Dog();
+
+animal = new Cat()
+((Cat)animal).meow()
+```
+
+## 추상 클래스
+
+상속 클레스에서 반드시 구현해야 하는 메소드가 있다면 부모 클래스에 abstract 키워드를 붙여 추상 클래스로 만들 수 있다.
+
+다형성을 보장하기 위해 사용한다.
+
+```java
+public abstract class Animal {
+    public abstract void eat();
+}
+
+public class Dog extends Animal {
+    @Override
+    public void eat() {
+        System.out.println("chap chap");
+    }
+}
+```
+
+## 인터페이스
+
+추상 클레스로 만들 경우 다중 상송이 안되는 문제가 있다.  
+예를들어 Animal 추상 클레스에 bark, meow 메서드가 있다면 고양이가 짖을 수 있게된다.
+
+이런 문제를 해결하기 위해 인터페이스를 사용한다.
+
+```java
+public interface ICat {
+    public void meow();
+    abstract public void eat(); // abstract 생략 가능
+}
+
+public class CatVo implements ICat {
+
+    @Override
+    public void meow() {}
+
+    @Override
+    public void eat() {}
+}
+```
+
+### 추상클레스, 인터페이스 비교
+
+공통점 : 다형성을 보장하기 위해 사용하고, 추상 메서드를 가질 수 있다.
+
+차이점 :
+
+인터페이스는 서로 다른 클레스의 공통 부분을 묶을 때 사용한다.
+
+추상메서드는 final static 변수를 가질 수 있다.
+
+```java
+final static DATABASE_URL = "foo:bar://waldo.barz:1234";
+```

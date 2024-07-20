@@ -1,4 +1,8 @@
-import { getASTTreeSafely, getFileNamesSafely, getPostPath } from '@/utils/fs'
+import {
+  getASTTreeSafely,
+  getFileNamesSafely,
+  getPostFullPath,
+} from '@/utils/server'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
@@ -25,7 +29,7 @@ export async function GET(request: NextRequest) {
     rest.push('[pageId]')
 
     const tocTree = await createTableOfContents(
-      getPostPath(...rest),
+      getPostFullPath(...rest),
       parseInt(index) - 1
     )
 
@@ -37,5 +41,3 @@ export async function GET(request: NextRequest) {
     return NextResponse.error()
   }
 }
-
-// * Table of Contents

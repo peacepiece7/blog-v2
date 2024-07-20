@@ -14,16 +14,22 @@ body {
   @apply translate-x-2;
 }
 
-/*
-  mermaid 스타일
-*/
-/* details[open] > summary {
-  list-style-type: '[close] ';
+/* navigation tree */
+.inactive-tree-node > span .folder-open {
+  @apply hidden;
+}
+:not(.inactive-tree-node) > span .folder-open {
+  @apply visible;
 }
 
-details:not([open]) > summary {
-  list-style-type: '[open] ';
-} */
+.inactive-tree-node > span .folder-close {
+  @apply visible;
+}
+:not(.inactive-tree-node) > span .folder-close {
+  @apply hidden;
+}
+
+/* post */
 
 details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
@@ -37,3 +43,14 @@ details[open] summary ~ * {
     opacity: 1;
   }
 }
+
+/*
+  mermaid 스타일
+*/
+/* details[open] > summary {
+  list-style-type: '[close] ';
+}
+
+details:not([open]) > summary {
+  list-style-type: '[open] ';
+} */

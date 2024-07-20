@@ -1,6 +1,6 @@
-import { DetailedHTMLProps, HTMLAttributes, useRef } from 'react'
+import { DetailedHTMLProps, HTMLAttributes } from 'react'
 import hljs from 'highlight.js'
-import { hiMelody } from '@/utils/fonts'
+import { hiMelody } from '@/utils/shared'
 
 const LANGUAGES_MAP: Record<string, string> = {
   'language-js': 'javascript',
@@ -45,7 +45,7 @@ export const Code = (
         {...restProps}
         dangerouslySetInnerHTML={{ __html: value }}
         className='not-italic font-mono'
-      ></code>
+      />
     </div>
   )
 }

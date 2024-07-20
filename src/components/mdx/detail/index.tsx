@@ -1,6 +1,6 @@
 'use client'
 import { MouseEventHandler, useRef, useState } from 'react'
-import { hiMelody } from '@/utils/fonts'
+import { hiMelody } from '@/utils/shared'
 import { FaAngleRight } from 'react-icons/fa6'
 
 interface DetailProps {

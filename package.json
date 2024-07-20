@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prepare": "husky",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "start:pm2": "yarn dlx pm2 start yarn --name blog-v2-yarn -- start",
     "lint": "next lint",
-    "check:version": "npx npm-check-updates"
+    "commitizen": "git-cz",
+    "eslint": "eslint --ext .ts,.tsx,.js,.jsx --cache --output-file ./logs/lint-log.txt"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.0.1",
@@ -35,12 +37,16 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.19",
+    "commitizen": "^4.3.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
     "postcss": "^8",
     "react-icons": "^5.2.1",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "~5.4.0"
   },
   "packageManager": "yarn@4.3.1"
 }
