@@ -1,5 +1,5 @@
 'use client'
-import { hiMelody } from '@/utils/fonts'
+import { hiMelody } from '@/utils/shared'
 import mermaid, { MermaidConfig } from 'mermaid'
 import {
   DetailedHTMLProps,
