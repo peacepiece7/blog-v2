@@ -20,10 +20,7 @@ export const useNavAnimation = (tree: React.ReactNode) => {
         }
 
         const li = el.tagName === 'LI' ? el : el.closest('li')
-
-        if (!li) {
-          return alert('LI 태그가 없습니다.')
-        }
+        if (!li) return
 
         const divElement = li.querySelector('div') as HTMLDivElement
         const firstUlChild = divElement.querySelector('ul') as HTMLUListElement
@@ -50,7 +47,7 @@ export const useNavAnimation = (tree: React.ReactNode) => {
         }
       }
     }
-  }, [])
+  }, [animate, scopeRef])
 
   return { scopeRef, navTree }
 }

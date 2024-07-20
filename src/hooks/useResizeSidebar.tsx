@@ -35,12 +35,14 @@ export const useResizeSidebar = (initWidth: number = 300) => {
       ) {
         const deltaX = e.clientX - startXRef.current
         const newWidth = startWidthRef.current + deltaX
-        if (newWidth > 0) {
+        if (newWidth > initWidth) {
           setSideBarWidth(newWidth)
+        } else {
+          setSideBarWidth(initWidth)
         }
       }
     },
-    [isDragging]
+    [isDragging, initWidth]
   )
 
   useEffect(() => {

@@ -37,13 +37,13 @@ export const createNavElements = (
         className={`list-disc ml-6 overflow-hidden`}
       >
         {node.leafNode && node.link ? (
-          <span
-            className='flex items-center
-             hover:bg-gray-400 hover:bg-opacity-10
-            '
-          >
+          <span className='flex items-center hover:bg-gray-400 hover:bg-opacity-10'>
             <TiDocument className='mr-2 min-w-6 min-h-6 w-6 h-6' />
-            <Link href={node.link} className='truncate'>
+            <Link
+              href={node.link}
+              className='truncate'
+              style={{ userSelect: 'none' }}
+            >
               {node.text}
             </Link>
           </span>
@@ -57,7 +57,9 @@ export const createNavElements = (
             >
               <IoFolderOpenOutline className='folder-open mr-2 min-w-6 min-h-6 w-6 h-6' />
               <IoFolderOutline className='folder-close mr-2 min-w-6 min-h-6 w-6 h-6' />
-              <p className='truncate'>{node.text}</p>
+              <p className='truncate' style={{ userSelect: 'none' }}>
+                {node.text}
+              </p>
             </span>
             <ul
               // ${deepth === 0 ? 'hidden inactive-tree-node' : ''}
@@ -105,6 +107,8 @@ export const createTOCElements = (
         Link,
         {
           href: `#${hashTag}`,
+          className: 'truncate',
+          style: { userSelect: 'none' }, // select-none이 안먹혀서 inline-style로 추가 (확인 필요)
         },
         text
       )
