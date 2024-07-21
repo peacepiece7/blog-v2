@@ -1,5 +1,5 @@
 import Navigation from './Navigation'
-import { Heading, RootContentMap } from 'mdast'
+import { Heading } from 'mdast'
 import React from 'react'
 import { fetcher } from '@/utils/server'
 import { TreeNode } from '@/app/api/navigation/route'

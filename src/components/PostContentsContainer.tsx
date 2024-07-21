@@ -7,7 +7,7 @@ import { createNavElements, createTOCElements } from '@/utils/server-components'
 import { Heading } from 'mdast'
 import { headers } from 'next/headers'
 
-export default async function ContentsLayoutPage(
+export default async function PostContentsContainer(
   props: Readonly<{
     children: React.ReactNode
   }>
@@ -26,7 +26,7 @@ export default async function ContentsLayoutPage(
         navChildren={createNavElements(navRes.navTree, [], 0)}
         tocChildren={createTOCElements(tocRes.tocTree)}
       />
-      <ContentsLayout>{props.children}</ContentsLayout>
+      <ContentsLayout key={url}>{props.children}</ContentsLayout>
     </>
   )
 }

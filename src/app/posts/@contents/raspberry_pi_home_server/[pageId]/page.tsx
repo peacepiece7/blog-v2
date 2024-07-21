@@ -1,5 +1,5 @@
+import PostContentsContainer from '@/components/PostContentsContainer'
 import { getFileNamesSafely, getPostFullPath } from '@/utils/server'
-
 export default async function PostPage({
   params,
 }: Readonly<{
@@ -13,5 +13,9 @@ export default async function PostPage({
     )
   })
 
-  return <MDXPage />
+  return (
+    <PostContentsContainer>
+      <MDXPage />
+    </PostContentsContainer>
+  )
 }

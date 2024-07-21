@@ -1,10 +1,12 @@
 import { RootContentMap } from 'mdast'
 import React from 'react'
-import { IoFolderOpenOutline, IoFolderOutline } from 'react-icons/io5'
-import { TiDocument } from 'react-icons/ti'
-import { GoHash } from 'react-icons/go'
-import Link from 'next/link'
 import { TreeNode } from '../app/api/navigation/route'
+import DocumentIcon from '@/components/ui/Icons/DocumentIcon'
+import NavigationLink from '@/components/ui/NavigationLink'
+import FolderOpenIcon from '@/components/ui/Icons/FolderOpenIcon'
+import FolderCloseIcon from '@/components/ui/Icons/FolderCloseIcon'
+import NavigationParagraph from '@/components/ui/NavigationParagraph'
+import HashIcon from '@/components/ui/Icons/HashIcon'
 
 /**
  * @description 네비게이션에 사용되는 트리 구조를 생성합니다.
@@ -18,6 +20,20 @@ export const createNavElements = (
   list: number[],
   deepth: number
 ): React.JSX.Element[] => {
+  // 텍스트를 읽기 좋게 변환합니다.
+  const convertToReadableText = (text: string) => {
+    const li = text.split(' ')[0]
+    if (isNaN(parseInt(li))) {
+      return text.replace(/\.mdx?$/, '')
+    } else {
+      return text
+        .split(' ')
+        .slice(1)
+        .join(' ')
+        .replace(/\.mdx?$/, '')
+    }
+  }
+
   return tree.map((node, idx) => {
     const dataPath = [...list, idx]
     if (node.leafNode && node.link) {
@@ -34,36 +50,28 @@ export const createNavElements = (
         data-path={dataPath.join('-')}
         data-deepth={deepth}
         data-leaf={node.leafNode ? 1 : 0}
-        className={`list-disc ml-6 overflow-hidden`}
+        className={`list-disc ml-4 overflow-hidden`}
       >
         {node.leafNode && node.link ? (
-          <span className='flex items-center hover:bg-gray-400 hover:bg-opacity-10'>
-            <TiDocument className='mr-2 min-w-6 min-h-6 w-6 h-6' />
-            <Link
-              href={node.link}
-              className='truncate'
-              style={{ userSelect: 'none' }}
-            >
-              {node.text}
-            </Link>
+          <span className='flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4'>
+            <DocumentIcon />
+            <NavigationLink href={node.link}>
+              {convertToReadableText(node.text)}
+            </NavigationLink>
           </span>
         ) : (
           <div className='inactive-tree-node'>
             <span
-              className='
-                flex items-center cursor-pointer
-                hover:bg-gray-400 hover:bg-opacity-10
-              '
+              className='flex items-center cursor-pointer hover:bg-gray-400 hover:bg-opacity-10 mr-4'
+              tabIndex={0}
             >
-              <IoFolderOpenOutline className='folder-open mr-2 min-w-6 min-h-6 w-6 h-6' />
-              <IoFolderOutline className='folder-close mr-2 min-w-6 min-h-6 w-6 h-6' />
-              <p className='truncate' style={{ userSelect: 'none' }}>
-                {node.text}
-              </p>
+              <FolderOpenIcon />
+              <FolderCloseIcon />
+              <NavigationParagraph text={node.text} />
             </span>
             <ul
               // ${deepth === 0 ? 'hidden inactive-tree-node' : ''}
-              className={`hidden list-disc ml-6 overflow-hidden`}
+              className={`hidden list-disc ml-4 overflow-hidden`}
             >
               {createNavElements(node.children, dataPath, deepth + 1)}
             </ul>
@@ -97,21 +105,11 @@ export const createTOCElements = (
       'li',
       {
         key: `li-${index}`,
-        className: 'flex items-center list-disc ml-6 overflow-hidden',
+        className: 'flex items-center list-disc ml-4 overflow-hidden mr-4',
         'data-deepth': depth,
       },
-      React.createElement(GoHash, {
-        className: 'mr-2 min-w-6 min-h-6 w-6 h-6',
-      }),
-      React.createElement(
-        Link,
-        {
-          href: `#${hashTag}`,
-          className: 'truncate',
-          style: { userSelect: 'none' }, // select-none이 안먹혀서 inline-style로 추가 (확인 필요)
-        },
-        text
-      )
+      <HashIcon />,
+      <NavigationLink href={`#${hashTag}`}>{text}</NavigationLink>
     )
     while (stack.length > 0 && stack[stack.length - 1].depth >= depth) {
       const { element, children } = stack.pop()!
@@ -126,7 +124,7 @@ export const createTOCElements = (
 
     const newUl = React.createElement('ul', {
       key: `ul-${index}`,
-      className: 'list-disc ml-6 overflow-hidden',
+      className: 'list-disc ml-4 overflow-hidden',
     })
     stack.push({ element: newUl, depth, children: [] as React.ReactElement[] })
   })

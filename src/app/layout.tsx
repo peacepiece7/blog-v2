@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { hiMelody, inter } from '@/utils/shared'
-import './styles/globals.css'
-import './styles/reset.css'
+import './global.css'
 
 export const metadata: Metadata = {
   title: '블로그',
