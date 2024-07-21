@@ -105,11 +105,10 @@ export const createTOCElements = (
       'li',
       {
         key: `li-${index}`,
-        className: 'flex items-center list-disc ml-4 overflow-hidden mr-4',
+        className: 'flex items-center list-disc ml-4 overflow-hidden mr-4 hover:bg-gray-400 hover:bg-opacity-10',
         'data-deepth': depth,
       },
-      <HashIcon />,
-      <NavigationLink href={`#${hashTag}`}>{text}</NavigationLink>
+      <NavigationLink href={`#${hashTag}`}>{'# ' + text}</NavigationLink>
     )
     while (stack.length > 0 && stack[stack.length - 1].depth >= depth) {
       const { element, children } = stack.pop()!
