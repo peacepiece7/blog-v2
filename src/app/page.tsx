@@ -3,84 +3,14 @@ import { ContentsLayout } from '@/components/layout/Layout'
 import { LeftSideBar } from '@/components/navigation/LeftSideBar'
 
 export default function Home() {
+  // 1. nav 링크를 클릭하면 왼쪽에서 로딩 컨텐츠가 스르륵 나옴
+  // 2. 스르륵이 끝나면 라우터 이동 => or 미리 이동하는데 스르륵이 끝나면 컨텐츠가 변경됨 (이건 나중에)
+
   return (
     <div className='grid grid-cols-[fit-content(100%)_1fr_1fr] grid-rows-[fit-content(100%)_1fr_1fr] h-full max-h-screen min-h-screen overflow-hidden'>
       <Header />
       <LeftSideBar />
-      <ContentsLayout>
-        <main className='flex min-h-screen flex-col items-center justify-between p-24'>
-          <div className='mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left'>
-            <a
-              href='https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-              className='group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <h2 className='mb-3 text-2xl font-semibold'>
-                Docs{' '}
-                <span className='inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none'>
-                  -&gt;
-                </span>
-              </h2>
-              <p className='m-0 max-w-[30ch] text-sm opacity-50'>
-                Find in-depth information about Next.js features and API.
-              </p>
-            </a>
-
-            <a
-              href='https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app'
-              className='group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <h2 className='mb-3 text-2xl font-semibold'>
-                Learn{' '}
-                <span className='inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none'>
-                  -&gt;
-                </span>
-              </h2>
-              <p className='m-0 max-w-[30ch] text-sm opacity-50'>
-                Learn about Next.js in an interactive course with&nbsp;quizzes!
-              </p>
-            </a>
-
-            <a
-              href='https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-              className='group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <h2 className='mb-3 text-2xl font-semibold'>
-                Templates{' '}
-                <span className='inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none'>
-                  -&gt;
-                </span>
-              </h2>
-              <p className='m-0 max-w-[30ch] text-sm opacity-50'>
-                Explore starter templates for Next.js.
-              </p>
-            </a>
-
-            <a
-              href='https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app'
-              className='group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <h2 className='mb-3 text-2xl font-semibold'>
-                Deploy{' '}
-                <span className='inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none'>
-                  -&gt;
-                </span>
-              </h2>
-              <p className='m-0 max-w-[30ch] text-balance text-sm opacity-50'>
-                Instantly deploy your Next.js site to a shareable URL with
-                Vercel.
-              </p>
-            </a>
-          </div>
-        </main>
-      </ContentsLayout>
+      <ContentsLayout>뭐 추가할지 생각중..</ContentsLayout>
     </div>
   )
 }

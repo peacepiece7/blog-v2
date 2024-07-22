@@ -1,4 +1,5 @@
 'use client'
+import { useSlidePostContentArea } from '@/hooks/useSlidePostContentArea'
 import { usePathname } from 'next/navigation'
 
 export function ContentsLayout({ children }: { children: React.ReactNode }) {
@@ -30,9 +31,11 @@ function PostPageLayout({ children }: { children: React.ReactNode }) {
 }
 
 function MainPageLayout({ children }: { children: React.ReactNode }) {
+  const { ContentsLoadingFrame } = useSlidePostContentArea()
   return (
-    <main className='col-start-2 col-end-5 row-start-2 row-end-4 p-4 m-10 overflow-hidden'>
-      {children}
-    </main>
+    <ContentsLoadingFrame />
+    // <main className='col-start-2 col-end-5 row-start-2 row-end-4 p-4 m-10 overflow-hidden'>
+    //   {children}
+    // </main>
   )
 }
