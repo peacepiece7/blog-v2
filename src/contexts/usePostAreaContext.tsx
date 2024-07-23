@@ -12,11 +12,13 @@ interface PostAreaSlideValueContextType {
   contentsRef: React.RefObject<HTMLElement>
   isWorking: boolean
   isDone: boolean
+  next: string
 }
 
 interface PostAreaSlideActionContextType {
   setIsWorking: Dispatch<SetStateAction<boolean>>
   setIsDone: Dispatch<SetStateAction<boolean>>
+  setNext: Dispatch<SetStateAction<string>>
 }
 
 const PostAreaSlideValueContext = createContext<
@@ -32,16 +34,20 @@ export function PostAreaSlideProvider({
   children: React.ReactNode
 }) {
   const [isWorking, setIsWorking] = useState(false)
+  const [next, setNext] = useState("")
   const [isDone, setIsDone] = useState(false)
   const contentsRef = useRef<HTMLElement>(null)
 
   return (
-    <PostAreaSlideActionContext.Provider value={{ setIsDone, setIsWorking }}>
+    <PostAreaSlideActionContext.Provider
+      value={{ setIsDone, setIsWorking, setNext }}
+    >
       <PostAreaSlideValueContext.Provider
         value={{
           contentsRef,
           isWorking,
           isDone,
+          next,
         }}
       >
         {children}

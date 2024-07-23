@@ -15,22 +15,39 @@ body {
 }
 
 /* navigation tree */
-.inactive-tree-node > span .folder-open {
+.inactive-tree-node > button .folder-open {
   @apply hidden;
 }
-:not(.inactive-tree-node) > span .folder-open {
+:not(.inactive-tree-node) > button .folder-open {
   @apply visible;
 }
 
-.inactive-tree-node > span .folder-close {
+.inactive-tree-node > button .folder-close {
   @apply visible;
 }
-:not(.inactive-tree-node) > span .folder-close {
+:not(.inactive-tree-node) > button .folder-close {
   @apply hidden;
 }
 
-.global-layout {
-  @apply col-start-2 col-end-5 row-start-2 row-end-4 p-14 overflow-hidden bg-blue-50;
+/*         text-blue-500 font-medium transition-all 
+        hover:text-blue-700 hover:underline 
+        visited:text-purple-500 visited:underline
+        visited:hover:text-purple-700 visited:hover:underline
+        active:hover:text-red-400 active:hover:underline */
+.link {
+  @apply text-blue-500 font-medium transition-all 
+hover:text-blue-700 hover:underline 
+visited:text-purple-500 visited:underline
+visited:hover:text-purple-700 visited:hover:underline
+active:hover:text-red-400 active:hover:underline leading-10;
+}
+
+.text-clickable {
+  @apply cursor-pointer font-medium transition-colors active:text-red-400 active:hover:focus:text-red-600;
+}
+
+.btn-common {
+  @apply border-2 m-2 py-1 px-4 transition-colors hover:bg-slate-200 active:hover:bg-rose-200;
 }
 
 /* post */

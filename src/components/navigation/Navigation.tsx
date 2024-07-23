@@ -3,6 +3,7 @@ import { useNavAnimation } from "@/hooks/useNavAnimation"
 import { useResizeSidebar } from "@/hooks/useResizeSidebar"
 import { usePathname } from "next/navigation"
 import { useRef, useState } from "react"
+import { Button } from "../common/Button/Button"
 
 export default function Navigation({
   navChildren,
@@ -29,11 +30,9 @@ export default function Navigation({
         style={{ width: `${sideBarWidth}px` }}
       >
         <div className="flex justify-around">
-          <button
+          <Button
             onClick={() => setActiveIdx(0)}
             className={`
-              border border-transparent rounded-md px-1 
-              hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 
                ${
                  activeIdx === 0
                    ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
@@ -41,13 +40,11 @@ export default function Navigation({
                }`}
           >
             목록
-          </button>
+          </Button>
           {isPostPage && (
-            <button
+            <Button
               onClick={() => setActiveIdx(1)}
               className={`
-                border border-transparent rounded-md px-1 
-                hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 
                 ${
                   activeIdx === 1
                     ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
@@ -55,7 +52,7 @@ export default function Navigation({
                 }`}
             >
               목차
-            </button>
+            </Button>
           )}
         </div>
         <div className="pt-10 text-sm">

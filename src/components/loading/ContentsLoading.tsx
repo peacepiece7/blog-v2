@@ -13,7 +13,7 @@ export const ContentsLoading = forwardRef<
   return (
     <main
       ref={ref}
-      className="global-layout transition-transform duration-500 ease-in-out translate-x-[-150%]"
+      className="global-layout invisible transition-all duration-700 ease-out -translate-x-1/3 opacity-40"
     >
       <PostPageLayout>
         <div>로딩 중 입니다...</div>

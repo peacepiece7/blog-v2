@@ -1,6 +1,6 @@
-import { NAV_DIR_CLASS_ID } from '@/components/ui/NavigationParagraph'
-import { useAnimate } from 'framer-motion'
-import { useCallback, useEffect } from 'react'
+import { NAV_DIR_CLASS_ID } from "@/components/ui/NavigationParagraph"
+import { useAnimate } from "framer-motion"
+import { useCallback, useEffect } from "react"
 
 /**
  * @description 네비게이션(목록)에 open/close 애니메이션을 추가합니다.
@@ -25,15 +25,15 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
         )
 
       navDirElements.forEach((el) => {
-        if (urls.find((url) => url === el.dataset['name'])) {
-          const li = el.closest('li') as HTMLLIElement
-          const divElement = li.querySelector('div') as HTMLDivElement
-          const firstUlChild = divElement.querySelector('ul')
+        if (urls.find((url) => url === el.dataset["name"])) {
+          const li = el.closest("li") as HTMLLIElement
+          const divElement = li.querySelector("div") as HTMLDivElement
+          const firstUlChild = divElement.querySelector("ul")
           if (!firstUlChild) return
-          if (divElement?.tagName === 'DIV') {
-            divElement.classList.remove('inactive-tree-node')
-            firstUlChild.style.height = 'auto'
-            firstUlChild.classList.remove('hidden')
+          if (divElement?.tagName === "DIV") {
+            divElement.classList.remove("inactive-tree-node")
+            firstUlChild.style.height = "auto"
+            firstUlChild.classList.remove("hidden")
           }
         }
       })
@@ -43,15 +43,15 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
 
   useEffect(
     function highlightActiveNode() {
-      const url = urls.join('/')
+      const url = urls.join("/")
       const matchElement = document.querySelector<HTMLAnchorElement>(
         `a[href="${url}"]`
       )
       const parentElement = matchElement?.parentElement
-      if (parentElement && parentElement.tagName === 'SPAN') {
+      if (parentElement && parentElement.tagName === "SPAN") {
         parentElement.className =
           parentElement.className +
-          ' border rounded-md px-1 border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30'
+          " border rounded-md px-1 border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
       }
     },
     [scopeRef, urls]
@@ -67,34 +67,34 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
         if (e.target) {
           const el = e.target as HTMLElement
           // if achor tag is clicked, do nothing
-          if (el.tagName === 'A') {
+          if (el.tagName === "A") {
             return
           }
 
-          const li = el.tagName === 'LI' ? el : el.closest('li')
+          const li = el.tagName === "LI" ? el : el.closest("li")
           if (!li) return
 
-          const divElement = li.querySelector('div')
+          const divElement = li.querySelector("div")
           if (!divElement) return
           const firstUlChild = divElement.querySelector(
-            'ul'
+            "ul"
           ) as HTMLUListElement
-          if (divElement?.tagName === 'DIV') {
-            if (divElement.classList.contains('inactive-tree-node')) {
-              divElement.classList.remove('inactive-tree-node')
-              firstUlChild.style.height = '0'
-              firstUlChild.classList.remove('hidden')
+          if (divElement?.tagName === "DIV") {
+            if (divElement.classList.contains("inactive-tree-node")) {
+              divElement.classList.remove("inactive-tree-node")
+              firstUlChild.style.height = "0"
+              firstUlChild.classList.remove("hidden")
               animate(
                 firstUlChild,
-                { height: 'auto' },
-                { ease: 'easeInOut', duration: 0.4 }
+                { height: "auto" },
+                { ease: "easeInOut", duration: 0.2 }
               )
             } else {
-              divElement.classList.add('inactive-tree-node')
+              divElement.classList.add("inactive-tree-node")
               animate(
                 firstUlChild,
                 { height: 0 },
-                { ease: 'easeInOut', duration: 0.4 }
+                { ease: "easeInOut", duration: 0.2 }
               )
             }
           }
@@ -109,7 +109,7 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
    */
   const handleKeydown = useCallback(
     (ev: KeyboardEvent) => {
-      if (ev.key === 'Enter') {
+      if (ev.key === "Enter") {
         handleClickNavNode(ev)
       }
     },
@@ -121,15 +121,15 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
       const currentScopeRef = scopeRef.current
       if (!currentScopeRef) return
 
-      currentScopeRef.addEventListener('click', handleClickNavNode)
-      currentScopeRef.addEventListener('touchstart', handleClickNavNode)
-      currentScopeRef.addEventListener('keydown', handleKeydown)
+      currentScopeRef.addEventListener("click", handleClickNavNode)
+      currentScopeRef.addEventListener("touchstart", handleClickNavNode)
+      currentScopeRef.addEventListener("keydown", handleKeydown)
 
       return () => {
         if (!currentScopeRef) return
-        currentScopeRef.removeEventListener('click', handleClickNavNode)
-        currentScopeRef.removeEventListener('touchstart', handleClickNavNode)
-        currentScopeRef.removeEventListener('keydown', handleKeydown)
+        currentScopeRef.removeEventListener("click", handleClickNavNode)
+        currentScopeRef.removeEventListener("touchstart", handleClickNavNode)
+        currentScopeRef.removeEventListener("keydown", handleKeydown)
       }
     },
     [animate, scopeRef, handleClickNavNode, handleKeydown]

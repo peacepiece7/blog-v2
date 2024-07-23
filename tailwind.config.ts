@@ -13,21 +13,22 @@ const config: Config = {
     "./src/app/mdx-components.tsx",
     "./src/utils/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/hooks/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     // 1rem => 10px로 적용됩니다.
     // hi_melody 폰트가 원래 좀 작습니다.
     fontSize: {
-      xs: "1.5rem",
-      sm: "1.75rem",
-      base: "2rem",
-      lg: "2.5rem",
-      xl: "2.75rem",
-      "2xl": "3rem",
-      "3xl": "3.5rem",
-      "4xl": "3.75rem",
-      "5xl": "4rem",
-      "6xl": "4.5rem",
+      xs: "1rem",
+      sm: "1.25rem",
+      base: "1.5rem",
+      lg: "2.75rem",
+      xl: "2em",
+      "2xl": "2.25rem",
+      "3xl": "2.5rem",
+      "4xl": "3rem",
+      "5xl": "3.5rem",
+      "6xl": "4rem",
     },
     extend: {
       backgroundImage: {},
@@ -52,15 +53,21 @@ const config: Config = {
     }),
   ],
 }
-
+// col-start-2 col-end-5 row-start-2 row-end-4 p-14 overflow-hidden bg-blue-50;
 const UTILITY_STYLES = {
   ".global-layout": {
-    "grid-column": "span 4 / start 2",
-    "grid-row": "span 2 / start 2",
-    overflow: "hidden",
+    "grid-column-start": "2",
+    "grid-column-end": "5",
+    "grid-row-start": "2",
+    "grid-row-end": "4",
     "background-color": "#ebf8fc", // bg-slate-50
+    overflow: "hidden",
+    padding: "3rem",
     height: "100%",
   },
+  ".link": {}, // intellisense 때문에 global.css에서 오버라이드
+  ".btn-common": {}, // intellisense 때문에 global.css에서 오버라이드
+  ".text-clickable": {}, // intellisense 때문에 global.css에서 오버라이드
 }
 
 export default config

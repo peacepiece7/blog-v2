@@ -5,7 +5,7 @@ import DocumentIcon from "@/components/ui/Icons/DocumentIcon"
 import NavigationLink from "@/components/ui/NavigationLink"
 import FolderOpenIcon from "@/components/ui/Icons/FolderOpenIcon"
 import FolderCloseIcon from "@/components/ui/Icons/FolderCloseIcon"
-import NavigationParagraph from "@/components/ui/NavigationParagraph"
+import NavigationDirButton from "@/components/ui/NavigationParagraph"
 
 /**
  * @description 네비게이션에 사용되는 트리 구조를 생성합니다.
@@ -17,7 +17,7 @@ import NavigationParagraph from "@/components/ui/NavigationParagraph"
 export const createNavElements = (
   tree: TreeNode[],
   list: number[],
-  deepth: number,
+  deepth: number
 ): React.JSX.Element[] => {
   // 텍스트를 읽기 좋게 변환합니다.
   const convertToReadableText = (text: string) => {
@@ -52,22 +52,22 @@ export const createNavElements = (
         className={`list-disc ml-4 overflow-hidden`}
       >
         {node.leafNode && node.link ? (
-          <span className="flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4">
-            <DocumentIcon />
-            <NavigationLink href={node.link}>
-              {convertToReadableText(node.text)}
-            </NavigationLink>
-          </span>
+          <NavigationLink href={node.link}>
+            <span className="flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4">
+              <DocumentIcon /> {convertToReadableText(node.text)}
+            </span>
+          </NavigationLink>
         ) : (
-          <div className="inactive-tree-node">
-            <span
-              className="flex items-center cursor-pointer hover:bg-gray-400 hover:bg-opacity-10 mr-4"
-              tabIndex={0}
+          <div className="inactive-tree-node mr-4">
+            <NavigationDirButton
+              name={node.text}
+              className="flex items-center w-full hover:bg-gray-400 hover:bg-opacity-10"
             >
               <FolderOpenIcon />
               <FolderCloseIcon />
-              <NavigationParagraph text={node.text} />
-            </span>
+              <span className="pl-2">{node.text}</span>
+            </NavigationDirButton>
+
             <ul
               // ${deepth === 0 ? 'hidden inactive-tree-node' : ''}
               className={`hidden list-disc ml-4 overflow-hidden`}
@@ -87,7 +87,7 @@ export const createNavElements = (
  * @returns
  */
 export const createTOCElements = (
-  headings: RootContentMap["heading"][],
+  headings: RootContentMap["heading"][]
 ): React.ReactElement => {
   const rootUl = React.createElement("ul", { key: "root" })
   const stack = [
@@ -108,13 +108,15 @@ export const createTOCElements = (
           "flex items-center list-disc ml-4 overflow-hidden mr-4 hover:bg-gray-400 hover:bg-opacity-10",
         "data-deepth": depth,
       },
-      <NavigationLink href={`#${hashTag}`}>{"# " + text}</NavigationLink>,
+      <a href={`#${hashTag}`} className="link">
+        {"# " + text}
+      </a>
     )
     while (stack.length > 0 && stack[stack.length - 1].depth >= depth) {
       const { element, children } = stack.pop()!
       if (children.length > 0) {
         stack[stack.length - 1].children.push(
-          React.cloneElement(element, {}, children),
+          React.cloneElement(element, {}, children)
         )
       }
     }
@@ -131,7 +133,7 @@ export const createTOCElements = (
   while (stack.length > 1) {
     const { element, children } = stack.pop()!
     stack[stack.length - 1].children.push(
-      React.cloneElement(element, {}, children),
+      React.cloneElement(element, {}, children)
     )
   }
 

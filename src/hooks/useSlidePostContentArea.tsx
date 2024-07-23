@@ -2,29 +2,40 @@ import {
   usePostAreaSlideAction,
   usePostAreaSlideValue,
 } from "@/contexts/usePostAreaContext"
+import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 
 // zustand 써야할듯
 export const usePostAreaSlideAnimation = () => {
-  const { isWorking, contentsRef, isDone } = usePostAreaSlideValue()
-  const { setIsWorking, setIsDone } = usePostAreaSlideAction()
+  const router = useRouter()
+  const { isWorking, contentsRef, isDone, next } = usePostAreaSlideValue()
+  const { setIsWorking, setIsDone, setNext } = usePostAreaSlideAction()
 
-  useEffect(() => {
-    console.log("isWorking", isWorking)
-    console.log("isDone", isDone)
-    console.log("REF : ", contentsRef.current)
-    if (!contentsRef.current) return
-    contentsRef.current.style.transition = "transform 1s ease-in-out"
-    if (isWorking) {
-      contentsRef.current.style.transform = "translateX(0%)"
-    } else {
-    }
+  useEffect(
+    function animateContentsOnWorkStart() {
+      if (!contentsRef.current) return
+      if (isWorking) {
+        contentsRef.current.classList.remove("invisible")
+        contentsRef.current.style.visibility = "visible"
+        contentsRef.current.style.transform = "translateX(0%)"
+        contentsRef.current.style.opacity = "1"
+        setTimeout(() => {
+          setIsDone(true)
+        }, 700)
+      }
+    },
+    [contentsRef, isWorking, setIsDone]
+  )
 
-    setTimeout(() => {
+  useEffect(
+    function triggerNextRouteOnDone() {
+      if (!isDone) return
+      next && router.push(next)
+      setNext("")
       setIsWorking(false)
-      setIsDone(true)
-    }, 500)
-  }, [contentsRef, isWorking, setIsWorking, setIsDone, isDone])
+    },
+    [isDone, next, router, setNext, setIsWorking]
+  )
 
   return { contentsRef }
 }

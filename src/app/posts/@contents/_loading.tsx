@@ -7,6 +7,10 @@ import { NavigationLoading } from "@/components/loading/NavigationLoading"
 export default function ContentsLoaingPage() {
   return (
     <>
+      <h1>
+        로딩 페이ㅈ임!!!!로딩 페이ㅈ임!!!!로딩 페이ㅈ임!!!!로딩 페이ㅈ임!!!!로딩
+        페이ㅈ임!!!!
+      </h1>
       <NavigationLoading />
       <ContentsLoading />
     </>

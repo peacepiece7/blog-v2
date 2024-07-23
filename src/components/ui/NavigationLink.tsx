@@ -1,6 +1,7 @@
 "use client"
 import { usePostAreaSlideAction } from "@/contexts/usePostAreaContext"
 import Link from "next/link"
+import { useState } from "react"
 export default function NavigationLink({
   href,
   children,
@@ -8,17 +9,22 @@ export default function NavigationLink({
   href: string
   children: React.ReactNode
 }>) {
-  const { setIsWorking } = usePostAreaSlideAction()
+  const [loading, setIsLoading] = useState(false)
+  const { setIsWorking, setNext } = usePostAreaSlideAction()
+
   return (
     <Link
-      className="truncate select-none ml-1"
+      className="block truncate select-none ml-1 link"
       href={href}
+      prefetch={true}
       onClick={(e) => {
-        setIsWorking(() => true)
-        // e.preventDefault()
+        e.preventDefault()
+        setIsWorking(true)
+        setNext(href)
+        setIsLoading(true)
       }}
     >
-      {children}
+      {loading ? <p>로딩중..!</p> : children}
     </Link>
   )
 }

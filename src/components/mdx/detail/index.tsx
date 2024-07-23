@@ -1,7 +1,7 @@
-'use client'
-import { MouseEventHandler, useRef, useState } from 'react'
-import { hiMelody } from '@/utils/shared'
-import { FaAngleRight } from 'react-icons/fa6'
+"use client"
+import { MouseEventHandler, useRef, useState } from "react"
+import { mainFont } from "@/utils/shared"
+import { FaAngleRight } from "react-icons/fa6"
 
 interface DetailProps {
   summaryTitle: string
@@ -17,9 +17,9 @@ export const Detail = ({ summaryTitle, children }: DetailProps) => {
   // TODO : 뷰포트에 걸렸는지 체크해서 화면에 걸리면 처음 한 번만 열기
 
   return (
-    <details ref={detailRef} className='list-none' onClick={onToggle}>
+    <details ref={detailRef} className="list-none" onClick={onToggle}>
       <summary
-        className={`list-none cursor-pointer ${hiMelody.className}`}
+        className={`list-none cursor-pointer ${mainFont.className}`}
         onClick={onToggle}
       >
         <div
@@ -28,7 +28,7 @@ export const Detail = ({ summaryTitle, children }: DetailProps) => {
           <p>{summaryTitle}</p>
           <FaAngleRight
             className={`w-6 h-6 ml-1 transition-all group-hover:translate-x-1
-              ${isOpen ? 'rotate-90 mb-1 translate-x-1' : 'mb-1'}`}
+              ${isOpen ? "rotate-90 mb-1 translate-x-1" : "mb-1"}`}
           />
         </div>
       </summary>
