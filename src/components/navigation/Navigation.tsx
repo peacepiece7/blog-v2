@@ -1,42 +1,43 @@
-'use client'
-import { useNavAnimation } from '@/hooks/useNavAnimation'
-import { useResizeSidebar } from '@/hooks/useResizeSidebar'
-import { usePathname } from 'next/navigation'
-import { useRef, useState } from 'react'
+"use client"
+import { useNavAnimation } from "@/hooks/useNavAnimation"
+import { useResizeSidebar } from "@/hooks/useResizeSidebar"
+import { usePathname } from "next/navigation"
+import { useRef, useState } from "react"
 
 export default function Navigation({
   navChildren,
   tocChildren,
-  activeTab = 'nav',
+  activeTab = "nav",
 }: Readonly<{
   navChildren: React.ReactNode
   tocChildren: React.ReactNode
-  activeTab: 'nav' | 'toc'
+  activeTab: "nav" | "toc"
 }>) {
   const pathname = usePathname()
   const navRef = useRef<HTMLDivElement>(null)
   const { barRef, sideBarWidth } = useResizeSidebar()
-  const { navTree } = useNavAnimation(navChildren, pathname?.split('/'))
-  const [activeIdx, setActiveIdx] = useState(activeTab === 'nav' ? 0 : 1)
+  const { navTree } = useNavAnimation(navChildren, pathname?.split("/"))
+  const [activeIdx, setActiveIdx] = useState(activeTab === "nav" ? 0 : 1)
 
-  const isPostPage = pathname.includes('posts')
+  const isPostPage = pathname.includes("posts")
 
   return (
-    <div className='relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 flex group'>
+    <div className="relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 flex group z-30 bg-white">
       <nav
         ref={navRef}
-        className='relative h-full overflow-y-scroll z-10 pt-4'
+        className="relative h-full overflow-y-scroll z-10 pt-4"
         style={{ width: `${sideBarWidth}px` }}
       >
-        <div className='flex justify-around'>
+        <div className="flex justify-around">
           <button
             onClick={() => setActiveIdx(0)}
-            className={`border border-transparent rounded-md px-1 
-               hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 
+            className={`
+              border border-transparent rounded-md px-1 
+              hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 
                ${
                  activeIdx === 0
-                   ? 'border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30'
-                   : ''
+                   ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
+                   : ""
                }`}
           >
             목록
@@ -44,24 +45,25 @@ export default function Navigation({
           {isPostPage && (
             <button
               onClick={() => setActiveIdx(1)}
-              className={`border border-transparent rounded-md px-1 
+              className={`
+                border border-transparent rounded-md px-1 
                 hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30 
                 ${
                   activeIdx === 1
-                    ? 'border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30'
-                    : ''
+                    ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
+                    : ""
                 }`}
             >
               목차
             </button>
           )}
         </div>
-        <div className='pt-10 text-sm'>
-          <div className={`${activeIdx === 0 ? 'visible' : 'hidden'}`}>
+        <div className="pt-10 text-sm">
+          <div className={`${activeIdx === 0 ? "visible" : "hidden"}`}>
             {navTree}
           </div>
           {isPostPage && (
-            <div className={`${activeIdx === 1 ? 'visible' : 'hidden'}`}>
+            <div className={`${activeIdx === 1 ? "visible" : "hidden"}`}>
               {tocChildren}
             </div>
           )}

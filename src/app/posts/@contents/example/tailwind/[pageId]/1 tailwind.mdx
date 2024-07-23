@@ -1,5 +1,5 @@
 export const METADATA = {
-  title: 'TITLE',
+  title: "TITLE",
 }
 
 # Tailwind Playground
@@ -9,13 +9,35 @@ export const METADATA = {
 부모 이벤트를 자식에서 전달하고 싶을 때 사용
 
 ```js
-<div className='group'>
+<div className="group">
   <p>1</p>
-  <p className='transition-transform group-hover:translate-x-2'>foo</p>
+  <p className="transition-transform group-hover:translate-x-2">foo</p>
 </div>
 ```
 
-<div className='group border-2 border-gray-400 mt-2'>
+<div className="group border-2 border-gray-400 mt-2">
   <p>foo</p>
-  <p className='transition-transform group-hover:translate-x-2'>bar</p>
+  <p className="transition-transform group-hover:translate-x-2">bar</p>
 </div>
+
+# settings.json
+
+## associations
+
+.css 파일에서 tailwindcss suggestion을 받고 싶다면 아래와 같이 설정
+
+```json
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+```
+
+## quick suggestion
+
+className => 문자열이라 suggestion이 잘 안 뜨는 케이스가 있음 이럴때 아래와 같이 설정
+
+```json
+"editor.quickSuggestions": {
+  "strings": "on"
+}
+```

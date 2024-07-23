@@ -1,6 +1,6 @@
-'use client'
-import { useSlidePostContentArea } from '@/hooks/useSlidePostContentArea'
-import Link from 'next/link'
+"use client"
+import { usePostAreaSlideAction } from "@/contexts/usePostAreaContext"
+import Link from "next/link"
 export default function NavigationLink({
   href,
   children,
@@ -8,16 +8,14 @@ export default function NavigationLink({
   href: string
   children: React.ReactNode
 }>) {
-  const { setIsWorking } = useSlidePostContentArea()
-
+  const { setIsWorking } = usePostAreaSlideAction()
   return (
     <Link
-      className='truncate select-none ml-1'
+      className="truncate select-none ml-1"
       href={href}
       onClick={(e) => {
-        console.log('e.target : ', e.target)
-        setIsWorking(true)
-        e.preventDefault()
+        setIsWorking(() => true)
+        // e.preventDefault()
       }}
     >
       {children}

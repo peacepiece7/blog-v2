@@ -1,33 +1,30 @@
-import { ContentsLoading } from '@/app/posts/@contents/loading'
-import { memo, useEffect, useRef, useState } from 'react'
+import {
+  usePostAreaSlideAction,
+  usePostAreaSlideValue,
+} from "@/contexts/usePostAreaContext"
+import { useEffect } from "react"
 
 // zustand 써야할듯
-export const useSlidePostContentArea = () => {
-  const [isWorking, setIsWorking] = useState(false)
-  const [isDone, setIsDone] = useState(false)
-  const contentsRef = useRef<HTMLDivElement>(null)
-
-  const ContentsLoadingFrame = memo(function ContentLoadingFrameMemo() {
-    return <ContentsLoading ref={contentsRef} />
-  }) // Add an empty array as the second argument
+export const usePostAreaSlideAnimation = () => {
+  const { isWorking, contentsRef, isDone } = usePostAreaSlideValue()
+  const { setIsWorking, setIsDone } = usePostAreaSlideAction()
 
   useEffect(() => {
-    if (!isWorking) return
-    // slide contentfRef from left to right
+    console.log("isWorking", isWorking)
+    console.log("isDone", isDone)
+    console.log("REF : ", contentsRef.current)
     if (!contentsRef.current) return
-    contentsRef.current.style.transition = 'transform 0.5s ease-in-out'
-    contentsRef.current.style.transform = 'translateX(100%)'
+    contentsRef.current.style.transition = "transform 1s ease-in-out"
+    if (isWorking) {
+      contentsRef.current.style.transform = "translateX(0%)"
+    } else {
+    }
 
     setTimeout(() => {
       setIsWorking(false)
       setIsDone(true)
     }, 500)
-  }, [isWorking])
+  }, [contentsRef, isWorking, setIsWorking, setIsDone, isDone])
 
-  return {
-    ContentsLoadingFrame,
-    isWorking,
-    isDone,
-    setIsWorking,
-  }
+  return { contentsRef }
 }

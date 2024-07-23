@@ -29,8 +29,11 @@ body {
   @apply hidden;
 }
 
-/* post */
+.global-layout {
+  @apply col-start-2 col-end-5 row-start-2 row-end-4 p-14 overflow-hidden bg-blue-50;
+}
 
+/* post */
 details[open] summary ~ * {
   animation: sweep 0.5s ease-in-out;
 }
