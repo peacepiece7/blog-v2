@@ -1,6 +1,6 @@
+import { useCallback, useEffect } from "react"
 import { NAV_DIR_CLASS_ID } from "@/components/ui/NavigationParagraph"
 import { useAnimate } from "framer-motion"
-import { useCallback, useEffect } from "react"
 
 /**
  * @description 네비게이션(목록)에 open/close 애니메이션을 추가합니다.
