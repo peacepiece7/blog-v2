@@ -1,4 +1,5 @@
 import { HTMLAttributes } from "react"
+import NavigationLink from "./NavigationLink"
 
 export function Button({
   children,
@@ -13,6 +14,7 @@ export function Button({
     [key in keyof HTMLAttributes<HTMLButtonElement>]?: HTMLAttributes<HTMLButtonElement>[key]
   }
 }) {
+  NavigationLink
   return (
     <button
       className={`btn-common  ${className}`}

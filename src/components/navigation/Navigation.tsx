@@ -3,7 +3,7 @@ import { useNavAnimation } from "@/hooks/useNavAnimation"
 import { useResizeSidebar } from "@/hooks/useResizeSidebar"
 import { usePathname } from "next/navigation"
 import { useRef, useState } from "react"
-import { Button } from "../common/Button/Button"
+import { Button } from "@/components/ui/Button"
 
 export default function Navigation({
   navChildren,

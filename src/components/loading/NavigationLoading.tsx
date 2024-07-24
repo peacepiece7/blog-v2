@@ -1,4 +1,4 @@
-import { Button } from "../common/Button/Button"
+import { Button } from "@/components/ui/Button"
 
 export const NavigationLoading = ({}: Readonly<{}>) => {
   return (

@@ -1,8 +1,8 @@
 "use client"
-import { usePostAreaSlideAnimation } from "@/hooks/useSlidePostContentArea"
 import { usePathname } from "next/navigation"
-import { ContentsLoading } from "../loading/ContentsLoading"
-import { Button } from "../common/Button/Button"
+import { ContentsLoading } from "@/components/loading/ContentsLoading"
+import { Button } from "@/components/ui/Button"
+import { usePostAreaSlideAnimation } from "@/hooks/useSlidePostContentArea"
 
 export function ContentsLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
