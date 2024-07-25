@@ -9,15 +9,15 @@ import { PostPageLayout } from "../layout/Layout"
 export const ContentsLoading = forwardRef<
   HTMLElement,
   { className?: HTMLAttributes<HTMLElement>["className"] }
->(function ContentsLoadingInner(_props, ref) {
+>(function ContentsLoadingInner(props, ref) {
   return (
-    <main
+    <aside
       ref={ref}
-      className="global-layout invisible transition-all duration-700 ease-out -translate-x-1/3 opacity-40"
+      className={`global-layout opacity-40 invisible transition-all duration-700 ease-out -translate-x-1/3`}
     >
       <PostPageLayout>
         <div>로딩 중 입니다...</div>
       </PostPageLayout>
-    </main>
+    </aside>
   )
 })

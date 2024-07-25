@@ -1,9 +1,9 @@
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 import {
   usePostAreaSlideAction,
   usePostAreaSlideValue,
 } from "@/contexts/usePostAreaContext"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
 
 // zustand 써야할듯
 export const usePostAreaSlideAnimation = () => {

@@ -1,8 +1,6 @@
 "use client"
 import Link from "next/link"
-import { Router } from "next/router"
 import { useState } from "react"
-import { MainPageLayout } from "@/components/layout/Layout"
 import { usePostAreaSlideAction } from "@/contexts/usePostAreaContext"
 
 export default function NavigationLink({

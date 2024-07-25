@@ -1,8 +1,8 @@
 "use client"
-import { useNavAnimation } from "@/hooks/useNavAnimation"
-import { useResizeSidebar } from "@/hooks/useResizeSidebar"
 import { usePathname } from "next/navigation"
 import { useRef, useState } from "react"
+import { useNavAnimation } from "@/hooks/useNavAnimation"
+import { useResizeSidebar } from "@/hooks/useResizeSidebar"
 import { Button } from "@/components/ui/Button"
 
 export default function Navigation({

@@ -1,3 +1,5 @@
+import { headers } from "next/headers"
+import { Heading } from "mdast"
 import { TreeNode } from "@/app/api/navigation/route"
 import { ContentsLayout } from "@/components/layout/Layout"
 import Navigation from "@/components/navigation/Navigation"
@@ -5,8 +7,6 @@ import { X_CUSTOM_URL } from "@/constants/server"
 import { PostAreaSlideProvider } from "@/contexts/usePostAreaContext"
 import { fetcher } from "@/utils/server"
 import { createNavElements, createTOCElements } from "@/utils/server-components"
-import { Heading } from "mdast"
-import { headers } from "next/headers"
 
 export default async function PostContentsContainer(
   props: Readonly<{
