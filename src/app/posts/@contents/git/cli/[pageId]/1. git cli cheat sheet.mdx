@@ -13,3 +13,21 @@
 # Remove cache
 
 `git rm -r --cached .`
+
+# Delete local branch
+
+`git branch -D <branch>`
+
+# Delete remote branch
+
+`git push origin -d <branch>`
+
+# Skip branch name when pushing
+
+## 현재 프로젝트에만 적용
+
+`git config push.default current`
+
+## 전역에 적용
+
+`git config --global push.default current`

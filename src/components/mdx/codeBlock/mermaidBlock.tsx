@@ -1,5 +1,4 @@
 "use client"
-import { mainFont } from "@/utils/shared"
 import mermaid, { MermaidConfig } from "mermaid"
 import {
   DetailedHTMLProps,
@@ -9,6 +8,7 @@ import {
   useState,
 } from "react"
 import { Detail } from "../detail"
+import { mainFont } from "@/utils/shared"
 
 export const Mermaid = (
   props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>

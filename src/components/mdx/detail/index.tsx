@@ -1,7 +1,7 @@
 "use client"
+import { FaAngleRight } from "react-icons/fa6"
 import { MouseEventHandler, useRef, useState } from "react"
 import { mainFont } from "@/utils/shared"
-import { FaAngleRight } from "react-icons/fa6"
 
 interface DetailProps {
   summaryTitle: string

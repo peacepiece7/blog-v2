@@ -1,9 +1,9 @@
+import { NextRequest, NextResponse } from 'next/server'
 import {
   getASTTreeSafely,
   getFileNamesSafely,
   getPostFullPath,
 } from '@/utils/server'
-import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
   const createTableOfContents = async (path: string, index: number = 0) => {

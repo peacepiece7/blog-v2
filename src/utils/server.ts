@@ -1,10 +1,10 @@
-'server only'
-import { readdirSync, readFileSync } from 'fs'
-import { unified } from 'unified'
-import markdown from 'remark-parse'
-import type { RootContentMap } from 'mdast'
-import path from 'path'
-import { headers } from 'next/headers'
+"server only"
+import { headers } from "next/headers"
+import { readdirSync, readFileSync } from "fs"
+import path from "path"
+import { unified } from "unified"
+import markdown from "remark-parse"
+import type { RootContentMap } from "mdast"
 
 /**
  * @description fetch api의 래퍼 함수입니다.
@@ -12,7 +12,7 @@ import { headers } from 'next/headers'
  */
 export const fetcher = async <T>(path: string, options?: RequestInit) => {
   const headerList = headers()
-  const host = headerList.get('host')
+  const host = headerList.get("host")
   // const sheme = process.env.NODE_ENV === 'development' ? 'http' : 'https'
   const url = `http://${host}${path}`
   return fetch(url, options).then((res) => res.json() as T)
@@ -69,5 +69,5 @@ export const getASTTreeSafely = <T extends keyof RootContentMap>(
  * @description 포스트 파일의 full path를 가져옵니다.
  */
 export const getPostFullPath = (...paths: string[]) => {
-  return path.join(path.resolve(), 'src', 'app', 'posts', '@contents', ...paths)
+  return path.join(path.resolve(), "src", "app", "posts", "@contents", ...paths)
 }
