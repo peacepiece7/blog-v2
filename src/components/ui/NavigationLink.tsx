@@ -15,7 +15,7 @@ export default function NavigationLink({
 
   return (
     <Link
-      className="block truncate select-none ml-1 link"
+      className="link truncate select-none"
       href={href}
       prefetch={true}
       onClick={(e) => {
@@ -23,6 +23,14 @@ export default function NavigationLink({
         setIsWorking(true)
         setNext(href)
         setIsLoading(true)
+      }}
+      onKeyDown={(ev) => {
+        if (ev.key === "Enter") {
+          ev.preventDefault()
+          setIsWorking(true)
+          setNext(href)
+          setIsLoading(true)
+        }
       }}
     >
       {loading ? <p>로딩중..!</p> : children}

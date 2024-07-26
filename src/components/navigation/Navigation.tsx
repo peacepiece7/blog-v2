@@ -1,6 +1,8 @@
 "use client"
 import { usePathname } from "next/navigation"
+import { useRouter } from "next/router"
 import { useRef, useState } from "react"
+import { SearchArea } from "./SearchArea"
 import { useNavAnimation } from "@/hooks/useNavAnimation"
 import { useResizeSidebar } from "@/hooks/useResizeSidebar"
 import { Button } from "@/components/ui/Button"
@@ -15,15 +17,17 @@ export default function Navigation({
   activeTab: "nav" | "toc"
 }>) {
   const pathname = usePathname()
-  const navRef = useRef<HTMLDivElement>(null)
-  const { barRef, sideBarWidth } = useResizeSidebar()
   const { navTree } = useNavAnimation(navChildren, pathname?.split("/"))
+  const { barRef, sideBarWidth } = useResizeSidebar()
+
+  const navRef = useRef<HTMLDivElement>(null)
   const [activeIdx, setActiveIdx] = useState(activeTab === "nav" ? 0 : 1)
 
   const isPostPage = pathname.includes("posts")
 
   return (
-    <div className="relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 flex group z-30 bg-white">
+    <div className="flex flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white">
+      <SearchArea />
       <nav
         ref={navRef}
         className="relative h-full overflow-y-scroll z-10 pt-4"

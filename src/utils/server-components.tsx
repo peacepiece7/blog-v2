@@ -49,13 +49,14 @@ export const createNavElements = (
         data-path={dataPath.join("-")}
         data-deepth={deepth}
         data-leaf={node.leafNode ? 1 : 0}
-        className={`list-disc ml-4 overflow-hidden`}
+        className={`ml-4 overflow-hidden`}
       >
         {node.leafNode && node.link ? (
           <NavigationLink href={node.link}>
-            <span className="flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4">
-              <DocumentIcon /> {convertToReadableText(node.text)}
-            </span>
+            <div className="flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4">
+              <DocumentIcon options={{ tabIndex: -1 }} />
+              <p className="truncate">{convertToReadableText(node.text)}</p>
+            </div>
           </NavigationLink>
         ) : (
           <div className="inactive-tree-node mr-4">
@@ -70,7 +71,7 @@ export const createNavElements = (
 
             <ul
               // ${deepth === 0 ? 'hidden inactive-tree-node' : ''}
-              className={`hidden list-disc ml-4 overflow-hidden`}
+              className={`hidden ml-4 overflow-hidden`}
             >
               {createNavElements(node.children, dataPath, deepth + 1)}
             </ul>
@@ -105,7 +106,7 @@ export const createTOCElements = (
       {
         key: `li-${index}`,
         className:
-          "flex items-center list-disc ml-4 overflow-hidden mr-4 hover:bg-gray-400 hover:bg-opacity-10",
+          "flex items-center ml-4 overflow-hidden mr-4 hover:bg-gray-400 hover:bg-opacity-10",
         "data-deepth": depth,
       },
       <a href={`#${hashTag}`} className="link">
@@ -125,7 +126,7 @@ export const createTOCElements = (
 
     const newUl = React.createElement("ul", {
       key: `ul-${index}`,
-      className: "list-disc ml-4 overflow-hidden",
+      className: "ml-4 overflow-hidden",
     })
     stack.push({ element: newUl, depth, children: [] as React.ReactElement[] })
   })
