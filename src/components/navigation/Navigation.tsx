@@ -1,6 +1,5 @@
 "use client"
 import { usePathname } from "next/navigation"
-import { useRouter } from "next/router"
 import { useRef, useState } from "react"
 import { SearchArea } from "./SearchArea"
 import { useNavAnimation } from "@/hooks/useNavAnimation"
@@ -28,37 +27,37 @@ export default function Navigation({
   return (
     <div className="flex flex-col relative h-auto col-start-1 col-end-2 row-start-2 row-end-4 group z-30 bg-white">
       <SearchArea />
-      <nav
-        ref={navRef}
-        className="relative h-full overflow-y-scroll z-10 pt-4"
-        style={{ width: `${sideBarWidth}px` }}
-      >
-        <div className="flex justify-around">
-          <Button
-            onClick={() => setActiveIdx(0)}
-            className={`
+      <div className="flex justify-around">
+        <Button
+          onClick={() => setActiveIdx(0)}
+          className={`
                ${
                  activeIdx === 0
                    ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
                    : ""
                }`}
-          >
-            목록
-          </Button>
-          {isPostPage && (
-            <Button
-              onClick={() => setActiveIdx(1)}
-              className={`
+        >
+          목록
+        </Button>
+        {isPostPage && (
+          <Button
+            onClick={() => setActiveIdx(1)}
+            className={`
                 ${
                   activeIdx === 1
                     ? "border-gray-300 bg-gray-100 dark:border-neutral-700 dark:bg-neutral-800/30"
                     : ""
                 }`}
-            >
-              목차
-            </Button>
-          )}
-        </div>
+          >
+            목차
+          </Button>
+        )}
+      </div>
+      <nav
+        ref={navRef}
+        className="relative h-full overflow-y-scroll z-10 pt-4"
+        style={{ width: `${sideBarWidth}px` }}
+      >
         <div className="pt-10 text-sm">
           <div className={`${activeIdx === 0 ? "visible" : "hidden"}`}>
             {navTree}

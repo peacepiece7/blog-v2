@@ -28,6 +28,14 @@ const PostAreaSlideActionContext = createContext<
   PostAreaSlideActionContextType | undefined
 >(undefined)
 
+/**
+ * 목록을 이동하면 포스트 페이지가 스르륵 이동하는 애니메이션을 제공하는 프로바이더입니다.
+ *
+ * 아래 컨텍스트 훅을 참고하세요.
+ *
+ * @see {@linkcode usePostAreaSlideValue}
+ * @see {@linkcode usePostAreaSlideAction}
+ */
 export function PostAreaSlideProvider({
   children,
 }: {

@@ -1,10 +1,17 @@
 "use client"
+import { useEffect, useState } from "react"
 import { Button } from "../ui/Button"
 import CloseIcon from "../ui/Icons/CloseIcon"
 import { createPortal } from "react-dom"
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
-  if (typeof window === "undefined") return null
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted || typeof window === "undefined") return null
 
   return createPortal(children, document.body)
 }

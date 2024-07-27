@@ -1,4 +1,5 @@
-import { HTMLAttributes } from "react"
+"use client"
+import { HTMLAttributes, useState } from "react"
 import SearchIcon from "@/components/ui/Icons/SearchIcon"
 
 export const SearchBar = ({
@@ -12,7 +13,7 @@ export const SearchBar = ({
       <input
         onClick={onClick}
         type="text"
-        value="Search..."
+        placeholder="Search..."
         className="w-full border-0 focus:ring-2 bg-transparent py-4"
       />
     </div>

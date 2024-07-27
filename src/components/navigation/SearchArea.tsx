@@ -1,5 +1,4 @@
 "use client"
-
 import useKeyboardJs from "react-use/lib/useKeyboardJs"
 import { useEffect, useState } from "react"
 import { SearchBar } from "@/components/common/Button/SearchBar"
@@ -12,7 +11,6 @@ export const SearchArea = () => {
   useEffect(
     function handleOnPressCtrlAndK() {
       if (isPressed) {
-        console.log("EVENT : ", event)
         event?.preventDefault()
         setIsOpen(true)
       }

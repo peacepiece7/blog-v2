@@ -1,3 +1,4 @@
+"use client"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import {
@@ -5,7 +6,9 @@ import {
   usePostAreaSlideValue,
 } from "@/contexts/usePostAreaContext"
 
-// zustand 써야할듯
+/**
+ * 포스트 영역 슬라이드 애니메이션을 처리하는 훅입니다.
+ */
 export const usePostAreaSlideAnimation = () => {
   const router = useRouter()
   const { isWorking, contentsRef, isDone, next } = usePostAreaSlideValue()

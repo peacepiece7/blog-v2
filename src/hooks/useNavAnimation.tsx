@@ -76,8 +76,7 @@ export const useNavAnimation = (tree: React.ReactNode, urls: string[] = []) => {
         const divElement = li.querySelector("div")
         if (!divElement) return
         const firstUlChild = divElement.querySelector("ul") as HTMLUListElement
-        if (divElement.tagName === "DIV") {
-          console.log("CHECKED : ", divElement, firstUlChild)
+        if (divElement.tagName === "DIV" && firstUlChild) {
           if (divElement.classList.contains("inactive-tree-node")) {
             divElement.classList.remove("inactive-tree-node")
             firstUlChild.style.height = "0"
