@@ -1,0 +1,18 @@
+.react-autosuggest__suggestions-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.react-autosuggest__suggestions-list {
+  width: 100%;
+}
+
+.react-autosuggest__suggestion:not(:first-child) {
+  border-top: 1px solid #ddd;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  background-color: #0c7eaf;
+}

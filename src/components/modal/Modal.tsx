@@ -1,7 +1,7 @@
 "use client"
-import { useEffect, useState } from "react"
-import { Button } from "../ui/Button"
-import CloseIcon from "../ui/Icons/CloseIcon"
+import { useCallback, useEffect, useState } from "react"
+import { Button } from "@/components/ui/Button"
+import CloseIcon from "@/components/ui/Icons/CloseIcon"
 import { createPortal } from "react-dom"
 
 const Modal = ({ children }: { children: React.ReactNode }) => {
@@ -27,10 +27,25 @@ const ModalLayout = ({
   children: React.ReactNode
   onClose: () => void
 }) => {
+  const handleOnPressEsc = useCallback(
+    (ev: KeyboardEvent) => {
+      if (ev.key === "Escape") onClose()
+    },
+    [onClose]
+  )
+
+  useEffect(() => {
+    if (!open) return
+    document.addEventListener("keydown", handleOnPressEsc)
+    return () => {
+      document.removeEventListener("keydown", handleOnPressEsc)
+    }
+  }, [open, handleOnPressEsc])
+
   return (
     <section
       className={`fixed top-0 left-0 flex flex-col justify-center items-center w-full h-full z-50 bg-neutral-900/70
-        transition-all duration-300
+        transition-opacity duration-300
       ${
         open
           ? "visible opacity-100 pointer-events-auto"

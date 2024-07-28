@@ -1,5 +1,5 @@
 import { HTMLAttributes, forwardRef } from "react"
-import { PostPageLayout } from "../layout/Layout"
+import { PostPageLayout } from "@/components/layout/Layout"
 
 /**
  * @description 포스트 페이지 로딩 중에 보여지는 레이아웃

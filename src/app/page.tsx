@@ -1,5 +1,5 @@
 import { Header } from "@/components/header"
-import { ContentsLayout } from "@/components/layout/Layout"
+import { ContentsLayout, PostPageLayout } from "@/components/layout/Layout"
 import { LeftSideBar } from "@/components/navigation/LeftSideBar"
 import { PostAreaSlideProvider } from "@/contexts/usePostAreaContext"
 

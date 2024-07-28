@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react"
-import { Detail } from "../detail"
+import { Detail } from "@/components/mdx/detail"
 import { mainFont } from "@/utils/shared"
 
 export const Mermaid = (

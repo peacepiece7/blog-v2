@@ -71,3 +71,20 @@ export const getASTTreeSafely = <T extends keyof RootContentMap>(
 export const getPostFullPath = (...paths: string[]) => {
   return path.join(path.resolve(), "src", "app", "posts", "@contents", ...paths)
 }
+
+/**
+ * .dx 파일 이름을 읽기 좋은 형태로 변환합니다.
+ * @example convertToReadableText("01. Getting Started.mdx") : "Getting Started"
+ */
+export const convertMDXFileNameToReadableText = (text: string) => {
+  const li = text.split(" ")[0]
+  if (isNaN(parseInt(li))) {
+    return text.replace(/\.mdx?$/, "")
+  } else {
+    return text
+      .split(" ")
+      .slice(1)
+      .join(" ")
+      .replace(/\.mdx?$/, "")
+  }
+}

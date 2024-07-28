@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
-import path from 'path'
-import fs from 'fs'
+import { NextResponse } from "next/server"
+import path from "path"
+import fs from "fs"
 
 export interface TreeNode {
   leafNode: boolean
@@ -21,11 +21,10 @@ export interface LeafNode {
 }
 
 export async function GET() {
-  const postPath = ['src', 'app', 'posts', '@contents']
+  const postPath = ["src", "app", "posts", "@contents"]
   const directoryPath = path.join(process.cwd(), ...postPath)
   const paths = getAllFilePaths(directoryPath)
   const navTree = buildTree(paths, directoryPath)
-
   return NextResponse.json({ navTree })
 }
 
@@ -38,7 +37,7 @@ function getAllFilePaths(dir: string): string[] {
     const stat = fs.statSync(filePath)
     if (stat && stat.isDirectory()) {
       results = results.concat(getAllFilePaths(filePath))
-    } else if (path.extname(file) === '.mdx') {
+    } else if (path.extname(file) === ".mdx") {
       results.push(filePath)
     }
   })
@@ -53,7 +52,7 @@ function buildTree(paths: string[], baseDir: string): TreeNode[] {
     const relativePath = path.relative(baseDir, filePath)
     const parts = relativePath
       .split(path.sep)
-      .filter((part) => part !== '[pageId]')
+      .filter((part) => part !== "[pageId]")
     const fileName = parts.pop() as string
     let current = tree
 
@@ -64,7 +63,8 @@ function buildTree(paths: string[], baseDir: string): TreeNode[] {
       current = current.children[part] as IntermediateNode
     })
 
-    const linkPath = `/posts/${parts.join('/')}/${fileName}`
+    const linkPath = `/posts/${parts.join("/")}/${fileName}`
+
     current.children[fileName] = {
       leafNode: true,
       link: linkPath,
@@ -78,10 +78,10 @@ function buildTree(paths: string[], baseDir: string): TreeNode[] {
     nodeName: string,
     currentPath: string[]
   ): TreeNode {
-    if ('leafNode' in node) {
+    if ("leafNode" in node) {
       return {
         ...node,
-        link: `/posts/${currentPath.join('/')}/${node.text}`,
+        link: `/posts/${currentPath.join("/")}/${node.text}`,
       }
     }
     const children = Object.entries(node.children).map(([key, child]) =>

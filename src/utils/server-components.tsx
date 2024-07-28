@@ -1,6 +1,7 @@
 import { RootContentMap } from "mdast"
 import React from "react"
-import { TreeNode } from "../app/api/navigation/route"
+import { convertMDXFileNameToReadableText } from "@/utils/server"
+import { TreeNode } from "@/app/api/navigation/route"
 import DocumentIcon from "@/components/ui/Icons/DocumentIcon"
 import NavigationLink from "@/components/ui/NavigationLink"
 import FolderOpenIcon from "@/components/ui/Icons/FolderOpenIcon"
@@ -19,20 +20,6 @@ export const createNavElements = (
   list: number[],
   deepth: number
 ): React.JSX.Element[] => {
-  // 텍스트를 읽기 좋게 변환합니다.
-  const convertToReadableText = (text: string) => {
-    const li = text.split(" ")[0]
-    if (isNaN(parseInt(li))) {
-      return text.replace(/\.mdx?$/, "")
-    } else {
-      return text
-        .split(" ")
-        .slice(1)
-        .join(" ")
-        .replace(/\.mdx?$/, "")
-    }
-  }
-
   return tree.map((node, idx) => {
     const dataPath = [...list, idx]
     if (node.leafNode && node.link) {
@@ -55,7 +42,9 @@ export const createNavElements = (
           <NavigationLink href={node.link}>
             <div className="flex items-center hover:bg-gray-400 hover:bg-opacity-10 mr-4">
               <DocumentIcon options={{ tabIndex: -1 }} />
-              <p className="truncate">{convertToReadableText(node.text)}</p>
+              <p className="truncate">
+                {convertMDXFileNameToReadableText(node.text)}
+              </p>
             </div>
           </NavigationLink>
         ) : (
