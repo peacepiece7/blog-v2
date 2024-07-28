@@ -1,4 +1,4 @@
-import { Inter, Hi_Melody } from "next/font/google"
+import { Inter, Hi_Melody, Roboto_Mono } from "next/font/google"
 import localFont from "next/font/local"
 
 /**
@@ -33,3 +33,8 @@ export const mainFont = localFont({
     },
   ],
 })
+
+/**
+ * @description 코드 블록 폰트입니다.
+ */
+export const codeFont = Roboto_Mono({ subsets: ["latin"] })

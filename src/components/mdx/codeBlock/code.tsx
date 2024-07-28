@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes } from "react"
 import hljs from "highlight.js"
+import { codeFont, subFont } from "@/utils/shared"
 
 const LANGUAGES_MAP: Record<string, string> = {
   "language-js": "javascript",
@@ -28,7 +29,7 @@ export const Code = (
   ) {
     return (
       <code
-        className=" text-rose-500 font-bold bg-slate-200 p-1 rounded-md text-xs not-italic font-mono"
+        className={`text-rose-500 font-bold bg-slate-200 p-1 rounded-md text-base not-italic ${codeFont.className}`}
         {...props}
       />
     )
@@ -40,11 +41,11 @@ export const Code = (
   }).value
 
   return (
-    <div className="bg-slate-300 p-2 rounded-lg overflow-y-auto text-xs">
+    <div className={`bg-slate-300 p-2 rounded-lg overflow-y-auto text-sm`}>
       <code
         {...restProps}
         dangerouslySetInnerHTML={{ __html: value }}
-        className="not-italic font-mono"
+        className={`not-italic ${codeFont.className}`}
       />
     </div>
   )
