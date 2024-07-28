@@ -23,7 +23,7 @@ jobs:
         run: |
           corepack enable
           yarn set version stable
-          
+
       - name: Install dependencies.
         working-directory: ./
         run: |
@@ -38,7 +38,7 @@ jobs:
         working-directory: ./
         run: yarn install
 
-    - name: Build the project.
+      - name: Build the project.
         working-directory: ./
         run: yarn build
 
@@ -53,7 +53,6 @@ jobs:
           sshpass -e scp -o StrictHostKeyChecking=no build.zip ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}
 
       - name: Deploy on the server.
-
         env:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
