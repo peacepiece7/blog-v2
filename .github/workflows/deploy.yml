@@ -43,7 +43,7 @@ jobs:
         run: yarn build
 
       - name: Compress the built code.
-        run: zip -r build.zip ./next
+        run: zip -r build.zip ./.next ./package.json ./yarn.lock ./public
 
       - name: Copy files to the personal server via SCP.
         env:
