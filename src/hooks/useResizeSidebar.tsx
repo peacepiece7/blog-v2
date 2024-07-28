@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+"use client"
+import { useCallback, useEffect, useRef, useState } from "react"
 
 export const useResizeSidebar = (initWidth: number = 300) => {
   const [sideBarWidth, setSideBarWidth] = useState(initWidth)
@@ -11,7 +12,7 @@ export const useResizeSidebar = (initWidth: number = 300) => {
   const mouseDown = useCallback(
     (e: MouseEvent) => {
       e.preventDefault()
-      document.body.style.userSelect = 'none'
+      document.body.style.userSelect = "none"
       startXRef.current = e.clientX
       startWidthRef.current = sideBarWidth
       setIsDragging(true)
@@ -20,7 +21,7 @@ export const useResizeSidebar = (initWidth: number = 300) => {
   )
 
   const mouseUp = useCallback((e: MouseEvent) => {
-    document.body.style.userSelect = 'auto'
+    document.body.style.userSelect = "auto"
     startXRef.current = null
     startWidthRef.current = null
     setIsDragging(false)
@@ -35,29 +36,31 @@ export const useResizeSidebar = (initWidth: number = 300) => {
       ) {
         const deltaX = e.clientX - startXRef.current
         const newWidth = startWidthRef.current + deltaX
-        if (newWidth > 0) {
+        if (newWidth > initWidth) {
           setSideBarWidth(newWidth)
+        } else {
+          setSideBarWidth(initWidth)
         }
       }
     },
-    [isDragging]
+    [isDragging, initWidth]
   )
 
   useEffect(() => {
     const barElement = barRef.current
 
     if (barElement) {
-      barElement.addEventListener('mousedown', mouseDown)
-      document.addEventListener('mousemove', mouseMove)
-      document.addEventListener('mouseup', mouseUp)
+      barElement.addEventListener("mousedown", mouseDown)
+      document.addEventListener("mousemove", mouseMove)
+      document.addEventListener("mouseup", mouseUp)
     }
 
     return () => {
       if (barElement) {
-        barElement.removeEventListener('mousedown', mouseDown)
+        barElement.removeEventListener("mousedown", mouseDown)
       }
-      document.removeEventListener('mousemove', mouseMove)
-      document.removeEventListener('mouseup', mouseUp)
+      document.removeEventListener("mousemove", mouseMove)
+      document.removeEventListener("mouseup", mouseUp)
     }
   }, [barRef, mouseDown, mouseMove, mouseUp])
 

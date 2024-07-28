@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+}
+
+body {
+}
+
+.children-svg-translate-x-2 svg {
+  @apply translate-x-2;
+}
+
+/* navigation tree */
+.inactive-tree-node > button .folder-open {
+  @apply hidden;
+}
+:not(.inactive-tree-node) > button .folder-open {
+  @apply visible;
+}
+
+.inactive-tree-node > button .folder-close {
+  @apply visible;
+}
+:not(.inactive-tree-node) > button .folder-close {
+  @apply hidden;
+}
+
+/*         text-blue-500 font-medium transition-all 
+        hover:text-blue-700 hover:underline 
+        visited:text-purple-500 visited:underline
+        visited:hover:text-purple-700 visited:hover:underline
+        active:hover:text-red-400 active:hover:underline */
+.link {
+  @apply text-blue-500 font-medium transition-all 
+hover:text-blue-700 hover:underline 
+visited:text-purple-500 visited:underline
+visited:hover:text-purple-700 visited:hover:underline
+active:hover:text-red-400 active:hover:underline;
+}
+
+.text-clickable {
+  @apply cursor-pointer font-medium transition-colors active:text-red-400 active:hover:focus:text-red-600;
+}
+
+.btn-common {
+  @apply border-2 m-2 py-1 px-4 transition-colors hover:bg-slate-200 active:hover:bg-rose-200;
+}
+
+/* post */
+details[open] summary ~ * {
+  animation: sweep 0.5s ease-in-out;
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/*
+  mermaid 스타일
+*/
+/* details[open] > summary {
+  list-style-type: '[close] ';
+}
+
+details:not([open]) > summary {
+  list-style-type: '[open] ';
+} */

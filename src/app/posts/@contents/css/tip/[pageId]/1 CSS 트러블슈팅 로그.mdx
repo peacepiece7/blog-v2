@@ -1,0 +1,23 @@
+# input autofocus, focus가 안됨
+
+`document.querySelector('input').focus()`와 `<input autofocus />`가 안되는 이슈가 있었다.
+
+다음 상황에서 발생했다.
+
+1. 모달이 오픈되면 첫 번째 input이 focus되어야 한다.
+2. transition 이벤트가 걸려있고, 모달이 오픈되는 동안 transition이 발생한다.
+3. 모달은 transition-all로 되어 있고, css visibility, opacity 속성이 transition 대상이다.
+
+## 원인
+
+visibliity가 원인으로 transition되는 동안은 focus가 되지 않는다.
+
+## 해결 방안
+
+### ref.addEventListener('transitionend')를 사용하여 transition이 끝난 후 focus를 준다.
+
+transiton-all 이벤트가 외부 패키지에 있거나 컴포넌트를 수정할 수 없을 경우 차선책으로 사용할 수 있다.
+
+### transition-all을 transition-opacity로 변경한다.
+
+css 수정이 가능하다면 transition-opacity만 transition 이벤트를 줘서 해결한다.

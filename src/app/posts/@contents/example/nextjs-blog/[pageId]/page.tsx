@@ -1,4 +1,5 @@
-import { getFileNamesSafely, getPostFullPath } from '@/utils/server'
+import PostContentsContainer from "@/components/PostContentsContainer"
+import { getFileNamesSafely, getPostFullPath } from "@/utils/server"
 
 export default async function PostPage({
   params,
@@ -6,12 +7,16 @@ export default async function PostPage({
   params: { pageId: string }
 }>) {
   const MDXPage = await new Promise<React.ComponentType>((resolve) => {
-    const postPath = getPostFullPath('example', 'tailwind', '[pageId]')
-    const fileNames = getFileNamesSafely(postPath, 'mdx')
+    const postPath = getPostFullPath("example", "nextjs-blog", "[pageId]")
+    const fileNames = getFileNamesSafely(postPath, "mdx")
     import(`./${fileNames[parseInt(params?.pageId) - 1 || 0]?.name}`).then(
       (module) => resolve(module.default)
     )
   })
 
-  return <MDXPage />
+  return (
+    <PostContentsContainer>
+      <MDXPage />
+    </PostContentsContainer>
+  )
 }

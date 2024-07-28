@@ -8,9 +8,7 @@
   "typescript.tsdk": ".yarn/sdks/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   // * Code spell checker setting
-  "cSpell.ignoreWords": [
-    "customworkd1"
-  ],
+  "cSpell.ignoreWords": ["customworkd1"],
   "cSpell.ignorePaths": [
     "package-lock.json",
     "node_modules",
@@ -29,4 +27,22 @@
     "typescript",
     "typescriptreact"
   ],
+  // * Tailwind CSS IntelliSense setting
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+
+  // * Tailwind className suggestion
+  "editor.quickSuggestions": {
+    "strings": "on"
+  }
+
+  // * import from "/" 시 src가 root로 설정 됨
+  // "path-intellisense.absolutePathToWorkspace": true,
+  // "path-intellisense.absolutePathTo": "${workspaceRoot}/src"
+
+  "path-intellisense.extensionOnImport": true,
+  "path-intellisense.mappings": {
+    "@": "${workspaceRoot}/src"
+  },
 }

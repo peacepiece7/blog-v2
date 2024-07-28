@@ -53,12 +53,12 @@ PnP 모드시 zip archives에서 타입을 가져와주는 yarn toolchain [ZipFS
 .next.config.js에 mdx 설정 추가
 
 ```js
-import createMDX from '@next/mdx'
+import createMDX from "@next/mdx"
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // 마크다운 및 MDX 파일을 포함시키기 위해 페이지 확장자 설정
-  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
 }
 
 const withMDX = createMDX({
@@ -95,15 +95,15 @@ pm2 명령 설정 후 실행
 module.exports = {
   apps: [
     {
-      name: 'blog',
-      script: 'yarn',
-      args: 'run start',
+      name: "blog",
+      script: "yarn",
+      args: "run start",
       watch: true, // 파일 변경 감지 및 자동 재시작
       env: {
-        NODE_ENV: 'development',
+        NODE_ENV: "development",
       },
       env_production: {
-        NODE_ENV: 'production',
+        NODE_ENV: "production",
       },
     },
   ],
@@ -148,3 +148,20 @@ yarn pnp & nextjs 14에서 pre-commit에 `npx lint-staged`로 `next lint`를 사
 package.json에서 `yarn prepare, yarn postinstall`은 동작하지 않은 것으로 보인다.
 
 git clone시 항상 `yarn install & yarn prepare`를 해주거나 sh로 해결해야 할 것 같다.
+
+# es-hangul
+
+https://www.slash.page/ko/libraries/common/hangul/README.i18n
+
+https://es-hangul.slash.page/
+
+# auto-complete
+
+https://react-autosuggest.js.org/
+
+
+# deploy.yml
+
+yarn set version stable
+
+corepack prepare yarn@${{ secrets.YARN_VERSION }} --activate

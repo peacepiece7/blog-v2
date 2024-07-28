@@ -1,13 +1,12 @@
-import type { Metadata } from 'next'
-import { hiMelody, inter } from '@/utils/shared'
-import './styles/globals.css'
-import './styles/reset.css'
+import type { Metadata } from "next"
+import { mainFont, subFont } from "@/utils/shared"
+import "./global.css"
 
 export const metadata: Metadata = {
-  title: '블로그',
-  description: '블로그입니다.',
-  keywords: '프론트 엔드',
-  creator: 'peacepiece7',
+  title: "블로그",
+  description: "블로그입니다.",
+  keywords: "프론트 엔드",
+  creator: "peacepiece7",
 }
 
 // app-index.js:33 Warning: Extra attributes from the server: monica-locale
@@ -15,12 +14,14 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode
-}>) {
+}) {
   return (
-    <html lang='en'>
-      <body className={`${hiMelody?.className} ${inter?.className} text-base`}>
+    <html lang="en">
+      <body
+        className={`${mainFont?.className} ${subFont?.className} text-base`}
+      >
         {children}
       </body>
     </html>

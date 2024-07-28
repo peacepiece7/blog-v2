@@ -1,0 +1,93 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [18.18.0]
+    steps:
+      - name: Checkout the repository.
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.npm
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
+
+      - name: Enable Corepack and set up yarn
+        run: |
+          corepack enable
+          yarn set version stable
+
+      - name: Install dependencies.
+        working-directory: ./
+        run: |
+          pwd
+          touch .env
+          echo BACK_SERVER_BASE_URL=${{ secrets.BACK_SERVER_BASE_URL }} >> .env
+          echo FRONT_SERVER_BASE_URL=${{ secrets.FRONT_SERVER_BASE_URL }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          cat .env
+
+      - name: Install packages.
+        working-directory: ./
+        run: yarn install
+
+      - name: Build the project.
+        working-directory: ./
+        run: yarn build
+
+      - name: Compress the built code.
+        run: zip -r build.zip ./.next ./package.json ./yarn.lock ./public
+
+      - name: Install sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
+      - name: Copy files to the personal server via SCP.
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          sshpass -e scp -o StrictHostKeyChecking=no build.zip ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}
+
+      - name: Deploy on the server.
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} <<'ENDSSH'
+          echo "START DEPLOY"
+          cd ${{ secrets.DEPLOY_PATH }}
+          echo "Current directory:"
+          pwd
+          echo "Unzipping build.zip"
+          unzip -o build.zip
+          echo "Unzip completed"
+          echo "Using nvm"
+          nvm use
+          echo "checkout branch"
+          git checkout main
+          echo "Pulling changes"
+          git fetch origin main
+          git pull origin main
+          echo "Installing dependencies"
+          yarn install
+          echo "Restarting application"
+          pm2 restart ${{ secrets.PM2_APP_NAME }}
+          echo "Deployment completed"
+          ENDSSH

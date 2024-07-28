@@ -1,3 +1,4 @@
+import PostContentsContainer from '@/components/PostContentsContainer'
 import { getFileNamesSafely, getPostFullPath } from '@/utils/server'
 
 export default async function PostPage({
@@ -13,5 +14,9 @@ export default async function PostPage({
     ).then((module) => resolve(module.default))
   })
 
-  return <MDXPage />
+  return (
+    <PostContentsContainer>
+      <MDXPage />
+    </PostContentsContainer>
+  )
 }

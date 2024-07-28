@@ -1,3 +1,4 @@
+import PostContentsContainer from '@/components/PostContentsContainer'
 import { getFileNamesSafely, getPostFullPath } from '@/utils/server'
 
 export default async function PostPage({
@@ -9,9 +10,16 @@ export default async function PostPage({
     const postPath = getPostFullPath('example', 'tailwind', '[pageId]')
     const fileNames = getFileNamesSafely(postPath, 'mdx')
     import(`./${fileNames[parseInt(params?.pageId) - 1 || 0]?.name}`).then(
-      (module) => resolve(module.default)
+      (module) => {
+        // console.log('module.METADATA : ', module.METADATA)
+        resolve(module.default)
+      }
     )
   })
 
-  return <MDXPage />
+  return (
+    <PostContentsContainer>
+      <MDXPage />
+    </PostContentsContainer>
+  )
 }
