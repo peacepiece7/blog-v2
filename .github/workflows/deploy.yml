@@ -70,4 +70,4 @@ jobs:
         env:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          sshpass -e ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "cd ${{ secrets.DEPLOY_PATH }} && unzip -o build.zip && nvm use && yarn install && pm2 restart ${{ secrets.PM2_APP_NAME }}"
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} "bash -c 'cd ${{ secrets.DEPLOY_PATH }} && unzip -o build.zip && nvm use && yarn install && pm2 restart ${{ secrets.PM2_APP_NAME }}'"
