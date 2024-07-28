@@ -19,6 +19,7 @@ export const fetcher = async <T>(path: string, options?: RequestInit) => {
     .then((res) => res.json() as T)
     .catch((error) => {
       console.error(error)
+      throw new Error("FETCHER ERROR : " + error)
     })
 }
 
