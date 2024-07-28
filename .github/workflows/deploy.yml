@@ -1,0 +1,55 @@
+name: deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    strategy:
+      matrix:
+        node-version: [18.18.0]
+    steps:
+      - name: Checkout the repository.
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies.
+        working-directory: ./
+        run: |
+          pwd
+          touch .env
+          echo BACK_SERVER_BASE_URL=${{ secrets.BACK_SERVER_BASE_URL }} >> .env
+          echo FRONT_SERVER_BASE_URL=${{ secrets.FRONT_SERVER_BASE_URL }} >> .env
+          echo PORT=${{ secrets.PORT }} >> .env
+          cat .env
+
+      - name: Install packages.
+        working-directory: ./
+        run: yarn install
+
+      - name: Build the project.
+        working-directory: ./
+        run: yarn build
+
+      - name: Compress the built code.
+        run: zip -r build.zip ./next
+
+      - name: Copy files to the personal server via SCP.
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          apt-get update && apt-get install -y sshpass
+          sshpass -e scp -o StrictHostKeyChecking=no build.zip ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}
+
+      - name: Deploy on the server.
+
+        env:
+          SSHPASS: ${{ secrets.SERVER_PASSWORD }}
+        run: |
+          sshpass -e ssh -o StrictHostKeyChecking=no ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }} 'unzip -o ${{ secrets.DEPLOY_PATH }}/build.zip -d ${{ secrets.DEPLOY_PATH }} && cd ${{ secrets.DEPLOY_PATH }} && yarn install && pm2 restart ${{ secrets.PM2_APP_NAME }}'
