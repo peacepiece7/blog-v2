@@ -19,6 +19,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Enable Corepack and set up yarn
+        run: |
+          corepack enable
+          yarn set version stable
+          
       - name: Install dependencies.
         working-directory: ./
         run: |
@@ -33,7 +38,7 @@ jobs:
         working-directory: ./
         run: yarn install
 
-      - name: Build the project.
+    - name: Build the project.
         working-directory: ./
         run: yarn build
 

@@ -158,3 +158,10 @@ https://es-hangul.slash.page/
 # auto-complete
 
 https://react-autosuggest.js.org/
+
+
+# deploy.yml
+
+yarn set version stable
+
+corepack prepare yarn@${{ secrets.YARN_VERSION }} --activate
