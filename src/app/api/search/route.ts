@@ -64,11 +64,11 @@ function buildSearchList(dirs: string[], baseDir: string): any {
    */
   const group: { [key in any]: string[] } = {}
   dirs.forEach((dir) => {
-    dir = dir.replaceAll(path.sep, "\\")
-    const regExp = /(?<=@contents\\)([^\\]+\\[^\\]+)/g
-    const match = dir.match(regExp)
-    if (match) {
-      const key = match[0].replace(/\\/g, "/")
+    dir = dir.replaceAll(path.sep, "/").replaceAll("\\", "/")
+
+    const left = dir.split("@contents/")[1]
+    const key = left.split("/[pageId]")[0]
+    if (key) {
       if (group[key]) {
         group[key].push(dir)
       } else {
@@ -80,13 +80,10 @@ function buildSearchList(dirs: string[], baseDir: string): any {
   Object.keys(group).forEach((key) => {
     group[key].forEach((filePath, idx) => {
       const relativePath = path.relative(baseDir, filePath)
-      const parts = relativePath
-        .split(path.sep)
-        .filter((part) => part !== "[pageId]")
-      const fileName = parts.pop() as string
-      const link = `/posts/${parts.join("/")}/${idx + 1}`
-      // prettier-ignore
-      const text = `${parts.join("/")}/${convertMDXFileNameToReadableText(fileName)}`
+      const parts = relativePath.split(path.sep)
+      const fileName = parts.pop()
+      const link = `/posts/${key}/${idx + 1}`
+      const text = `${key}/${convertMDXFileNameToReadableText(fileName || "")}`
       tree.push({
         link,
         text,

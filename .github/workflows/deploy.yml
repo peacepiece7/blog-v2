@@ -1,7 +1,7 @@
 name: deploy
 
 on:
-  pull_request:
+  push:
     branches: [main]
 
 jobs:
@@ -80,6 +80,11 @@ jobs:
           echo "Unzip completed"
           echo "Using nvm"
           nvm use
+          echo "checkout branch"
+          git checkout main
+          echo "Pulling changes"
+          git fetch origin main
+          git pull origin main
           echo "Installing dependencies"
           yarn install
           echo "Restarting application"
