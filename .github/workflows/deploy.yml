@@ -45,11 +45,15 @@ jobs:
       - name: Compress the built code.
         run: zip -r build.zip ./.next ./package.json ./yarn.lock ./public
 
+      - name: Install sshpass
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y sshpass
+
       - name: Copy files to the personal server via SCP.
         env:
           SSHPASS: ${{ secrets.SERVER_PASSWORD }}
         run: |
-          apt-get update && apt-get install -y sshpass
           sshpass -e scp -o StrictHostKeyChecking=no build.zip ${{ secrets.SERVER_USERNAME }}@${{ secrets.SERVER_IP }}:${{ secrets.DEPLOY_PATH }}
 
       - name: Deploy on the server.
