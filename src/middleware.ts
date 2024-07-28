@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import { Heading } from "mdast"
-import { fetcher } from "./utils/server"
 import { urlPathRegExp } from "@/constants/regexp"
 import { X_CUSTOM_URL } from "@/constants/server"
 
