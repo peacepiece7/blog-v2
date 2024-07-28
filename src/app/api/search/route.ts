@@ -52,7 +52,7 @@ export type SearchItem = {
   link: string
   text: string
 }
-function buildSearchList(paths: string[], baseDir: string): any {
+function buildSearchList(dirs: string[], baseDir: string): any {
   const tree: SearchItem[] = []
 
   /**
@@ -63,15 +63,16 @@ function buildSearchList(paths: string[], baseDir: string): any {
    * }
    */
   const group: { [key in any]: string[] } = {}
-  paths.forEach((path) => {
+  dirs.forEach((dir) => {
+    dir = dir.replaceAll(path.sep, "\\")
     const regExp = /(?<=@contents\\)([^\\]+\\[^\\]+)/g
-    const match = path.match(regExp)
+    const match = dir.match(regExp)
     if (match) {
       const key = match[0].replace(/\\/g, "/")
       if (group[key]) {
-        group[key].push(path)
+        group[key].push(dir)
       } else {
-        group[key] = [path]
+        group[key] = [dir]
       }
     }
   })
