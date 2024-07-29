@@ -26,9 +26,6 @@ export async function GET() {
   const directoryPath = path.join(process.cwd(), ...postPath)
   const paths = getAllFilePaths(directoryPath)
   const list = buildSearchList(paths, directoryPath)
-  console.log("DIRECTORY PATH : ", directoryPath)
-  console.log("PATHS : ", paths)
-  console.log("LIST : ", list)
   return NextResponse.json({ list })
 }
 
