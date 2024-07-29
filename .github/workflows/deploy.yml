@@ -82,9 +82,9 @@ jobs:
           nvm use
           echo "checkout branch"
           git checkout main
-          echo "Pulling changes"
+          echo "Reset origin main"
           git fetch origin main
-          git pull origin main
+          git reset --hard origin/main
           echo "Installing dependencies"
           yarn install
           echo "Restarting application"
