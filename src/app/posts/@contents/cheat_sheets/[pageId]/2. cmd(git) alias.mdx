@@ -14,7 +14,7 @@ HEY_LOCAL_MACHINE\\SOFTWARE\Microsofte\\Command Processor 들어가서
 
 문자열 값 => AutoRun 또는 autorun 둘 중 하나 => 값 데이터에 `%userprofile%/cmd_alias.exe` 추가
 
-## Alias
+## cmd alias
 
 ```
 @echo off
@@ -70,4 +70,59 @@ doskey p=cd %userprofile%\repo\projects
 doskey ps=cd %userprofile%\repo\projects\sports-club
 doskey psa=cd %userprofile%\repo\projects\sports-club\assets
 @echo on
+```
+
+# bash
+
+.bashrc에 추가하고 `source ~/.bashrc`
+
+## bash alias
+
+```
+# Push cycle
+alias ga='git add'
+alias gaa='git add .'
+alias gc='git commit'
+alias gph='git push'
+
+# Pull
+alias gfa='git fetch --all'
+alias gp='git pull'
+
+# Health check
+alias gl='git log'
+alias gs='git status'
+alias glo='git log --oneline'
+alias glg='git log --graph'
+alias glog='git log --oneline --graph'
+
+# Branch
+alias gb='git branch'
+alias gco='git checkout'
+alias gsw='git switch'
+alias gpick='git cherry-pick'
+
+# Stage
+alias grt='git restore'
+alias grts='git restore --staged'
+
+# NPM
+alias nr='npm run'
+alias nrd='npm run dev'
+alias nrs='npm run serve'
+alias nrb='npm run build'
+
+# PNPM
+alias pn='pnpm'
+alias pnd='pnpm run dev'
+alias pnrs='pnpm run serve'
+alias pnrb='pnpm run build'
+
+# Path
+alias repo='cd ~/repo/peacepiece7'
+alias obs='~/AppData/Local/Programs/obsidian/Obsidian.exe'
+alias cobs='cd ~/repo/peacepiece7/obs-repo'
+alias p='cd ~/repo/projects'
+alias ps='cd ~/repo/projects/sports-club'
+alias psa='cd ~/repo/projects/sports-club/assets'
 ```
