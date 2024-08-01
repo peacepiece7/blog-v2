@@ -5,6 +5,7 @@
 html {
   font-size: 62.5%;
   scroll-behavior: smooth;
+  letter-spacing: 0.05em;
 }
 
 body {
@@ -29,11 +30,6 @@ body {
   @apply hidden;
 }
 
-/*         text-blue-500 font-medium transition-all 
-        hover:text-blue-700 hover:underline 
-        visited:text-purple-500 visited:underline
-        visited:hover:text-purple-700 visited:hover:underline
-        active:hover:text-red-400 active:hover:underline */
 .link {
   @apply text-blue-500 font-medium transition-all 
 hover:text-blue-700 hover:underline 
