@@ -20,6 +20,37 @@ export const METADATA = {
   <p className="transition-transform group-hover:translate-x-2">bar</p>
 </div>
 
+## apply
+
+```css
+.btn-primary {
+  @apply bg-blue-500 text-white;
+}
+```
+
+자동완성 기능을 사용하려면 tailwind.config.ts에 아래와 같이 설정
+
+```ts
+const config = {
+  plugins: [
+    require("@tailwindcss/typography"),
+    plugin(function ({ addUtilities, addBase, config }) {
+      addUtilities({
+        ".btn-primary": {},
+      })
+    }),
+  ],
+}
+```
+
+`@apply`대신에 addUtilities안에서 커스텀 클레스를 작성해도 됨
+
+addUtilities는 첫 번째 인자로 `CSSRuleObject` | `CSSRuleObject[]`를 받는데
+
+이게 css 속성이 정의되어있지 않아서 자동완성이 안됨
+
+addUtilities안에 들어가는 객체에 style 타입을 정해주고, as unknown as CSSRuleObject 해주는 것도 하나의 방법일 수 있음
+
 # settings.json
 
 ## associations

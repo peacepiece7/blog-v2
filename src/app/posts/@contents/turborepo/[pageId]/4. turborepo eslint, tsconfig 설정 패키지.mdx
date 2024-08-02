@@ -1,0 +1,50 @@
+# eslint, tsconfig 설정 패키기 사용하기
+
+## 패키지 생성
+
+`terbo gen workspace`
+
+알아서 dependency, typescript, eslint 설정 뭐할건지 물어본다.
+[gen workspace 옵션은](https://turbo.build/repo/docs/reference/generate#workspace)은 여기
+
+[generating-code 가이드](https://turbo.build/repo/docs/guides/generating-code)는 여기
+
+## Root Dependency
+
+turbo, husky, lint-staged 같이 **저장소를 관리하는 도구**만 루트 디펜던시로 남겨두기
+
+## 새로 만든 패키지에 eslint, tsconfig 적용하기
+
+스토리북을 새로 생성했다고 쳐보자.
+
+```bash
+mkdir app/storybook
+cd app/storybook
+
+pnpm dlx storybook@latest init
+```
+
+apps/storybook/.eslintrc.cjs에 eslint, tsconfig를 패키지에 있는 걸로 대체하고 싶을 거다.
+
+그러면 이렇게 작성해주면 된다.
+
+```json
+{
+  "extends": ["@repo/eslint-config/storybook.js"]
+}
+```
+
+위와 같이 설정 했는데, 적용이 안된다면 package.json에 `@repo/eslint-config`가 없어서 그렇다.
+
+`apps/storybook/node_modules/@repo` 안에 eslint-config가 없기 떄문이다.
+
+```bash
+pnpm install @repo/eslint-config --save-dev --filter=storybook
+pnpm install @repo/typescript-config --save-dev --filter=storybook
+```
+
+이렇게 설치해주면 된다.
+
+`@repo/eslint-config/storybook.js`이 없다면  
+`pnpm dlx storybook@latest init`시 생성된 eslint, tsconfig 파일을  
+`@repo/eslint-config`, `@repo/typescript-config`로 옮겨주자
