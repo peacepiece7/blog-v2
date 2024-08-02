@@ -1,0 +1,137 @@
+# tailwindcss 설정 패키지 사용하기
+
+## 패키지 생성
+
+`terbo gen workspace` 또는
+
+```bash
+mkdir packages/tailwind-config
+cd packages/tailwind-config
+
+pnpm init
+```
+
+package.json이 생성되면 수정해준다.
+
+```json
+{
+  "name": "@repo/tailwind-config",
+  "version": "0.0.1",
+  "private": true
+}
+```
+
+여기서부터 [공식문서](https://tailwindcss.com/docs/installation)따라서 해주면 된다.
+
+```bash
+pnpm install tailwindcss --save-dev --filter @repo/tailwind-config
+
+```
+
+tailwind.config.js 파일 생성 후 편집 (json, ts, js 상관없음 알아서 ㄱㄱ)
+
+```js
+// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "src/**/*.{js,ts,jsx,tsx}",
+    "apps/**/*.{js,ts,jsx,tsx}",
+    "pages/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {},
+}
+```
+
+## 다른 패키지에서 tailwind 설정 사용하기
+
+tailwindcss를 사용하고자 하는 프로젝트에 위 설정 파일을 적용해주면 된다.
+
+```bash
+pnpm install postcss @repo/tailwindcss-config autoprefixer --save-dev --filter @apps/web
+cd apps/web
+touch postcss.config.js
+```
+
+```js
+// postcss.config.js
+const config = require("@repo/tailwind-config/tailwind.config.js")
+
+/** @type {import('postcss-load-config').Config} */
+module.exports = {
+  plugins: {
+    tailwindcss: { config },
+    autoprefixer: {},
+  },
+}
+```
+
+## tailwindcss 설정 공유하기
+
+tailwindcss 설정은 패키지끼리 공유되기에 공통으로 사용할 클레스를 정의해서 내보내기 한다.
+
+예시 설정
+
+tailwind-config.js에서 유틸리티 스타일을 정의하면 다른 패키지에서도 intellisense의 도움을 받을 수 있다.
+
+```js
+// @repo/tailwind-config/tailwind.config.css
+/** @type {import('tailwindcss').Config} */
+
+const plugin = require("tailwindcss/plugin")
+
+const UTILITY_STYLES = {
+  ".global-layout": {
+    "grid-column-start": "2",
+    "grid-column-end": "5",
+    "grid-row-start": "2",
+    "grid-row-end": "4",
+    "background-color": "#ebf8fc",
+    height: "100%",
+  },
+  ".link": {},
+  // ...
+}
+
+module.exports = {
+  content: [
+    "src/**/*.{js,ts,jsx,tsx}",
+    "apps/**/*.{js,ts,jsx,tsx}",
+    "pages/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    fontSize: {
+      xs: "1rem",
+      sm: "1.25rem",
+      // ...
+    },
+  },
+  plugins: [
+    require("@tailwindcss/typography"),
+    plugin(function ({ addUtilities, addBase, config }) {
+      addUtilities(UTILITY_STYLES)
+    }),
+  ],
+}
+```
+
+상황에 맞게 유틸리티 스타일을 정의하고 사용하면 된다.
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @repo/tailwind-config/global.css */
+html {
+  font-size: 62.5%;
+}
+
+.link {
+  @apply text-blue-500 font-medium transition-all 
+hover:text-blue-700 hover:underline 
+visited:text-purple-500 visited:underline
+visited:hover:text-purple-700 visited:hover:underline
+active:hover:text-red-400 active:hover:underline;
+}
+```

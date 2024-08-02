@@ -1,0 +1,61 @@
+## syncpack
+
+모노레포에서 일관된 종속성 버전을 관리하기 위한 도구이다.
+
+[npm 공식 사이트 참고](https://www.npmjs.com/package/syncpack)
+
+### 설치 및 설정
+
+`pnpm install syncpack --save-dev --workspace-root`
+
+`npm install -g syncpack`
+
+.syncpackrc.cjs 파일을 프로젝트 루트에 생성 후 아래와 같이 설정한다.
+
+```js
+module.exports = {
+  dependencyTypes: ["dev", "peer", "prod"],
+  semverRange: "^",
+  source: ["package.json", "apps/*/package.json", "packages/*/package.json"],
+  versionGroups: [
+    {
+      label:
+        'Internal config packages should be pinned to "*" (meaning any version is acceptable)',
+      packages: ["**"],
+      dependencies: ["config-prettier", "config-tsconfig", "eslint-config-tds"],
+      dependencyTypes: ["dev"],
+      pinVersion: "*",
+    },
+  ],
+}
+```
+
+### cli
+
+```
+Commands:
+  fix-mismatches      여러 버전으로 사용된 종속성을 동일한 버전으로 설정합니다.
+  format              속성을 정렬하고 단축하여 규칙에 맞게 정리합니다.
+  lint                모든 버전 및 범위를 린트(검사)합니다.
+  lint-semver-ranges  종속성 버전이 지정된 semver 범위 형식에 맞는지 확인합니다.
+  list-mismatches     패키지에서 여러 버전으로 사용된 모든 종속성을 나열합니다.
+  list                패키지에서 사용된 모든 종속성을 나열합니다.
+  prompt              Syncpack이 자동으로 수정할 수 없는 불일치를 수동으로 수정합니다.
+  set-semver-ranges   semver 범위를 지정된 형식으로 설정합니다.
+  update              npm 레지스트리의 최신 버전으로 업데이트합니다.
+```
+
+### 설명
+
+**dependencyTypes** : 종속성의 종류를 설정한다.
+
+"devDependencies" -> "dev"
+"peerDependencies" -> "peer"
+"dependencies" -> "prod"
+
+이렇게 입력한다.
+
+**semverRange** : 버전 범위를 설정한다.
+
+`"^"` : 매이저 버전이 변경되지 않는 범위 자동 업데이트
+`"~"` : 지정한 버전의 마지막 자리 내 범위 자동 업데이트
