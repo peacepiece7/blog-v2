@@ -30,10 +30,10 @@
 
 `git push origin HEAD`
 
-#### 현재 프로젝트에만 적용
+### push default 설정
 
-`git config push.default current`
+1. 현재 프로젝트(.git) 한정 : `git config push.default current`
 
-#### 전역에 적용
+2. 전역으로 적용 : `git config --global push.default current`
 
-`git config --global push.default current`
+`git push` => 이렇게하면 알아서 현재 브랜치로 푸시됨
