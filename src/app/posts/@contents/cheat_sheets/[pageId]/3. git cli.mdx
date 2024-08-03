@@ -1,33 +1,39 @@
-# Branch rename
+# git cli cheat sheet
+
+### 브랜치 이름 변경
 
 `git branch -M <target-branch> <new-name>`
 
-# Remove untracked files and directories
+### 추적되지 않은(Untracked) 파일, 디렉터리 삭제
+
+`git reset --hard origin/dev & git clean -fd` 이런식으로 히스토리 관리가 필요차 않은 파일, 디렉터리 삭제
 
 `git clean -fd`
 
-# Merge no fast forward and edit commit message
+### fast-forawrd 없이 병함 하기 & 머지 커밋 메시지 수정
 
 `git merge <branch> --no-ff --edit`
 
-# Remove cache
+### git 캐시 삭제
 
 `git rm -r --cached .`
 
-# Delete local branch
+### 로컬 브랜치 삭제
 
 `git branch -D <branch>`
 
-# Delete remote branch
+### 원격 브랜치 삭제
 
 `git push origin -d <branch>`
 
-# Skip branch name when pushing
+### 브랜치 이름을 따로 지정하지 않고 푸시하기
 
-## 현재 프로젝트에만 적용
+`git push origin HEAD`
 
-`git config push.default current`
+### push default 설정
 
-## 전역에 적용
+1. 현재 프로젝트(.git) 한정 : `git config push.default current`
 
-`git config --global push.default current`
+2. 전역으로 적용 : `git config --global push.default current`
+
+`git push` => 이렇게하면 알아서 현재 브랜치로 푸시됨

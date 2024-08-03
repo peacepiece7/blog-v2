@@ -4,31 +4,11 @@
 
 [npm 공식 사이트 참고](https://www.npmjs.com/package/syncpack)
 
-### 설치 및 설정
+### 설치
 
 `pnpm install syncpack --save-dev --workspace-root`
 
 `npm install -g syncpack`
-
-.syncpackrc.cjs 파일을 프로젝트 루트에 생성 후 아래와 같이 설정한다.
-
-```js
-module.exports = {
-  dependencyTypes: ["dev", "peer", "prod"],
-  semverRange: "^",
-  source: ["package.json", "apps/*/package.json", "packages/*/package.json"],
-  versionGroups: [
-    {
-      label:
-        'Internal config packages should be pinned to "*" (meaning any version is acceptable)',
-      packages: ["**"],
-      dependencies: ["config-prettier", "config-tsconfig", "eslint-config-tds"],
-      dependencyTypes: ["dev"],
-      pinVersion: "*",
-    },
-  ],
-}
-```
 
 ### cli
 
@@ -45,9 +25,39 @@ Commands:
   update              npm 레지스트리의 최신 버전으로 업데이트합니다.
 ```
 
-### 설명
+### 설정
 
-**dependencyTypes** : 종속성의 종류를 설정한다.
+.syncpackrc.cjs 파일을 프로젝트 루트에 생성 후 아래와 같이 설정한다.
+
+```js
+/** @type {import("syncpack").RcFile} */
+module.exports = {
+  dependencyTypes: ["dev", "peer", "prod"],
+  semverRange: "^",
+  source: ["package.json", "apps/*/package.json", "packages/*/package.json"],
+  versionGroups: [
+    {
+      label: 'Internal config packages should be pinned to "*" (meaning any version is acceptable)',
+      packages: ["**"],
+      dependencies: ["config-eslint", "config-tailwind", "confing-ts", "ui-shadcn"],
+      dependencyTypes: ["dev", "prod", "peer"],
+      pinVersion: "*",
+    },
+  ],
+  semverGroups: [
+    {
+      label: 'Internal config packages should be pinned to "*" (meaning any version is acceptable)',
+      packages: ["**"],
+      dependencies: ["config-eslint", "config-tailwind", "confing-ts", "ui-shadcn"],
+      dependencyTypes: ["dev", "prod", "peer"],
+      pinVersion: "*",
+    },
+  ],
+}
+```
+
+**dependencyTypes**  
+종속성의 종류를 설정한다.
 
 "devDependencies" -> "dev"
 "peerDependencies" -> "peer"
@@ -55,7 +65,166 @@ Commands:
 
 이렇게 입력한다.
 
-**semverRange** : 버전 범위를 설정한다.
+**semverRange**  
+버전 범위를 설정한다.
+
+[semver 기억 안나면 여기 참고](/posts/semver/1)
 
 `"^"` : 매이저 버전이 변경되지 않는 범위 자동 업데이트
 `"~"` : 지정한 버전의 마지막 자리 내 범위 자동 업데이트
+
+**source**  
+종속성을 관리할 파일을 설정한다.
+
+**packages**  
+`npm install <라이브러리 이름>`로 설치한 라이브러리 이름을 적는다.
+
+**dependencies**  
+적용하고 싶은 패키지의 이름을 작성한다.  
+**package.json의 name 필드**를 여기 적어주면 된다.
+
+이외에 이런 옵션들도 있다.
+
+```
+isIgnored : boolean
+policy: 'sameRange'
+isBanned: boolean
+pinVersion: string // "*", "1.0.0"
+```
+
+## versionGroups, semverGroups
+
+`.syncpackrc.cjs`를 보면 다음 구조로 되어있는데 versionGroups, semverGroups를 이해해보자.
+
+```js
+/** @type {import("syncpack").RcFile} */
+module.exports = {
+  dependencyTypes: [],
+  semverRange: "^",
+  source: [""],
+  versionGroups: [], // ??
+  semverGroups: [], // ??
+}
+```
+
+일단 위에서 배운 속성들은 대부분 versionGroups, semverGroups에서 같이 쓸 수 있는 속성이다.
+
+몰라도 자동완성으로 무슨 속성이 있는지 체크하고 쓰면 된다.
+
+실행했을 때 내가 작성한 label이 출력되는데, 이게 안나오면 속성을 잘못 기입한거다.
+
+### semverGroups
+
+semver 정책을 오버라이드 할 때 사용한다.
+
+경험상 별로 쓸 일이 없다.
+
+[semver 정책이 뭔지 기억 안나면 여기 참고하자](/posts/semver/1)
+
+예를들어
+
+dog-ui의 react 는 18.3.1  
+cat-ui의 react는 ^18.3.1  
+rabbit-ui의 react는 ~18.3.1
+그 외 모든 패키지는 ^~ 로 설정해보자.
+
+로 semver를 지정해보자.
+
+```json
+{
+  "dependencyTypes": ["dev", "peer", "prod"],
+  "semverRange": "^",
+  "source": ["**"],
+  "semverGroups": [
+    {
+      "label": "dog-ui의 dependencies에 있는 react는 18.3.1로 고정입니다.",
+      "packages": ["dog-ui"],
+      "dependencyTypes": ["prod"],
+      "dependencies": ["react"],
+      "range": ""
+    },
+    {
+      "label": "cat-ui의 dependencies에 있는 react는 ^18.3.1로 고정입니다.",
+      "packages": ["cat-ui"],
+      "dependencyTypes": ["prod"],
+      "dependencies": ["react"],
+      "range": "^"
+    },
+    {
+      "label": "rabbit-ui의 dependencies에 있는 react는 ~18.3.1로 고정입니다.",
+      "packages": ["rabbit-ui"],
+      "dependencyTypes": ["prod"],
+      "dependencies": ["react"],
+      "range": "~"
+    }
+  ]
+}
+```
+
+`syncpack lint-semver-ranges`를 실행한다.
+
+### versionGroups
+
+version 정책을 오버라이드 할 때 사용한다.
+
+이건 자주 사용하는 듯
+
+1. 동일한 패키지의 다른 버전을 사용할 경우
+
+react 19, react 18을 사용하는 패키지가 있다고 가정하자.
+
+`syncpack list`를 실행하면 react 18을 사용하는 패키지는 HighestSemverMismatch에러가 발생한다.
+
+```bash
+     react:
+        ✘ ^18.3.1 → 19.0.0-rc-f994737d14-20240522 [HighestSemverMismatch]
+```
+
+react 19를 사용하는 패키지의 범위를 versionGroups에 추가해준다.
+
+```js
+/** @type {import("syncpack").RcFile} */
+module.exports = {
+  dependencyTypes: ["dev", "peer", "prod"],
+  semverRange: "^",
+  source: ["**"],
+  versionGroups: [
+    {
+      label: "use react 19 in apps/web and apps/docs",
+      packages: ["@app/web", "@app/docs"],
+      dependencies: ["react", "react-dom"],
+      policy: "sameRange",
+    },
+  ],
+}
+```
+
+react 19를 사용하는 패키지는 versionGroups에서 제외되었기 때문에 react 18을 쓰는 나머지 패키지는 "HighestSemverMismatch" 에러가 발생하지 않는다.
+
+2. 인터널 패키지 버전 검사 (workspace:\*)
+
+CI/CD 돌릴 떄 `syncpack list`를 실행 하는데 이때 최신 릴리즈된 인터널 패키지를 쓰는지 체크해주는 것이 좋다.
+
+보통 인터널 패키지는 "\@repo/config-eslint": "workspace:\*" 이런식으로 설정되어 있다.
+
+작업공간의 최신 버전으로 패키지의 버전을 지정하는 것 보단 "\@repo/config-eslint": "\*" 이런식으로 설정해서
+
+registry에서 해당 패키지의 최신 릴리즈 버전인지 체크할 수 있다.
+
+```js
+/** @type {import("syncpack").RcFile} */
+module.exports = {
+  dependencyTypes: ["dev", "peer", "prod"],
+  semverRange: "^",
+  source: ["**"],
+  versionGroups: [
+    {
+      label: 'Internal config packages should be pinned to "*" (meaning any version is acceptable)',
+      packages: ["**"],
+      dependencies: ["@repo/config-eslint", "@repo/confing-ts", "@repo/ui"],
+      dependencyTypes: ["dev", "prod", "peer"],
+      pinVersion: "*",
+    },
+  ],
+}
+```
