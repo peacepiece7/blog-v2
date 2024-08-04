@@ -1,0 +1,175 @@
+# commitlint
+
+이렇게 설치
+
+```
+pnpm install --save-dev -w @commitlint/cli @commitlint/config-conventional
+```
+
+`@commitlint/config-conventional` : [angular commit message convention](https://github.com/conventional-changelog/commitlint/tree/master/@commitlint/config-conventional#type-enum)을 사용한다.
+(`feat: foo` `fix: bar` 이런 느낌)
+
+그리고 이렇게 설정했다.
+
+```js
+// commitlint.config.mjs
+
+const Configuration = {
+  extends: ["@commitlint/config-conventional"],
+  rules: {
+    "header-max-length": [2, "always", 72],
+    "body-leading-blank": [2, "always"],
+    "body-max-line-length": [2, "always", 80],
+  },
+}
+
+export default Configuration
+```
+
+commit-msg hook에 husky를 사용해서 설정하자.
+
+```sh
+# .husky/commit-msg
+
+npx --no -- commitlint --config commitlint.config.mjs --edit "${1}"
+```
+
+`git add . && git commit`를 실행하면 commitlint가 동작한다.
+
+### 커스텀 플러그인 만들기
+
+`@commitlint/config-conventional`는 한글 지원이 안된다. 한글을 사용하고 싶다면, 플러그인을 직접 만들자. (`@commitlint/config-conventional` 뺴도 된다.)
+
+```js
+const Configuration = {
+  extends: ["@commitlint/config-conventional"],
+  rules: {
+    "subject-case": [2, "never", ["upper-case", "pascal-case", "start-case"]], // subject-case : any
+    "header-max-length": [2, "always", 72],
+    "body-leading-blank": [2, "always"],
+    "body-max-line-length": [2, "always", 225],
+    "footer-leading-blank": [2, "always"],
+    "type-enum-kor": [2, "always", ["기능", "버그", "개선"]],
+    "type-empty-kor": [2, "always"],
+    "type-enum": [0, "always"], // 영어만 입력 받는거 무시
+    "type-empty": [0, "always"], // 한글 입력시 empty 에러 무시
+    "subject-empty": [0, "always"], // 한글 입력시 empty 에러 무시
+  },
+  plugins: [{ rules: { "type-enum-kor": typeEnumWithKor, "type-empty-kor": typeEmptyWithKor } }],
+}
+
+function typeEnumWithKor(value) {
+  const { header, always, ...rest } = value
+  const type = header.split(":")[0].split("(")[0]
+  const keys = ["기능", "버그", "개선"]
+  return [keys.some((t) => t === type), "다음 중 하나를 선택해주세요: " + keys.join(", ")]
+}
+
+function typeEmptyWithKor(value) {
+  const { header, always, ...rest } = value
+  const regex = /^[가-힣a-zA-Z]+\([가-힣a-zA-Z0-9]*\)!?:\s[^\s]+.*|^[가-힣a-zA-Z]+!?:\s[^\s]+.*$/
+
+  const isMatched = regex.test(header)
+  return [isMatched, '머릿말을 양식에 맞게 작성해주세요 (예: "feat(comments): message", "fix(bug): message" )']
+}
+
+export default Configuration
+```
+
+### 대화형으로 구성하기
+
+대화형 구성은 unix 계열에서만 하는게 좋다.
+
+window 환경에서 대화하는 것은 건강에 좋지 않다.
+
+[commitlint prompt](https://commitlint.js.org/reference/prompt.html#prompt)여기를 참고
+
+`cz-customizable`을 사용해서 구성할 계획이면 다음 링크를 참고
+
+[commitlint/issues/2684](https://github.com/conventional-changelog/commitlint/issues/2684)  
+[blog cz-customizable](https://velog.io/@restarea/cz-customizable)
+
+[pre-commit을 Inquirer로 hooking](https://github.com/SBoudrias/Inquirer.js?tab=readme-ov-file#using-as-pre-commitgit-hooks-or-scripts)하는 방법도 고려해보자.
+
+대화형으로 커밋을 구성 하려면 다음 시퀀스로 만들고자 하는데 윈도우 어쩌지...
+
+```
+`git commit` 입력
+    -> husky prepare-commit-msg 실행
+        -> commitlint(commitlint.config.js) 실행
+        -> commitlint 설정을 받아서 대화형 구성 실행 (inquirer)
+        -> .git/COMMIT_EDITMSG에 결과 저장
+    -> husky commit-msg 실행
+        -> commitlint rules 검사 실행
+```
+
+## git commit template 설정
+
+`git config commit.template <file>`로 설정하면 된다.
+
+```js
+// script.js
+const GIT_COMMIT_TEMPLATE = `
+
+# NOTE: 
+# 다음 형태로 커밋 메시지를 작성해주세요.
+# <타입>[적용 범위(선택 사항)]: <설명>
+#
+#[본문(선택 사항)]
+#
+#[꼬리말(선택 사항)]
+#
+
+# EXAMPLE:
+# fix(libraryName) : 사용하지 않는 구식 라이브러리 제거
+#
+# 저녁 매뉴 추천 받습니다.
+# 주말엔 놀고 싶어요.
+# 
+# - nodejs 버전이 올라가면서 사용하지 않는 라이브러리를 제거
+# - newLibararyName으로 통합
+# - libraryName를 사용중인 경우 newLibararyName으로 변경 필요
+#
+# Resolves: #123, #245
+# Closes issue by #123
+# Pull request: #123
+# Refs: 676104e, a215868
+
+# REFERENCE:
+# https://github.com/angular/angular/blob/68a6a07/CONTRIBUTING.md#commit
+# https://www.conventionalcommits.org/ko/v1.0.0/
+
+# HEADER_TYPE:
+${Object.keys(GIT_COMMIT_CONFIGURATION["type-enum-kor"])
+  .map((key) => {
+    return `# ${key} : ${GIT_COMMIT_CONFIGURATION["type-enum-kor"][key].description}`
+  })
+  .join("\n")}
+  
+# REMEMBER_ME:
+# HEADER TYPE은 영어로 작성해주세요.
+# 한글을 지향합니다.
+# 제목 끝에 마침표 금지
+# 본문는 "무엇을", "왜"에 대한 내용을 작성해주세요.
+`
+
+fs.writeFileSync("./git_commit_template.txt", GIT_COMMIT_TEMPLATE)
+```
+
+packge.json에 prepare를 실행할 떄 git commit template이 돌아가도록 설정하자
+
+```json
+{
+  "scripts": {
+    "prepare": "husky & node ./script.js & git config commit.template ./git_commit_template.txt"
+  }
+}
+```
+
+## 참고
+
+[🎨 commitlint 공식문서 링크](https://commitlint.js.org/)
+[commitlint/issues/2684](https://github.com/conventional-changelog/commitlint/issues/2684)  
+[blog cz-customizable](https://velog.io/@restarea/cz-customizable)
+[pre-commit을 Inquirer로 hooking](https://github.com/SBoudrias/Inquirer.js?tab=readme-ov-file#using-as-pre-commitgit-hooks-or-scripts)
+[commitlint prompt](https://commitlint.js.org/reference/prompt.html#prompt)

@@ -28,15 +28,21 @@ apps/storybook/.eslintrc.cjs에 eslint, tsconfig를 패키지에 있는 걸로 �
 
 그러면 이렇게 작성해주면 된다.
 
-```json
+```js
+{
+  "extends": [require.resolve("./node_modules/@repo/eslint-config/storybook.js")]
+}
+```
+
+이렇게 패키지 이름으로 가져오고 싶은데, 이 방식으로는 해당 경로를 찾을 수 없어서 일단 보류해두었다.
+
+eslint 공식 문서를 정독해보고 직접 eslint plugin을 만든 뒤 다시 시도해봐야겠다..
+
+```js
 {
   "extends": ["@repo/eslint-config/storybook.js"]
 }
 ```
-
-위와 같이 설정 했는데, 적용이 안된다면 package.json에 `@repo/eslint-config`가 없어서 그렇다.
-
-`apps/storybook/node_modules/@repo` 안에 eslint-config가 없기 떄문이다.
 
 ```bash
 pnpm install @repo/eslint-config --save-dev --filter=storybook
