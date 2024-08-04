@@ -21,7 +21,7 @@ package.json이 생성되면 수정해준다.
 }
 ```
 
-여기서부터 [공식문서](https://tailwindcss.com/docs/installation)따라서 해주면 된다.
+여기서부터 [공식문서](https://tailwindcss.com/docs/installation)를 따라서 설치
 
 ```bash
 pnpm install tailwindcss --save-dev --filter @repo/tailwind-config
@@ -34,18 +34,14 @@ tailwind.config.js 파일 생성 후 편집 (json, ts, js 상관없음 알아서
 // tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "src/**/*.{js,ts,jsx,tsx}",
-    "apps/**/*.{js,ts,jsx,tsx}",
-    "pages/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["src/**/*.{js,ts,jsx,tsx}", "apps/**/*.{js,ts,jsx,tsx}", "pages/**/*.{js,ts,jsx,tsx}"],
   theme: {},
 }
 ```
 
 ## 다른 패키지에서 tailwind 설정 사용하기
 
-tailwindcss를 사용하고자 하는 프로젝트에 위 설정 파일을 적용해주면 된다.
+tailwindcss를 사용하고자 하는 프로젝트에 위 설정 파일을 적용한다.
 
 ```bash
 pnpm install postcss @repo/tailwindcss-config autoprefixer --save-dev --filter @apps/web
@@ -64,6 +60,18 @@ module.exports = {
     autoprefixer: {},
   },
 }
+```
+
+tailwind, postcss config를 관리하는 패키지가 따로 있다면, 해당 패키지를 사용하면 된다.
+
+```js
+// tailwindcss.config.js
+module.exports = require("@repo/tailwind-config/tailwind.config.js")
+```
+
+```js
+// postcss.config.js
+module.exports = require("@repo/config-tailwind/postcss-config.js")
 ```
 
 ## tailwindcss 설정 공유하기
@@ -94,11 +102,7 @@ const UTILITY_STYLES = {
 }
 
 module.exports = {
-  content: [
-    "src/**/*.{js,ts,jsx,tsx}",
-    "apps/**/*.{js,ts,jsx,tsx}",
-    "pages/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["src/**/*.{js,ts,jsx,tsx}", "apps/**/*.{js,ts,jsx,tsx}", "pages/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontSize: {
       xs: "1rem",
@@ -115,7 +119,7 @@ module.exports = {
 }
 ```
 
-상황에 맞게 유틸리티 스타일을 정의하고 사용하면 된다.
+목적에 맞게 유틸리티 스타일을 정의하고 사용한다.
 
 ```css
 @tailwind base;

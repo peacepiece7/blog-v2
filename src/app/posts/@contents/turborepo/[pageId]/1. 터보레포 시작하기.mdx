@@ -1,10 +1,4 @@
-https://github.com/jamal7x7/terborepo-next-tailwind
-
-https://github.com/Davicho-Dev/ReactTs-Vite-Jest-Testing_Library-TailwindCSS-Cypress-Storybook
-
-https://github.com/johnajacob/nextjs-tailwindcss-storybook
-
-# installation
+# pnpm 설치
 
 pnp를 지원하지 않기 떄문에 pnpm을 선택
 
@@ -16,13 +10,43 @@ pnpm dlx create-turbo@latest
 
 설치하는데 생각보다 오래걸림 멈춘건줄 알고 어러번 캔슬했는데, 웹 서핑좀 하고 오니까 설치 진행중이라고 나옴..
 
-# terborepo with examples
+## pnpm version
 
-https://turbo.build/repo/docs/getting-started/installation#start-with-an-example
+```bash
+corepack enable
+npm install -g pnpm
+pnpm -v
+```
 
-# 저장소 생성 전 필독
+package.json에 있는 packageManager 버전을 쓰면 된다.  
+packageManager 속성이 있으면 설치된 버전에 [상관없이 명시되어있는 버전으로 변경된다.](https://nodejs.org/docs/latest/api/corepack.html#how-does-corepack-interact-with-npm)
 
-https://turbo.build/repo/docs/crafting-your-repository
+```json
+{ "packageManager": "pnpm@8.15.6" }
+```
+
+## node version
+
+```
+mkdir ./nvmrc
+echo "v20.12.1" > .nvmrc
+```
+
+window는 (.bashrc에 alias 넣어두자)
+
+```bash
+nvm use $(cat .nvmrc)
+```
+
+unix 계열은
+
+```bash
+nvm use
+```
+
+# turborepo 개요
+
+자세한 내용은 터보 레포에 대해서 정리한 포스팅 [crafting terborepo 요약](222.121.79.140/posts/turborepo/2) 참고
 
 # Telemetry
 
@@ -32,8 +56,6 @@ https://turbo.build/repo/docs/crafting-your-repository
 
 `turbo telemetry status`
 
-https://turbo.build/repo/docs/telemetry
-
 # cli
 
 두 커맨드는 동일하게 동작함
@@ -41,3 +63,17 @@ https://turbo.build/repo/docs/telemetry
 `turbo run dev --filter @repo/math`
 
 `pnpm run dev --filter @repo/math`
+
+# 참고한 곳
+
+https://github.com/Davicho-Dev/ReactTs-Vite-Jest-Testing_Library-TailwindCSS-Cypress-Storybook
+
+https://github.com/johnajacob/nextjs-tailwindcss-storybook
+
+https://turbo.build/repo/docs/telemetry
+
+https://turbo.build/repo/docs/getting-started/installation#start-with-an-example
+
+https://turbo.build/repo/docs/crafting-your-repository
+
+https://github.com/jamal7x7/terborepo-next-tailwind
