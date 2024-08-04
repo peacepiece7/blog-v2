@@ -17,16 +17,10 @@ const LANGUAGES_MAP: Record<string, string> = {
   "language-rust": "rust",
 }
 
-export const Code = (
-  props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-) => {
+export const Code = (props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>) => {
   const { children, ...restProps } = props
 
-  if (
-    !props.className &&
-    typeof props.children === "string" &&
-    !props.children.includes("\n")
-  ) {
+  if (!props.className && typeof props.children === "string" && !props.children.includes("\n")) {
     return (
       <code
         className={`text-rose-500 font-bold bg-slate-200 p-1 rounded-md text-base not-italic ${codeFont.className}`}
@@ -41,12 +35,8 @@ export const Code = (
   }).value
 
   return (
-    <div className={`bg-slate-300 p-2 rounded-lg overflow-y-auto text-sm`}>
-      <code
-        {...restProps}
-        dangerouslySetInnerHTML={{ __html: value }}
-        className={`not-italic ${codeFont.className}`}
-      />
+    <div className={`bg-slate-300 p-2 my-2 rounded-lg overflow-y-auto text-sm`}>
+      <code {...restProps} dangerouslySetInnerHTML={{ __html: value }} className={`not-italic ${codeFont.className}`} />
     </div>
   )
 }

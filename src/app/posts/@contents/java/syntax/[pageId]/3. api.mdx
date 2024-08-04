@@ -1,17 +1,14 @@
+import { Detail } from "@/components/mdx/detail"
+
 # maven, gradle
 
-아직 잘 모르겠지만 mvnrepository.com 에서 (이하 mvnrepo) 라이브러리를 검색하고 사용하면 된다.
-
+<Detail title="maven, gradle 요약">
+아직 잘 모르겠지만 mvnrepository.com 에서 (이하 mvnrepo) 라이브러리를 검색하고 사용하면 된다.  
 npm 같은 java pakcage manager 같다.
 
-npm install시 node_modules에 패키지가 추가되는 것 처럼 .jar로 끝나는 패키지를 받아서 직접 넣는 방법이 있고
+npm install시 node_modules에 패키지가 추가되는 것 처럼 .jar로 끝나는 패키지를 받아서 project strcture<kbd>ctrl + alt + shift + s</kbd>에서 추가하면 된다.
 
-script 태그를 추가하듯이 xml 태그를 복사해서 pom.xml에 추가하는 maven 이라는 방식이 있고
-
-모바일 앱 개발시에는 gradle에 추가하는 방식이 있다.
-
-maven은
-
+maven은  
 pom.xml에 이런 내용을
 
 ```xml
@@ -30,4 +27,208 @@ build.gradle에 이런 내용을 넣어주며 된다.
 ```
 // https://mvnrepository.com/artifact/com.google.code.gson/gson
 implementation group: 'com.google.code.gson', name: 'gson', version: '2.11.0'
+```
+
+</Detail>
+
+# java.base
+
+[java.base 모듈 요약링크](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/module-summary.html)
+
+## ArrayList
+
+ArrayList는 List 인터페이스를 구현한 클래스로, 크기를 변경할 수 있는 배열이다.
+
+<Detail>
+
+```java
+import fc.java.model2.Book;
+import java.util.ArrayList;
+
+public class ArrayListTest {
+    public static void main(String[] args) {
+        ArrayList<Book> list = new ArrayList<>();
+    }
+}
+```
+
+</Detail>
+
+## String
+
+`java.lang`의 String 클래스
+
+ArrayList처럼 자주 쓰일 것 같다 기억해두자
+
+<Detail>
+
+```java
+    public static void main(String[] args) {
+
+        String str1 = "Hello, world!";
+        System.out.println(str1.substring(7)); // world!
+        System.out.println(str1.indexOf("w")); // (int)7
+        System.out.println(str1.replaceAll("l", "X")); // HeXXo, worXd
+        System.out.println(str1.charAt(0)); // (char)H
+        String[] strArr = str1.split("\\s+");
+        for(String item : strArr) {
+            System.out.println(item); // Hello,\n world!
+        }
+
+        String a = "abc";
+        String b = "bcd";
+        System.out.println(a.equals(b)); // false
+
+        int result = a.compareTo(b); // -1
+        // result = 0; 두 문자는 같음
+        // result < 0; a가 b보다 사전상 앞에 있음 (ascii 값 빼서 비교)
+        // result > 0; a가 b보다 사전상 뒤에 있음
+
+    }
+```
+
+</Detail>
+
+https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html
+
+# Wapper class
+
+js의 wrapper object랑 같다.
+
+prototype chainning을 통해 primitive type도 상위 object의 메서드에 접근하는 것처럼
+
+자바는 primitive type에 없는 메서드를 실행할 떄 자동으로 boxing, unboxing이 일어난다.
+
+# Collection Framework
+
+**List** : 순서가 있는 객체의 모임을 다루는 인터페이스
+
+- ArrayList
+- LinkedList
+
+**Set** : 중목된 원소가 없는 객체의 모음을 다루는 인터페이스
+
+- HashSet
+- TreeSet
+
+**Map** : key-value 객체를 다루는 인터페이스
+
+- HashMap
+- TreeMap
+
+<Detail>
+
+List 예시
+
+```java
+ArrayList<Integer> list = new ArrayList<>();
+ list.add(10); // new Integer(10) - auto boxing
+
+for(int item : list) {
+System.out.println(item);
+}
+```
+
+Set 예시
+
+```java
+Set<String> set=new HashSet<>();
+set.add("Apple");
+set.add("Banana");
+set.add("Apple");
+System.out.println(set.size()); // 2
+set.remove("Apple");
+boolean isContain = set.contains("Apple");
+System.out.println(isContain); // false
+set.clear();
+System.out.println(set.isEmpty() ? "YES" : "NO"); // yes
+```
+
+Map 예시
+
+```java
+Map<String, Integer> score = new HashMap<>();
+score.put("A", 90);
+score.put("B", 50);
+score.put("C", 80);
+
+System.out.println(score.get("A")); // 90;
+score.put("A", 70);
+System.out.println(score.get("A")); // 70;
+
+// 누적합
+String str = "Hello, world";
+char[] strArr = str.toCharArray();
+Map<Character, Integer> pSum = new HashMap<>();
+for(char c : strArr) {
+    if(pSum.containsKey(c)) pSum.put(c, pSum.get(c)+1);
+    else pSum.put(c, 1);
+}
+```
+
+</Detail>
+
+# Generic
+
+js랑 비슷하다 다만 `V extends String | Integer` 이렇게는 안되고 Exception으로 처리해야 한다.
+
+<Detail>
+
+```java
+public class GenericPair<K extends String, V> {
+    private K key;
+    private V value;
+
+
+    public K getKey() {
+        return key;
+    }
+
+    public void setKey(K key) {
+        this.key = key;
+    }
+
+    public V getValue() {
+        return value;
+    }
+
+    public void setValue(V value) {
+        if (!(value instanceof String || value instanceof Integer)) {
+            throw new IllegalArgumentException("Value must be of type String or Integer");
+        }
+        this.value = value;
+    }
+}
+```
+
+</Detail>
+
+# 람다식
+
+## 내부 익명 클래스
+
+인터페이스로 선언하고, 뒤에 대괄호를 붙여서 내부 익명 클래스를 만든다.
+
+```java
+public class MathOperationImpl implements IMathOperation {
+        @Override
+        public int operation(int x, int y) {
+            return x+y;
+        }
+}
+
+public static void main(String[] args) {
+    MathOperationImpl mo = new MathOperationImpl();
+
+    // 인터페이스를 내부 익명 클래스로 구현
+    IMathOperation innerMo = new IMathOperation(){
+        @Override
+        public int operation(int x, int y) {
+            return x - y;
+        }
+    };
+
+    System.out.println(mo.operation(10, 20)); // 30
+    System.out.println(innerMo.operation(10, 20)); // -10
+}
 ```
