@@ -1,0 +1,55 @@
+# shadcn
+
+shadcn은 설치가 필요 없는 디자인 시스템이다.
+
+복사해서 가져오기만 하면 된다.
+
+찾아보니 [이미 잘 만들어 둔 보일러 플레이트가](https://github.com/arevalolance/design-system-template)가 있었다.
+
+Radix UI 기반으로 웹표준, 접근성을 준수하고, MUI, ANTD 등의 CSS 프레임워크보다 열려있다.
+
+[shadcn, radix에 대해서는 여기서](https://velog.io/@ckstn0777/shadcnui-%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EA%B3%B5%EC%9C%A0-UI-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EC%82%AC%EC%9A%A9-%EA%B2%BD%ED%97%98)읽어보자
+
+## 설치
+
+tsconfig, tailwindcss 설정이 있는 패키지에서 시작한다.
+
+```bash
+pnpm dlx shadcn-ui@latest init
+```
+
+tailwind.config.js는 shadcn 설치 설정에 따라 변경된다.
+
+쓰고 싶은 컴포넌트가 있다면 공식 문서에서 복사 붙여넣기 또는 다음 명령어를 입력하면 된다.
+
+`pnpm dlx shadcn-ui@latest add button`
+
+이런 구조로 button 컴포넌트가 추가된다.
+
+```
+└─ src
+    ├── lib
+    │    └── utils.ts
+    └── ui
+        └── button.ts
+```
+
+## storybook 연동하기
+
+.storybook/main.js 설정을 이런식으로 패키지를 넘나드는 방식으로 하거나
+
+```js
+  stories: [
+    {
+      directory: '../../../packages/ui-shadcn/src/**',
+      titlePrefix: 'UI',
+      files: '*.stories.*'
+    },
+  ],
+```
+
+storybook 패키지 안에서 디자인을 가져와서 스토리를 작성하면 된다.
+
+```js
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+```

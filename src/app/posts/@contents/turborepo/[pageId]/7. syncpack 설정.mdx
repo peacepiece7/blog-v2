@@ -1,16 +1,35 @@
-## syncpack
+# syncpack
 
 모노레포에서 일관된 종속성 버전을 관리하기 위한 도구이다.
 
 [npm 공식 사이트 참고](https://www.npmjs.com/package/syncpack)
 
-### 설치
+## tl;dr
+
+`npm install -g syncpack` -> .syncpackrc.cjs 파일 루트 생성
+
+```js
+/** @type {import("syncpack").RcFile} */
+module.exports = {
+  dependencyTypes: ["prod", "dev", "peer"],
+  semverRange: "^",
+  source: ["**"],
+  versionGroups: [],
+  semverGroups: [],
+}
+```
+
+1. 버전 검사 `synckpack list`
+
+2. semver 검사 `semverGroups` 작성 후 `syncpack lint-semver-ranges`
+
+## 설치
 
 `pnpm install syncpack --save-dev --workspace-root`
 
 `npm install -g syncpack`
 
-### cli
+## cli
 
 ```
 Commands:
@@ -25,7 +44,7 @@ Commands:
   update              npm 레지스트리의 최신 버전으로 업데이트합니다.
 ```
 
-### 설정
+## 설정
 
 .syncpackrc.cjs 파일을 프로젝트 루트에 생성 후 아래와 같이 설정한다.
 

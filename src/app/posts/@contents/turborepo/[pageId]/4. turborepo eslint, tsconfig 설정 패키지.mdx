@@ -5,17 +5,18 @@
 `terbo gen workspace`
 
 알아서 dependency, typescript, eslint 설정 뭐할건지 물어본다.
+
 [gen workspace 옵션은](https://turbo.build/repo/docs/reference/generate#workspace)은 여기
 
 [generating-code 가이드](https://turbo.build/repo/docs/guides/generating-code)는 여기
 
 ## Root Dependency
 
-turbo, husky, lint-staged 같이 **저장소를 관리하는 도구**만 루트 디펜던시로 남겨두기
+turbo, husky, lint-staged 같이 **저장소를 관리하는 도구**만 루트 디펜던시로 남겨둔다.
 
 ## 새로 만든 패키지에 eslint, tsconfig 적용하기
 
-스토리북을 새로 생성했다고 쳐보자.
+스토리북으로 사용할 패키지를 새로 생성했다고 쳐보자
 
 ```bash
 mkdir app/storybook
@@ -24,27 +25,41 @@ cd app/storybook
 pnpm dlx storybook@latest init
 ```
 
-apps/storybook/.eslintrc.cjs에 eslint, tsconfig를 패키지에 있는 걸로 대체하고 싶을 거다.
+apps/storybook/.eslintrc.cjs에 eslint, tsconfig를 모노레포 packages 안에 있는 걸로 대체하고 싶을 거다.
 
 그러면 이렇게 작성해주면 된다.
 
-```json
+```js
 {
-  "extends": ["@repo/eslint-config/storybook.js"]
+  "extends": [require.resolve("./node_modules/@repo/eslint-config/storybook.js")]
 }
 ```
 
-위와 같이 설정 했는데, 적용이 안된다면 package.json에 `@repo/eslint-config`가 없어서 그렇다.
-
-`apps/storybook/node_modules/@repo` 안에 eslint-config가 없기 떄문이다.
+그리고 추가한 패키지를 설치해주면 된다. 순서상 이게 위보다 먼저인것 같다.
 
 ```bash
 pnpm install @repo/eslint-config --save-dev --filter=storybook
 pnpm install @repo/typescript-config --save-dev --filter=storybook
 ```
 
-이렇게 설치해주면 된다.
+## 삽질헸던 내용
 
-`@repo/eslint-config/storybook.js`이 없다면  
-`pnpm dlx storybook@latest init`시 생성된 eslint, tsconfig 파일을  
-`@repo/eslint-config`, `@repo/typescript-config`로 옮겨주자
+1. \import 경로를 찾지 못하는 문제
+
+아래처럼 패키지 이름으로 가져오고 싶은데, 이 방식으로는 해당 경로를 찾을 수 없어서 일단 보류해두었다.
+
+eslint 공식 문서를 정독해보고 직접 eslint plugin도 만들어보고 해봐야겠다.
+
+```js
+{
+  "extends": ["@repo/eslint-config/storybook.js"]
+}
+```
+
+2.  eslint, ts 설정은 한 곳에 모아두는게 좋다.
+
+만약 `@repo/eslint-config/storybook.js`이 없다면
+
+`pnpm dlx storybook@latest init`시 생성된 eslint, tsconfig 파일을
+
+`@repo/eslint-config`, `@repo/typescript-config`로 옮겨주자.
