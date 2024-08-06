@@ -1,22 +1,12 @@
 "use client"
 import mermaid, { MermaidConfig } from "mermaid"
-import {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  useEffect,
-  useRef,
-  useState,
-} from "react"
+import { DetailedHTMLProps, HTMLAttributes, useEffect, useRef, useState } from "react"
 import { Detail } from "@/components/mdx/detail"
 import { mainFont } from "@/utils/shared"
 
-export const Mermaid = (
-  props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>
-) => {
+export const Mermaid = (props: DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement>) => {
   const codeRef = useRef<HTMLPreElement>(null)
-  const [summaryTitle, _setSummaryTitle] = useState(
-    () => setSummeryTitle(props.children as string) || "상세 보기"
-  )
+  const [summaryTitle, _setSummaryTitle] = useState(() => setSummeryTitle(props.children as string) || "상세 보기")
 
   useEffect(() => {
     if (!codeRef.current) return
@@ -37,7 +27,7 @@ export const Mermaid = (
   }, [])
 
   return (
-    <Detail summaryTitle={summaryTitle}>
+    <Detail title={summaryTitle}>
       <code ref={codeRef}>{props.children}</code>
     </Detail>
   )
@@ -46,9 +36,7 @@ export const Mermaid = (
 function setSummeryTitle(text: string) {
   const firstCommentStartIndex = text.indexOf("%%")
   if (firstCommentStartIndex !== -1) {
-    const firstCommentEndIndex = text
-      .slice(firstCommentStartIndex)
-      .indexOf("\n")
+    const firstCommentEndIndex = text.slice(firstCommentStartIndex).indexOf("\n")
     return text.slice(firstCommentStartIndex + 2, firstCommentEndIndex).trim()
   }
 }
