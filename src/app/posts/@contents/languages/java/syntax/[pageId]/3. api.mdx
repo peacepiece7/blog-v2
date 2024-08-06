@@ -60,7 +60,7 @@ public class ArrayListTest {
 
 ArrayList처럼 자주 쓰일 것 같다 기억해두자
 
-<Detail>
+<Detail title="String 예문보기">
 
 ```java
     public static void main(String[] args) {
@@ -116,7 +116,7 @@ prototype chainning을 통해 primitive type도 상위 object의 메서드에 �
 - HashMap
 - TreeMap
 
-<Detail>
+<Detail title="Collection Framework 예문보기">
 
 List 예시
 
@@ -172,7 +172,7 @@ for(char c : strArr) {
 
 js랑 비슷하다 다만 `V extends String | Integer` 이렇게는 안되고 Exception으로 처리해야 한다.
 
-<Detail>
+<Detail title="Generic 예문보기">
 
 ```java
 public class GenericPair<K extends String, V> {
@@ -203,7 +203,11 @@ public class GenericPair<K extends String, V> {
 
 </Detail>
 
-# 람다식
+# 함수형 인터페이스
+
+함수형 인터페이스는 하나의 추상 메서드만을 가지고 있는 인터페이스를 말한다.
+
+자바는 인터페이스도 메모리의 공간을 차지하고, 값으로 할당할 수 있다.
 
 ## 내부 익명 클래스
 
@@ -230,5 +234,129 @@ public static void main(String[] args) {
 
     System.out.println(mo.operation(10, 20)); // 30
     System.out.println(innerMo.operation(10, 20)); // -10
+}
+```
+
+## Method reference
+
+{/* 자바에서는 인터페이스도 메모리의 공간을 차지하고, 값으로 할당할 수 있다. */}
+
+메서드 참조 연산자 `::`를 사용하여 다음의 경우 메서드 참조를 할 수 있다.
+
+- 정적 메서드 참조: ClassName::staticMethodName
+- 인스턴스 메서드 참조: instance::instanceMethodName
+- 특정 객체의 인스턴스 메서드 참조: ClassName::instanceMethodName
+- 생성자 참조: ClassName::new
+
+<Detail title="메서드 참조 예문보기">
+
+정적 메서드 참조
+정적 메서드를 참조할 때 사용됩니다.
+
+```java
+코드 복사
+import java.util.function.Function;
+
+public class MethodReferenceExample {
+    public static void main(String[] args) {
+        Function<String, Integer> func = Integer::parseInt;
+        Integer result = func.apply("123");
+        System.out.println(result); // 출력: 123
+    }
+}
+```
+
+2. 인스턴스 메서드 참조
+   특정 객체의 인스턴스 메서드를 참조할 때 사용됩니다.
+
+```java
+코드 복사
+import java.util.function.Consumer;
+
+public class MethodReferenceExample {
+    public static void main(String[] args) {
+        MethodReferenceExample example = new MethodReferenceExample();
+        Consumer<String> printer = example::printMessage;
+        printer.accept("Hello, World!"); // 출력: Hello, World!
+    }
+
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+}
+```
+
+3. 특정 객체의 인스턴스 메서드 참조
+   특정 클래스의 인스턴스 메서드를 참조할 때 사용됩니다. 이 경우, 참조되는 메서드는 첫 번째 파라미터로 해당 클래스의 인스턴스를 받아야 합니다.
+
+```java
+코드 복사
+import java.util.function.BiFunction;
+
+public class MethodReferenceExample {
+public static void main(String[] args) {
+BiFunction<String, String, Boolean> func = String::equalsIgnoreCase;
+Boolean result = func.apply("hello", "HELLO");
+System.out.println(result); // 출력: true
+  }
+}
+```
+
+4. 생성자 참조
+   생성자를 참조할 때 사용됩니다.
+
+```java
+코드 복사
+import java.util.function.Supplier;
+
+public class MethodReferenceExample {
+public static void main(String[] args) {
+Supplier<MethodReferenceExample> supplier = MethodReferenceExample::new;
+MethodReferenceExample example = supplier.get();
+System.out.println(example); // 출력: MethodReferenceExample@<hashcode>
+  }
+}
+```
+
+</Detail >
+
+# 람다식
+
+람다식은 java 8에서 도입되었다.
+
+java.util.function 패키지에는 다양한 함수형 인터페이스가 포함되어 있다.
+
+이러한 함수형 인터페이스를 람다식으로 구현할 수 있다.
+
+```java
+// 익명 내부함수
+IMathOperation add = new IMathOperation() {
+    @Override
+    public int operation(int x, int y) {
+return x + y;
+    }
+};
+
+// 람다식
+IMathOperation addLambda = (int x, int y) -> {return x + y;};
+IMathOperation addLambda2 = (x, y) -> x + y;
+IMathOperation addLambda3 = Integer::sum;
+```
+
+```java
+@FunctionalInterface
+public interface StringOperation {
+    public String apply(String s);
+}
+
+public static String processString(String input, StringOperation operation) {
+    return operation.apply(input);
+}
+public static void main(String[] args) {
+    StringOperation toUppercase = s -> s.toUpperCase();
+    StringOperation toLowercase = s -> s.toLowerCase();
+    String input = "Lambda Expressions";
+    System.out.println(processString(input, toUppercase));
+    System.out.println(processString(input, toLowercase));
 }
 ```
