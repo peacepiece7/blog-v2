@@ -1,0 +1,121 @@
+export const METADATA = {
+  title: "TITLE",
+}
+
+# Tailwind Playground
+
+## group-hover
+
+부모 이벤트를 자식에서 전달하고 싶을 때 사용
+
+```js
+<div className="group">
+  <p>1</p>
+  <p className="transition-transform group-hover:translate-x-2">foo</p>
+</div>
+```
+
+<div className="group border-2 border-gray-400 mt-2">
+  <p>foo</p>
+  <p className="transition-transform group-hover:translate-x-2">bar</p>
+</div>
+
+## apply
+
+```css
+.btn-primary {
+  @apply bg-blue-500 text-white;
+}
+```
+
+자동완성 기능을 사용하려면 tailwind.config.ts에 아래와 같이 설정
+
+```ts
+const config = {
+  plugins: [
+    require("@tailwindcss/typography"),
+    plugin(function ({ addUtilities, addBase, config }) {
+      addUtilities({
+        ".btn-primary": {},
+      })
+    }),
+  ],
+}
+```
+
+`@apply`대신에 addUtilities안에서 커스텀 클레스를 작성해도 됨
+
+addUtilities는 첫 번째 인자로 `CSSRuleObject` | `CSSRuleObject[]`를 받는데
+
+이게 css 속성이 정의되어있지 않아서 자동완성이 안됨
+
+addUtilities안에 들어가는 객체에 style 타입을 정해주고, as unknown as CSSRuleObject 해주는 것도 하나의 방법일 수 있음
+
+# settings.json
+
+## associations
+
+.css 파일에서 tailwindcss suggestion을 받고 싶다면 아래와 같이 설정
+
+```json
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+```
+
+## quick suggestion
+
+className => 문자열이라 suggestion이 잘 안 뜨는 케이스가 있음 이럴때 아래와 같이 설정
+
+```json
+"editor.quickSuggestions": {
+  "strings": "on"
+}
+```
+
+# 특정 속성에 vscode tailwindcss intellisense extesion 적용되게 하기
+
+이런 경우
+
+```js
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground shadow hover:bg-primary/90",
+        destructive: "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+        outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+      },
+      size: {
+        default: "h-9 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-10 rounded-md px-8",
+        icon: "h-9 w-9",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  }
+)
+```
+
+.vscode/settings.json에 다음과 같이 작성하면 된다.
+
+```json
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["cn\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]
+  ]
+```
+
+tailwindcss working directories도 설정해주자
+
+```json
+{ "eslint.workingDirectories": [{ "pattern": "apps/*/" }, { "pattern": "packages/*/" }] }
+```
