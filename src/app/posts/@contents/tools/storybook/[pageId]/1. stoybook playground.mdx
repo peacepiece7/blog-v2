@@ -1,0 +1,126 @@
+import { Detail } from "@/components/mdx/detail"
+
+# Controller
+
+컨트롤러 조건부 추가
+
+<Detail title="컨트롤러 예문 보가">
+```ts
+export const Default: Story = {
+  args: {
+    type: "single",
+    collapsible: true,
+  },
+  argTypes: {
+    type: {
+      options: ["single", "multiple"],
+      control: { type: "select" },
+    },
+    collapsible: {
+      control: { type: "boolean" },
+      description: 'type : "single" 일 때만 사용 가능합니다.',
+      if: { arg: "type", neq: "multiple" }, // 요기 추가
+    },
+  },
+}
+```
+</Detail>
+
+# Decorator
+
+meta, component, preview 모두 추가 가능하다
+
+[Storybook decorator](https://storybook.js.org/docs/writing-stories/decorators)
+
+<Detail title='Decorator 예문보기'>
+```tsx
+export const Default: Story = {
+  decorators: [
+    (Story) => (
+      <div className="min-w-[500px]">
+        <Story />
+      </div>
+    ),
+  ],
+  render: (args) => {
+    const collapsible = args.type === "single" ? args.collapsible : false
+    return (
+      <Accordion type={args.type} collapsible={collapsible} className="w-full">
+        <AccordionItem value="item-1">
+          <AccordionTrigger>Is it accessible?</AccordionTrigger>
+          <AccordionContent asChild={args.asChild}>
+            {args.asChild ? (
+              <a>AccordionItem은 anchor tag입니다. (transition이 끊깁니다.)</a>
+            ) : (
+              <a>AccordionItem은 div tag입니다.</a>
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    )
+  },
+}
+```
+</Detail>
+
+# Autodocs custom template
+
+Preview.tsx에서 autodocs를 수정할 수 있다.
+
+https://storybook.js.org/docs/writing-docs/autodocs#write-a-custom-template
+
+mdx 파일을 랜더하거나 컴포넌트를 랜더할 수 있다.
+
+<Detail>
+```tsx
+import { Title, Subtitle, Description, Primary, Controls, Stories } from "@storybook/blocks"
+import DocumentationTemplate from "./DocumentationTemplate.mdx"
+export default {
+  parameters: {
+    // 1안
+    docs: {
+      page: DocumentationTemplate,
+    },
+    // 2안
+    docs: {
+      page: () => (
+        <>
+          <Title />
+          <Subtitle />
+          <Description />
+          <Primary />
+          <Controls />
+          <Stories />
+        </>
+      ),
+    },
+  },
+}
+```
+</Detail>
+
+페이지마다 커스터마이징도 가능하다.
+
+<Detail>
+```tsx
+const meta = {
+  title: "button",
+  component: Button,
+  parameters: {
+    layout: "centered",
+    docs: {
+      page: () => <CustomDocument referenceURL="https://reference" documentsURL="https://dpcs" />,
+    },
+  },
+} satisfies Meta<typeof Button>
+
+export default meta
+```
+</Detail>
+# composite, multiple components
+
+한 페이지에서 여러 컴포넌트를 보여주는 방법
+
+https://storybook.js.org/docs/writing-docs/autodocs#documenting-multiple-components
+
+https://storybook.js.org/tutorials/intro-to-storybook/react/ko/composite-component/
